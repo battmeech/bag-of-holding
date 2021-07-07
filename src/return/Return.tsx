@@ -1,5 +1,5 @@
 import { Box } from "@chakra-ui/layout";
-import { Button, Input, Text } from "@chakra-ui/react";
+import { Button, Input, SimpleGrid, Text } from "@chakra-ui/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { FormEventHandler, useState } from "react";
@@ -27,17 +27,19 @@ function Return() {
         </Box>
       </form>
 
-      <Link href={`/${campaignCode}`} passHref>
-        <Button colorScheme="teal" disabled={!campaignCode}>
-          go to campaign
-        </Button>
-      </Link>
+      <SimpleGrid columns={{ sm: 1, lg: 2 }} spacing={8}>
+        <Link href={`/${campaignCode}`} passHref>
+          <Button colorScheme="teal" disabled={!campaignCode}>
+            go to campaign
+          </Button>
+        </Link>
 
-      <Link href="/" passHref>
-        <Button ml={4} colorScheme="teal" variant="link">
-          don&apos;t have one?
-        </Button>
-      </Link>
+        <Link href="/" passHref>
+          <Button ml={4} colorScheme="teal" variant="link">
+            don&apos;t have one?
+          </Button>
+        </Link>
+      </SimpleGrid>
     </Box>
   );
 }

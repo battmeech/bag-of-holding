@@ -1,6 +1,6 @@
 import { useMutation } from "@apollo/client";
 import { Box, Flex } from "@chakra-ui/layout";
-import { Button, Input, Text } from "@chakra-ui/react";
+import { Button, Input, SimpleGrid, Text } from "@chakra-ui/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { FormEventHandler, useState } from "react";
@@ -43,19 +43,21 @@ const Home = () => {
         </Box>
       </form>
 
-      <Button
-        disabled={loading || !campaignName}
-        onClick={createCampaign}
-        colorScheme="teal"
-      >
-        create new campaign
-      </Button>
-
-      <Link href="/return" passHref>
-        <Button ml={4} colorScheme="teal" variant="link">
-          already have one?
+      <SimpleGrid columns={{ sm: 1, lg: 2 }} spacing={8}>
+        <Button
+          disabled={loading || !campaignName}
+          onClick={createCampaign}
+          colorScheme="teal"
+        >
+          create new campaign
         </Button>
-      </Link>
+
+        <Link href="/return" passHref>
+          <Button colorScheme="teal" variant="link">
+            already have one?
+          </Button>
+        </Link>
+      </SimpleGrid>
     </Box>
   );
 };
