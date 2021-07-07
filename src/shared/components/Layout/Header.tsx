@@ -1,6 +1,6 @@
 import { Box, Flex, Heading } from "@chakra-ui/layout";
 
-import AccessibleLink from "components/AccessibleLink";
+import { AccessibleLink } from "shared";
 import ThemeToggle from "./ThemeToggle";
 
 const Header = () => {
@@ -8,7 +8,7 @@ const Header = () => {
     <Flex as="header" width="full" align="center">
       <AccessibleLink href="/">
         <Heading as="h1" size="md">
-          nextchakra-starter
+          bag of holding
         </Heading>
       </AccessibleLink>
 

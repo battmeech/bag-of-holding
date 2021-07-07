@@ -1,0 +1,8 @@
+{
+  "client": {
+    "service": "bag-of-holding",
+    "includes": ["./src/**/*.{ts,tsx}"],
+    "excludes": ["**/node_modules", "**/*.test.tsx", "**/__tests__/**"],
+    "tagName": "gql"
+  }
+}

@@ -4,7 +4,7 @@ import { Image } from "@chakra-ui/image";
 import { Box, Heading, Text, Link as ChakraLink } from "@chakra-ui/layout";
 import Link from "next/link";
 
-import MotionBox from "components/motion/Box";
+import { MotionBox } from "shared";
 
 const Page404 = () => {
   const { colorMode } = useColorMode();

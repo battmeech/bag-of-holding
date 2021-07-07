@@ -8,14 +8,18 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "prettify": "prettier --write src"
+    "prettify": "prettier --write src",
+    "schema:download": "apollo client:download-schema graphql-schema.json",
+    "schema:codegen": "apollo client:codegen --target=typescript --passthroughCustomScalars --customScalarsPrefix=GraphQL$ --tsFileExtension=ts"
   },
   "dependencies": {
+    "@apollo/client": "^3.3.21",
     "@chakra-ui/react": "^1.6.4",
     "@emotion/react": "^11.1.5",
     "@emotion/styled": "^11.3.0",
     "@fontsource/lexend": "^4.4.5",
     "framer-motion": "^4.1.17",
+    "graphql": "^15.5.1",
     "next": "^11.0.0",
     "next-pwa": "^5.2.21",
     "react": "^17.0.2",
@@ -25,6 +29,7 @@
   "devDependencies": {
     "@netlify/plugin-nextjs": "^3.4.2",
     "@types/react": "^17.0.11",
+    "apollo": "^2.33.4",
     "eslint": "^7.28.0",
     "eslint-config-next": "^11.0.0",
     "prettier": "^2.3.2",
