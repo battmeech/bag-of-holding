@@ -16,7 +16,7 @@ export const CampaignLoaded = ({ campaign }: { campaign: Campaign }) => {
 
       <SimpleGrid columns={{ base: 1, sm: 2, md: 2, lg: 4 }} spacing={4} mb={4}>
         {campaign.items.map((item) => (
-          <ItemCard key={item.id} item={item} />
+          <ItemCard key={item.id} item={item} campaignId={campaign.id} />
         ))}
       </SimpleGrid>
 
