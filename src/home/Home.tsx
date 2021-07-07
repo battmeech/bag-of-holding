@@ -31,9 +31,7 @@ const Home = () => {
 
   return (
     <Box mb={8} width={{ base: "100%", md: "75%", lg: "50%" }}>
-      <Text mt={8} mb={4}>
-        create a new campaign
-      </Text>
+      <Text mb={4}>create a new campaign</Text>
       <form onSubmit={onSubmit}>
         <Box mb={4}>
           <Input
@@ -52,6 +50,12 @@ const Home = () => {
       >
         create new campaign
       </Button>
+
+      <Link href="/return" passHref>
+        <Button ml={4} colorScheme="teal" variant="link">
+          already have one?
+        </Button>
+      </Link>
     </Box>
   );
 };
