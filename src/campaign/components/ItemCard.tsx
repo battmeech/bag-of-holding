@@ -1,6 +1,5 @@
 import { useMutation } from "@apollo/client";
-import { DeleteIcon } from "@chakra-ui/icons";
-import { Box, CloseButton, Text, Flex } from "@chakra-ui/react";
+import { Box, CloseButton, Flex, Text } from "@chakra-ui/react";
 import {
   FetchCampaign_fetchCampaign_Campaign_items as Item,
   RemoveItem,

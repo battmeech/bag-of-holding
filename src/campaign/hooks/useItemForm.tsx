@@ -1,12 +1,6 @@
 import { useMutation } from "@apollo/client";
-import {
-  AddItem,
-  AddItemGQL,
-  AddItemVariables,
-  RemoveItemGQL,
-} from "campaign/gql";
-import { useEffect } from "react";
-import { useState } from "react";
+import { AddItem, AddItemGQL, AddItemVariables } from "campaign/gql";
+import { useEffect, useState } from "react";
 
 type Item = {
   name: string;

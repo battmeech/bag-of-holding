@@ -1,5 +1,5 @@
 import { useMutation } from "@apollo/client";
-import { Box, Flex } from "@chakra-ui/layout";
+import { Box } from "@chakra-ui/layout";
 import { Button, Input, SimpleGrid, Text } from "@chakra-ui/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
