@@ -9,15 +9,15 @@ import {
   MenuList,
   SimpleGrid,
   Text,
-  useDisclosure,
 } from "@chakra-ui/react";
 import { FetchCampaign_fetchCampaign_Campaign as Campaign } from "campaign/gql";
 import React from "react";
+import { useModal } from "shared";
 import { AddItemModal } from "./AddItemModal";
 import { ItemCard } from "./ItemCard";
 
 export const CampaignLoaded = ({ campaign }: { campaign: Campaign }) => {
-  const { isOpen, onClose, onOpen } = useDisclosure();
+  const { openModal } = useModal();
   return (
     <Box>
       <Flex as="header" width="full" align="center" mb={4}>
@@ -32,7 +32,13 @@ export const CampaignLoaded = ({ campaign }: { campaign: Campaign }) => {
               variant="ghost"
             />
             <MenuList>
-              <MenuItem onClick={onOpen}>add item</MenuItem>
+              <MenuItem
+                onClick={() =>
+                  openModal(<AddItemModal campaignId={campaign.id} />)
+                }
+              >
+                add item
+              </MenuItem>
             </MenuList>
           </Menu>
         </Box>
@@ -49,12 +55,6 @@ export const CampaignLoaded = ({ campaign }: { campaign: Campaign }) => {
       </SimpleGrid>
 
       <Text fontSize="xs">campaign id: {campaign.id}</Text>
-
-      <AddItemModal
-        isOpen={isOpen}
-        onClose={onClose}
-        campaignId={campaign.id}
-      />
     </Box>
   );
 };
