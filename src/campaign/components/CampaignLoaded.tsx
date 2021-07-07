@@ -1,14 +1,42 @@
+import { HamburgerIcon } from "@chakra-ui/icons";
+import {
+  Box,
+  Flex,
+  IconButton,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
+  SimpleGrid,
+  Text,
+  useDisclosure,
+} from "@chakra-ui/react";
 import { FetchCampaign_fetchCampaign_Campaign as Campaign } from "campaign/gql";
-import { Box, SimpleGrid, Text } from "@chakra-ui/react";
+import React from "react";
+import { AddItemModal } from "./AddItemModal";
 import { ItemCard } from "./ItemCard";
 
 export const CampaignLoaded = ({ campaign }: { campaign: Campaign }) => {
+  const { isOpen, onClose, onOpen } = useDisclosure();
   return (
     <Box>
-      <Text mb={4} fontSize="xl">
-        {campaign.name}
-      </Text>
+      <Flex as="header" width="full" align="center" mb={4}>
+        <Text fontSize="xl">{campaign.name}</Text>
 
+        <Box ml="auto">
+          <Menu placement="bottom-end">
+            <MenuButton
+              as={IconButton}
+              aria-label="actions"
+              icon={<HamburgerIcon />}
+              variant="ghost"
+            />
+            <MenuList>
+              <MenuItem onClick={onOpen}>add item</MenuItem>
+            </MenuList>
+          </Menu>
+        </Box>
+      </Flex>
       <Text mb={4}>
         gold: {campaign.gold} silver: {campaign.silver} copper:{" "}
         {campaign.bronze}
@@ -21,6 +49,12 @@ export const CampaignLoaded = ({ campaign }: { campaign: Campaign }) => {
       </SimpleGrid>
 
       <Text fontSize="xs">campaign id: {campaign.id}</Text>
+
+      <AddItemModal
+        isOpen={isOpen}
+        onClose={onClose}
+        campaignId={campaign.id}
+      />
     </Box>
   );
 };

@@ -7,6 +7,11 @@
 // START Enums and Input Objects
 //==============================================================
 
+export interface AddItemInput {
+  name: string;
+  description?: string | null;
+}
+
 export interface RemoveItemInput {
   id: string;
 }
