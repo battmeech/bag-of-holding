@@ -1,4 +1,4 @@
-import { Flex, FlexProps, Text } from "@chakra-ui/react";
+import { Flex, FlexProps, Text, Tooltip } from "@chakra-ui/react";
 import React from "react";
 import { RiCopperCoinFill } from "react-icons/ri";
 
@@ -29,10 +29,14 @@ export const Currency: React.FC<CurrencyProps> = ({
 }) => {
   return (
     <Flex {...flexProps} display="flex" alignItems="center">
-      <RiCopperCoinFill
-        aria-label={denomination}
-        color={colorMap[denomination]}
-      />
+      <Tooltip label={denomination}>
+        <span>
+          <RiCopperCoinFill
+            aria-label={denomination}
+            color={colorMap[denomination]}
+          />
+        </span>
+      </Tooltip>
       <Text ml={1}>{value}</Text>
     </Flex>
   );
