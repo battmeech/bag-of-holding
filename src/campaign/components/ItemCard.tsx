@@ -1,5 +1,6 @@
 import { useMutation } from "@apollo/client";
-import { Box, CloseButton, Flex, Text } from "@chakra-ui/react";
+import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
+import { Box, Flex, IconButton, Text } from "@chakra-ui/react";
 import {
   FetchCampaign_fetchCampaign_Campaign_items as Item,
   RemoveItem,
@@ -7,6 +8,8 @@ import {
   RemoveItemVariables,
 } from "campaign/gql";
 import React from "react";
+import { useModal } from "shared";
+import { EditItemModal } from "./EditItemModal";
 
 export const ItemCard = ({
   item,
@@ -15,6 +18,7 @@ export const ItemCard = ({
   item: Item;
   campaignId: string;
 }) => {
+  const { openModal } = useModal();
   const [mutate, { loading }] = useMutation<RemoveItem, RemoveItemVariables>(
     RemoveItemGQL,
     {
@@ -35,10 +39,23 @@ export const ItemCard = ({
 
           <Box flex="1 1 auto" />
 
-          <CloseButton
-            aria-label="delete item"
-            size="sm"
+          <IconButton
+            aria-label="edit item"
+            size="xs"
+            variant="ghost"
             disabled={loading}
+            icon={<EditIcon />}
+            onClick={() =>
+              openModal(<EditItemModal campaignId={campaignId} item={item} />)
+            }
+          />
+
+          <IconButton
+            aria-label="delete item"
+            size="xs"
+            variant="ghost"
+            disabled={loading}
+            icon={<DeleteIcon />}
             onClick={() => mutate()}
           />
         </Flex>

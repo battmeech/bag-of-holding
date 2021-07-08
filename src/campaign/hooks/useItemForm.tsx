@@ -1,10 +1,25 @@
 import { useMutation } from "@apollo/client";
-import { AddItem, AddItemGQL, AddItemVariables } from "campaign/gql";
+import {
+  AddItem,
+  AddItemGQL,
+  AddItemVariables,
+  EditItem,
+  EditItemGQL,
+  EditItemVariables,
+  EditItem_editItem_Campaign_items as ExistingItem,
+} from "campaign/gql";
 import { useEffect, useState } from "react";
 
 type Item = {
   name: string;
   description?: string;
+};
+
+export type FormProps = {
+  errors: Map<keyof Item, boolean>;
+  // eslint-disable-next-line no-unused-vars
+  setValues: (value: { key: keyof Item; value: string }) => void;
+  values: Item;
 };
 
 const validate = (
@@ -13,25 +28,20 @@ const validate = (
   value: string
 ) => {
   if (key === "description") return errors;
-  if (key === "name" && !value) errors.set(key, true);
+  if ((key === "name" && !value) || !value.trim()) errors.set(key, true);
   else if (key === "name" && value) errors.delete(key);
   return errors;
 };
 
-export const useItemForm = ({
-  campaignId,
-  onSuccessCallback,
-}: {
-  campaignId: string;
-  onSuccessCallback: () => void;
-}) => {
-  const [item, setItem] = useState<Item>({ name: "", description: undefined });
+const initialiseValues = (startValues?: Item): Item => {
+  if (!startValues) return { name: "", description: undefined };
+  else return startValues;
+};
+
+const useItem = (startingValues?: Item) => {
+  const [item, setItem] = useState<Item>(initialiseValues(startingValues));
   const [errors, setErrors] = useState(new Map<keyof Item, boolean>());
   const [isSaveEnabled, setIsSaveEnabled] = useState(false);
-
-  const [mutate, { loading }] = useMutation<AddItem, AddItemVariables>(
-    AddItemGQL
-  );
 
   const resetForm = () => {
     setItem({ name: "", description: undefined });
@@ -54,11 +64,39 @@ export const useItemForm = ({
     else setIsSaveEnabled(true);
   }, [item, errors]);
 
+  const formProps: FormProps = {
+    errors,
+    setValues,
+    values: item,
+  };
+
+  return {
+    resetForm,
+    isSaveEnabled,
+    formProps,
+  };
+};
+
+export const useCreateItem = ({
+  campaignId,
+  onSuccessCallback,
+}: {
+  campaignId: string;
+  onSuccessCallback: () => void;
+}) => {
+  const { isSaveEnabled, resetForm, formProps } = useItem();
+  const [mutate, { loading }] = useMutation<AddItem, AddItemVariables>(
+    AddItemGQL
+  );
+
   const saveItem = async () => {
     await mutate({
       variables: {
         id: campaignId,
-        input: { name: item.name, description: item.description },
+        input: {
+          name: formProps.values.name,
+          description: formProps.values.description,
+        },
       },
     });
     onSuccessCallback();
@@ -69,9 +107,50 @@ export const useItemForm = ({
     saveLoading: loading,
     resetForm,
     isSaveEnabled,
-    values: item,
-    setValues,
+    formProps,
     saveItem,
-    errors,
+  };
+};
+
+export const useEditItem = ({
+  campaignId,
+  existingItem,
+  onSuccessCallback,
+}: {
+  campaignId: string;
+  existingItem: ExistingItem;
+  onSuccessCallback: () => void;
+}) => {
+  const { isSaveEnabled, resetForm, formProps } = useItem({
+    name: existingItem.name,
+    description: existingItem.description
+      ? existingItem.description
+      : undefined,
+  });
+  const [mutate, { loading }] = useMutation<EditItem, EditItemVariables>(
+    EditItemGQL
+  );
+
+  const saveItem = async () => {
+    await mutate({
+      variables: {
+        id: campaignId,
+        input: {
+          id: existingItem.id,
+          name: formProps.values.name,
+          description: formProps.values.description,
+        },
+      },
+    });
+    onSuccessCallback();
+    resetForm();
+  };
+
+  return {
+    saveLoading: loading,
+    resetForm,
+    isSaveEnabled,
+    formProps,
+    saveItem,
   };
 };

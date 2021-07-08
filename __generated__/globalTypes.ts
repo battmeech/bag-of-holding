@@ -12,6 +12,12 @@ export interface AddItemInput {
   description?: string | null;
 }
 
+export interface EditItemInput {
+  id: string;
+  name?: string | null;
+  description?: string | null;
+}
+
 export interface RemoveItemInput {
   id: string;
 }
