@@ -7,7 +7,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "eslint ./src --ext ts",
     "prettify": "prettier --write src",
     "schema:download": "apollo client:download-schema graphql-schema.json",
     "schema:codegen": "apollo client:codegen --target=typescript --passthroughCustomScalars --customScalarsPrefix=GraphQL$ --tsFileExtension=ts",
