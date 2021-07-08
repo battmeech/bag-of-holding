@@ -1,8 +1,7 @@
 import Document, { Head, Html, Main, NextScript } from "next/document";
 
 const APP_NAME = "bag-of-holding";
-const APP_DESCRIPTION =
-  "Next.js app template with Chakra-UI, TypeScript, and PWA configured";
+const APP_DESCRIPTION = "A place to store all your items!";
 
 class MyDocument extends Document {
   static async getInitialProps(ctx: any) {
