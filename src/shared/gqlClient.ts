@@ -1,6 +1,10 @@
 import { ApolloClient, InMemoryCache } from "@apollo/client";
 
+const uri =
+  process.env.NEXT_PUBLIC_GRAPHQL_URL ??
+  "https://dev-bag-of-holding.herokuapp.com/";
+
 export const client = new ApolloClient({
-  uri: "https://purrito-bag-of-holding.herokuapp.com/",
+  uri,
   cache: new InMemoryCache(),
 });
