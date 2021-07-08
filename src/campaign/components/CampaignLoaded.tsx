@@ -33,7 +33,7 @@ export const CampaignLoaded = ({ campaign }: { campaign: Campaign }) => {
         <Currency denomination="copper" value={campaign.copper} mr={3} />
       </Flex>
 
-      <SimpleGrid columns={{ base: 1, sm: 2, md: 2, lg: 4 }} spacing={4} mb={4}>
+      <SimpleGrid columns={{ base: 1, sm: 2, md: 2, lg: 4 }} spacing={4} mb={6}>
         {campaign.items.map((item) => (
           <ItemCard key={item.id} item={item} campaignId={campaign.id} />
         ))}
