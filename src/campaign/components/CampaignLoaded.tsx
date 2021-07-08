@@ -1,15 +1,5 @@
-import { HamburgerIcon } from "@chakra-ui/icons";
-import {
-  Box,
-  Flex,
-  IconButton,
-  Menu,
-  MenuButton,
-  MenuItem,
-  MenuList,
-  SimpleGrid,
-  Text,
-} from "@chakra-ui/react";
+import { AddIcon } from "@chakra-ui/icons";
+import { Box, Flex, IconButton, SimpleGrid, Text } from "@chakra-ui/react";
 import { FetchCampaign_fetchCampaign_Campaign as Campaign } from "campaign/gql";
 import React from "react";
 import { useModal } from "shared";
@@ -25,23 +15,13 @@ export const CampaignLoaded = ({ campaign }: { campaign: Campaign }) => {
         <Text fontSize="xl">{campaign.name}</Text>
 
         <Box ml="auto">
-          <Menu placement="bottom-end">
-            <MenuButton
-              as={IconButton}
-              aria-label="actions"
-              icon={<HamburgerIcon />}
-              variant="ghost"
-            />
-            <MenuList>
-              <MenuItem
-                onClick={() =>
-                  openModal(<AddItemModal campaignId={campaign.id} />)
-                }
-              >
-                add item
-              </MenuItem>
-            </MenuList>
-          </Menu>
+          <IconButton
+            aria-label="add item"
+            variant="ghost"
+            size="lg"
+            icon={<AddIcon />}
+            onClick={() => openModal(<AddItemModal campaignId={campaign.id} />)}
+          />
         </Box>
       </Flex>
 
