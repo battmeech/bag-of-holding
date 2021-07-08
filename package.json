@@ -10,7 +10,9 @@
     "lint": "next lint",
     "prettify": "prettier --write src",
     "schema:download": "apollo client:download-schema graphql-schema.json",
-    "schema:codegen": "apollo client:codegen --target=typescript --passthroughCustomScalars --customScalarsPrefix=GraphQL$ --tsFileExtension=ts"
+    "schema:codegen": "apollo client:codegen --target=typescript --passthroughCustomScalars --customScalarsPrefix=GraphQL$ --tsFileExtension=ts",
+    "schema:download:dev": "apollo client:download-schema graphql-schema.json -v=dev",
+    "schema:codegen:dev": "apollo client:codegen --target=typescript --passthroughCustomScalars --customScalarsPrefix=GraphQL$ --tsFileExtension=ts -v=dev"
   },
   "dependencies": {
     "@apollo/client": "^3.3.21",
