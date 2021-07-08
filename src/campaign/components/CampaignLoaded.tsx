@@ -1,5 +1,12 @@
 import { AddIcon } from "@chakra-ui/icons";
-import { Box, Flex, IconButton, SimpleGrid, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Flex,
+  IconButton,
+  SimpleGrid,
+  Text,
+} from "@chakra-ui/react";
 import { FetchCampaign_fetchCampaign_Campaign as Campaign } from "campaign/gql";
 import React from "react";
 import { useModal } from "shared";
@@ -33,11 +40,27 @@ export const CampaignLoaded = ({ campaign }: { campaign: Campaign }) => {
         <Currency denomination="copper" value={campaign.copper} mr={3} />
       </Flex>
 
-      <SimpleGrid columns={{ base: 1, sm: 2, md: 2, lg: 4 }} spacing={4} mb={6}>
-        {campaign.items.map((item) => (
-          <ItemCard key={item.id} item={item} campaignId={campaign.id} />
-        ))}
-      </SimpleGrid>
+      {campaign.items.length === 0 ? (
+        <Box mb={6}>
+          <Text mb={4}>looks empty in here</Text>
+          <Button
+            colorScheme="teal"
+            onClick={() => openModal(<AddItemModal campaignId={campaign.id} />)}
+          >
+            add an item
+          </Button>
+        </Box>
+      ) : (
+        <SimpleGrid
+          columns={{ base: 1, sm: 2, md: 2, lg: 4 }}
+          spacing={4}
+          mb={6}
+        >
+          {campaign.items.map((item) => (
+            <ItemCard key={item.id} item={item} campaignId={campaign.id} />
+          ))}
+        </SimpleGrid>
+      )}
 
       <Text fontSize="xs">campaign id: {campaign.id}</Text>
     </Box>
