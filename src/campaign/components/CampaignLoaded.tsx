@@ -46,7 +46,9 @@ export const CampaignLoaded = ({ campaign }: { campaign: Campaign }) => {
       </Flex>
 
       <Flex mb={4}>
+        <Currency denomination="platinum" value={campaign.platinum} mr={3} />
         <Currency denomination="gold" value={campaign.gold} mr={3} />
+        <Currency denomination="electrum" value={campaign.electrum} mr={3} />
         <Currency denomination="silver" value={campaign.silver} mr={3} />
         <Currency denomination="copper" value={campaign.copper} mr={3} />
       </Flex>

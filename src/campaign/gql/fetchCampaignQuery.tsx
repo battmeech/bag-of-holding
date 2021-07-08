@@ -7,6 +7,8 @@ export const FetchCampaignGQL = gql`
       ... on Campaign {
         id
         name
+        electrum
+        platinum
         gold
         silver
         copper

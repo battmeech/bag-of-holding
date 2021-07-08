@@ -18,6 +18,8 @@ export interface FetchCampaign_fetchCampaign_Campaign {
   __typename: "Campaign";
   id: string;
   name: string;
+  electrum: number;
+  platinum: number;
   gold: number;
   silver: number;
   copper: number;
