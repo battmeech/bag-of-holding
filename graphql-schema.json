@@ -154,6 +154,38 @@
             "deprecationReason": null
           },
           {
+            "name": "electrum",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "platinum",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "gold",
             "description": null,
             "args": [],
@@ -187,6 +219,22 @@
           },
           {
             "name": "bronze",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            "isDeprecated": true,
+            "deprecationReason": "use copper instead"
+          },
+          {
+            "name": "copper",
             "description": null,
             "args": [],
             "type": {
@@ -386,6 +434,38 @@
             "deprecationReason": null
           },
           {
+            "name": "electrum",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "platinum",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "gold",
             "description": null,
             "type": {
@@ -418,7 +498,7 @@
             "deprecationReason": null
           },
           {
-            "name": "bronze",
+            "name": "copper",
             "description": null,
             "type": {
               "kind": "NON_NULL",

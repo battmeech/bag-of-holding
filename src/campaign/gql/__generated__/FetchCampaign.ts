@@ -20,7 +20,7 @@ export interface FetchCampaign_fetchCampaign_Campaign {
   name: string;
   gold: number;
   silver: number;
-  bronze: number;
+  copper: number;
   items: FetchCampaign_fetchCampaign_Campaign_items[];
 }
 

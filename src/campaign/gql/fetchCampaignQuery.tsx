@@ -9,7 +9,7 @@ export const FetchCampaignGQL = gql`
         name
         gold
         silver
-        bronze
+        copper
         items {
           id
           name

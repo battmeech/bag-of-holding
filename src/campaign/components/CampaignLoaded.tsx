@@ -8,7 +8,7 @@ import {
   MenuItem,
   MenuList,
   SimpleGrid,
-  Text
+  Text,
 } from "@chakra-ui/react";
 import { FetchCampaign_fetchCampaign_Campaign as Campaign } from "campaign/gql";
 import React from "react";
@@ -46,11 +46,11 @@ export const CampaignLoaded = ({ campaign }: { campaign: Campaign }) => {
       </Flex>
 
       <Flex mb={4}>
-        <Currency denomination='gold' value={campaign.gold} mr={3}/>
-        <Currency denomination='silver' value={campaign.silver} mr={3}/>
-        <Currency denomination='copper' value={campaign.bronze} mr={3}/>
+        <Currency denomination="gold" value={campaign.gold} mr={3} />
+        <Currency denomination="silver" value={campaign.silver} mr={3} />
+        <Currency denomination="copper" value={campaign.copper} mr={3} />
       </Flex>
-     
+
       <SimpleGrid columns={{ base: 1, sm: 2, md: 2, lg: 4 }} spacing={4} mb={4}>
         {campaign.items.map((item) => (
           <ItemCard key={item.id} item={item} campaignId={campaign.id} />
