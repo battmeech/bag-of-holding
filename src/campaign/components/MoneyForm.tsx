@@ -5,7 +5,7 @@ import { CurrencyInput } from "./CurrencyInput";
 
 export function MoneyForm({ values, setValues, errors }: FormProps) {
   return (
-    <SimpleGrid columns={2} spacing={2}>
+    <SimpleGrid columns={1} spacing={2}>
       <CurrencyInput
         denomination="platinum"
         value={values.platinum}

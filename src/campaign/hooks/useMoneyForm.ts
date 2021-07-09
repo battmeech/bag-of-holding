@@ -55,6 +55,9 @@ export const useMoneyForm = ({
   const [isSaveEnabled, setIsSaveEnabled] = useState(false);
 
   const setValues = ({ key, value }: { key: keyof Values; value: number }) => {
+    console.log(value);
+    if (isNaN(value)) return;
+    if (value < 0) return;
     setMoney((currentState) => ({
       ...currentState,
       [key]: value,

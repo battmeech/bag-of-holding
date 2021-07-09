@@ -11,7 +11,7 @@ export type CurrencyDenomination =
 
 export type CurrencyProps = {
   denomination: CurrencyDenomination;
-  value: number;
+  value?: number;
 } & FlexProps;
 
 const colorMap: Record<CurrencyDenomination, string> = {
@@ -37,7 +37,7 @@ export const Currency: React.FC<CurrencyProps> = ({
           />
         </span>
       </Tooltip>
-      <Text ml={1}>{value}</Text>
+      {value && <Text ml={1}>{value}</Text>}
     </Flex>
   );
 };
