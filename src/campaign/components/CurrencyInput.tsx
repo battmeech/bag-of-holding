@@ -8,7 +8,7 @@ import {
   InputRightAddon,
 } from "@chakra-ui/react";
 import React from "react";
-import { Currency, CurrencyDenomination } from "./Currency";
+import { CurrencyDenomination, Coin } from "./Coin";
 
 type CurrencyInputProps = {
   denomination: CurrencyDenomination;
@@ -52,7 +52,7 @@ export const CurrencyInput = ({
   return (
     <InputGroup>
       <InputLeftAddon>
-        <Currency denomination={denomination} />
+        <Coin denomination={denomination} />
       </InputLeftAddon>
       <Input
         error={error}
