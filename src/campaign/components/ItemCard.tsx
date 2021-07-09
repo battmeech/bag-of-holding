@@ -1,6 +1,15 @@
 import { useMutation } from "@apollo/client";
-import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
-import { Box, Flex, IconButton, Text } from "@chakra-ui/react";
+import { DeleteIcon, EditIcon, HamburgerIcon } from "@chakra-ui/icons";
+import {
+  Box,
+  Flex,
+  IconButton,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
+  Text,
+} from "@chakra-ui/react";
 import {
   FetchCampaign_fetchCampaign_Campaign_items as Item,
   RemoveItem,
@@ -19,17 +28,14 @@ export const ItemCard = ({
   campaignId: string;
 }) => {
   const { openModal } = useModal();
-  const [mutate, { loading }] = useMutation<RemoveItem, RemoveItemVariables>(
-    RemoveItemGQL,
-    {
-      variables: {
-        id: campaignId,
-        input: {
-          id: item.id,
-        },
+  const [mutate] = useMutation<RemoveItem, RemoveItemVariables>(RemoveItemGQL, {
+    variables: {
+      id: campaignId,
+      input: {
+        id: item.id,
       },
-    }
-  );
+    },
+  });
 
   return (
     <Box borderWidth="1px" borderRadius="lg" overflow="hidden">
@@ -39,25 +45,30 @@ export const ItemCard = ({
 
           <Box flex="1 1 auto" />
 
-          <IconButton
-            aria-label="edit item"
-            size="xs"
-            variant="ghost"
-            disabled={loading}
-            icon={<EditIcon />}
-            onClick={() =>
-              openModal(<EditItemModal campaignId={campaignId} item={item} />)
-            }
-          />
-
-          <IconButton
-            aria-label="delete item"
-            size="xs"
-            variant="ghost"
-            disabled={loading}
-            icon={<DeleteIcon />}
-            onClick={() => mutate()}
-          />
+          <Menu placement="bottom-end">
+            <MenuButton
+              as={IconButton}
+              aria-label="Options"
+              icon={<HamburgerIcon />}
+              variant="ghost"
+              size="xs"
+            />
+            <MenuList>
+              <MenuItem
+                icon={<EditIcon />}
+                onClick={() =>
+                  openModal(
+                    <EditItemModal campaignId={campaignId} item={item} />
+                  )
+                }
+              >
+                edit item
+              </MenuItem>
+              <MenuItem icon={<DeleteIcon />} onClick={() => mutate()}>
+                delete item
+              </MenuItem>
+            </MenuList>
+          </Menu>
         </Flex>
 
         <Text fontSize="sm">{item.description}</Text>
