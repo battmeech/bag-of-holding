@@ -21,7 +21,7 @@ export const CampaignLoaded = ({ campaign }: { campaign: Campaign }) => {
   const { openModal } = useModal();
   return (
     <Box>
-      <Flex as="header" width="full" align="center" mb={4}>
+      <Flex as="header" width="full" align="center">
         <Text fontSize="xl">{campaign.name}</Text>
 
         <Box ml="auto">
@@ -39,7 +39,7 @@ export const CampaignLoaded = ({ campaign }: { campaign: Campaign }) => {
         </Box>
       </Flex>
 
-      <Flex mb={4}>
+      <Flex mb={2}>
         <Currency denomination="platinum" value={campaign.platinum} mr={3} />
         <Currency denomination="gold" value={campaign.gold} mr={3} />
         <Currency denomination="electrum" value={campaign.electrum} mr={3} />
