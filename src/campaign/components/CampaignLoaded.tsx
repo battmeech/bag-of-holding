@@ -13,6 +13,7 @@ import { useModal } from "shared";
 import { AddItemModal } from "./AddItemModal";
 import { Currency } from "./Currency";
 import { ItemCard } from "./ItemCard";
+import { MoneyModal } from "./MoneyModal";
 
 export const CampaignLoaded = ({ campaign }: { campaign: Campaign }) => {
   const { openModal } = useModal();
@@ -32,7 +33,11 @@ export const CampaignLoaded = ({ campaign }: { campaign: Campaign }) => {
         </Box>
       </Flex>
 
-      <Flex mb={4}>
+      <Flex
+        mb={4}
+        cursor="pointer"
+        onClick={() => openModal(<MoneyModal campaignId={campaign.id} />)}
+      >
         <Currency denomination="platinum" value={campaign.platinum} mr={3} />
         <Currency denomination="gold" value={campaign.gold} mr={3} />
         <Currency denomination="electrum" value={campaign.electrum} mr={3} />

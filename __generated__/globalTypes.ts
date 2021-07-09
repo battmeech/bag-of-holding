@@ -7,6 +7,11 @@
 // START Enums and Input Objects
 //==============================================================
 
+export enum MoneyModification {
+  ADD = "ADD",
+  DEDUCT = "DEDUCT",
+}
+
 export interface AddItemInput {
   name: string;
   description?: string | null;
@@ -16,6 +21,15 @@ export interface EditItemInput {
   id: string;
   name?: string | null;
   description?: string | null;
+}
+
+export interface ModifyMoneyInput {
+  modification: MoneyModification;
+  electrum: number;
+  platinum: number;
+  gold: number;
+  silver: number;
+  copper: number;
 }
 
 export interface RemoveItemInput {
