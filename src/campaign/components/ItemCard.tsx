@@ -1,5 +1,5 @@
 import { useMutation } from "@apollo/client";
-import { DeleteIcon, EditIcon, HamburgerIcon } from "@chakra-ui/icons";
+import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
 import {
   Box,
   Flex,
@@ -17,6 +17,7 @@ import {
   RemoveItemVariables,
 } from "campaign/gql";
 import React from "react";
+import { GoKebabVertical } from "react-icons/go";
 import { useModal } from "shared";
 import { EditItemModal } from "./EditItemModal";
 
@@ -48,8 +49,8 @@ export const ItemCard = ({
           <Menu placement="bottom-end">
             <MenuButton
               as={IconButton}
-              aria-label="Options"
-              icon={<HamburgerIcon />}
+              aria-label="item options"
+              icon={<GoKebabVertical />}
               variant="ghost"
               size="xs"
             />
