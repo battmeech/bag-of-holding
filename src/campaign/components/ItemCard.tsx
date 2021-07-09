@@ -1,4 +1,3 @@
-import { useMutation } from "@apollo/client";
 import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
 import {
   Box,
@@ -10,15 +9,11 @@ import {
   MenuList,
   Text,
 } from "@chakra-ui/react";
-import {
-  FetchCampaign_fetchCampaign_Campaign_items as Item,
-  RemoveItem,
-  RemoveItemGQL,
-  RemoveItemVariables,
-} from "campaign/gql";
+import { FetchCampaign_fetchCampaign_Campaign_items as Item } from "campaign/gql";
 import React from "react";
 import { GoKebabVertical } from "react-icons/go";
 import { useModal } from "shared";
+import { DeleteConfirmationModal } from "./DeleteConfirmationModal";
 import { EditItemModal } from "./EditItemModal";
 
 export const ItemCard = ({
@@ -29,14 +24,6 @@ export const ItemCard = ({
   campaignId: string;
 }) => {
   const { openModal } = useModal();
-  const [mutate] = useMutation<RemoveItem, RemoveItemVariables>(RemoveItemGQL, {
-    variables: {
-      id: campaignId,
-      input: {
-        id: item.id,
-      },
-    },
-  });
 
   return (
     <Box borderWidth="1px" borderRadius="lg" overflow="hidden">
@@ -65,7 +52,17 @@ export const ItemCard = ({
               >
                 edit item
               </MenuItem>
-              <MenuItem icon={<DeleteIcon />} onClick={() => mutate()}>
+              <MenuItem
+                icon={<DeleteIcon />}
+                onClick={() =>
+                  openModal(
+                    <DeleteConfirmationModal
+                      campaignId={campaignId}
+                      itemId={item.id}
+                    />
+                  )
+                }
+              >
                 delete item
               </MenuItem>
             </MenuList>
