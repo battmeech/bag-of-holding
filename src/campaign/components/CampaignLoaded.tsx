@@ -15,7 +15,7 @@ import { AddItemModal } from "./AddItemModal";
 import { Currency } from "./Currency";
 import { ItemCard } from "./ItemCard";
 import { MoneyModal } from "./MoneyModal";
-import { FaPiggyBank } from "react-icons/Fa";
+import { FaPiggyBank } from "react-icons/fa";
 
 export const CampaignLoaded = ({ campaign }: { campaign: Campaign }) => {
   const { openModal } = useModal();
