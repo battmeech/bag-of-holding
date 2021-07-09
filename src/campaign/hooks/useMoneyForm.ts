@@ -20,18 +20,28 @@ type Modification = "add" | "deduct";
 export type FormProps = {
   errors: Map<keyof Values, boolean>;
   // eslint-disable-next-line no-unused-vars
-  setValues: (value: { key: keyof Values; value: number }) => void;
+  setValues: (value: { key: keyof Values; value: number | string }) => void;
   values: Values;
 };
 
 const validate = (
   errors: Map<keyof Values, boolean>,
   key: keyof Values,
-  value: number
+  value: number | string
 ) => {
-  if (!value && value !== 0) errors.set(key, true);
-  else if (value < 0) errors.set(key, true);
-  else errors.delete(key);
+  if (typeof value === "string") {
+    if (value === "") {
+      errors.set(key, true);
+    } else {
+      const num = Number(value);
+      if (isNaN(num)) errors.set(key, true);
+      else errors.delete(key);
+    }
+  } else {
+    if (value < 0) errors.set(key, true);
+    else errors.delete(key);
+  }
+
   return errors;
 };
 
@@ -53,20 +63,31 @@ export const useMoneyForm = ({
   const [money, setMoney] = useState<Values>(initialValue);
   const [errors, setErrors] = useState(new Map<keyof Values, boolean>());
   const [isSaveEnabled, setIsSaveEnabled] = useState(false);
+  const [mutateError, setMutateError] = useState(false);
 
-  const setValues = ({ key, value }: { key: keyof Values; value: number }) => {
-    if (isNaN(value)) return;
-    if (value < 0) return;
+  const setValues = ({
+    key,
+    value,
+  }: {
+    key: keyof Values;
+    value: number | string;
+  }) => {
+    const newValue: Record<string, any> = {};
+    const numValue = Number(value);
+
+    if (value === "") newValue[key] = "";
+    else if (!isNaN(numValue) && value >= 0) newValue[key] = numValue;
+    else if (isNaN(numValue)) return;
     setMoney((currentState) => ({
       ...currentState,
-      [key]: value,
+      ...newValue,
     }));
-
     setErrors(validate(errors, key, value));
   };
 
   const [mutate, { loading }] = useMutation<ModifyMoney, ModifyMoneyVariables>(
-    ModifyMoneyGQL
+    ModifyMoneyGQL,
+    { onError: () => setMutateError(true) }
   );
 
   const resetForm = () => {
@@ -75,7 +96,7 @@ export const useMoneyForm = ({
 
   useEffect(() => {
     if (errors.size > 0) setIsSaveEnabled(false);
-    if (
+    else if (
       money.copper === 0 &&
       money.silver === 0 &&
       money.electrum === 0 &&
@@ -113,5 +134,6 @@ export const useMoneyForm = ({
     modifyMoney,
     loading,
     isSaveEnabled,
+    mutateError,
   };
 };

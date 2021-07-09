@@ -15,7 +15,7 @@ type CurrencyInputProps = {
   value: number;
   error: boolean;
   // eslint-disable-next-line no-unused-vars
-  onChange: (value: number) => void;
+  onChange: (value: number | string) => void;
 };
 
 export const CurrencyInput = ({
@@ -46,6 +46,9 @@ export const CurrencyInput = ({
     } else {
       newValue -= 1;
     }
+
+    if (newValue < 0) newValue = 0;
+
     onChange(newValue);
   };
 
@@ -55,11 +58,10 @@ export const CurrencyInput = ({
         <Coin denomination={denomination} />
       </InputLeftAddon>
       <Input
-        error={error}
-        type="number"
+        isInvalid={error}
         placeholder={denomination}
         value={value}
-        onChange={(event) => onChange(Number(event.target.value))}
+        onChange={(event) => onChange(event.target.value)}
       />
       <InputRightAddon>
         <Box>
