@@ -71,6 +71,7 @@ export const CurrencyInput = ({
             aria-label={`add-${denomination}`}
             size="sm"
             icon={<AddIcon />}
+            mr={1}
           />
 
           <IconButton
