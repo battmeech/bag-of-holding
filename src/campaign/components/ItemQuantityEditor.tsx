@@ -6,13 +6,15 @@ import React from "react";
 import { debounce } from "lodash";
 import { useCallback } from "react";
 
-export const QuantityEditor = ({
-  campaignId,
-  item,
-}: {
+type ItemQuantityEditorProps = {
   campaignId: string;
   item: Item;
-}) => {
+};
+
+export const ItemQuantityEditor = ({
+  campaignId,
+  item,
+}: ItemQuantityEditorProps) => {
   const { quantity, saveItem, setQuantity } = useEditQuantity({
     campaignId,
     itemId: item.id,
