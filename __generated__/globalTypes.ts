@@ -15,12 +15,14 @@ export enum MoneyModification {
 export interface AddItemInput {
   name: string;
   description?: string | null;
+  quantity?: number | null;
 }
 
 export interface EditItemInput {
   id: string;
   name?: string | null;
   description?: string | null;
+  quantity?: number | null;
 }
 
 export interface ModifyMoneyInput {

@@ -9,6 +9,10 @@ import { EditItemInput } from "./../../../../__generated__/globalTypes";
 // GraphQL mutation operation: EditItem
 // ====================================================
 
+export interface EditItem_editItem_InvalidInput {
+  __typename: "InvalidInput";
+}
+
 export interface EditItem_editItem_Campaign_items {
   __typename: "Item";
   id: string;
@@ -27,7 +31,7 @@ export interface EditItem_editItem_CampaignNotFound {
   message: string;
 }
 
-export type EditItem_editItem = EditItem_editItem_Campaign | EditItem_editItem_CampaignNotFound;
+export type EditItem_editItem = EditItem_editItem_InvalidInput | EditItem_editItem_Campaign | EditItem_editItem_CampaignNotFound;
 
 export interface EditItem {
   editItem: EditItem_editItem;
