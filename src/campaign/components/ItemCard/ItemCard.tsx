@@ -15,6 +15,7 @@ import { GoKebabVertical } from "react-icons/go";
 import { useModal } from "shared";
 import { DeleteConfirmationModal } from "../DeleteConfirmationModal";
 import { EditItemModal } from "../EditItemModal";
+import { QuantityEditor } from "../QuantityEditor";
 
 export const ItemCard = ({
   item,
@@ -70,6 +71,8 @@ export const ItemCard = ({
         </Flex>
 
         <Text fontSize="sm">{item.description}</Text>
+
+        <QuantityEditor campaignId={campaignId} item={item} />
       </Box>
     </Box>
   );

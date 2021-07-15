@@ -8,7 +8,6 @@ import {
   EditItemVariables,
   EditItem_editItem_Campaign_items as ExistingItem,
 } from "campaign/gql";
-import { debounce } from "lodash";
 import { useEffect, useState } from "react";
 
 type Item = {
@@ -188,11 +187,9 @@ export const useEditQuantity = ({
     });
   };
 
-  const saveItemDebounce = debounce(saveItem, 100);
-
   return {
     saveLoading: loading,
     formProps,
-    saveItem: saveItemDebounce,
+    saveItem,
   };
 };
