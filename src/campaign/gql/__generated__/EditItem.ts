@@ -18,6 +18,7 @@ export interface EditItem_editItem_Campaign_items {
   id: string;
   name: string;
   description: string | null;
+  quantity: number;
 }
 
 export interface EditItem_editItem_Campaign {

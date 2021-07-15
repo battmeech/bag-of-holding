@@ -10,6 +10,7 @@ export const AddItemGQL = gql`
           id
           name
           description
+          quantity
         }
       }
       ... on CampaignNotFound {

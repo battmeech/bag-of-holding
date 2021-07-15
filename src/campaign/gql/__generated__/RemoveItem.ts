@@ -14,6 +14,7 @@ export interface RemoveItem_removeItem_Campaign_items {
   id: string;
   name: string;
   description: string | null;
+  quantity: number;
 }
 
 export interface RemoveItem_removeItem_Campaign {

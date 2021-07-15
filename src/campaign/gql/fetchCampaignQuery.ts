@@ -16,6 +16,7 @@ export const FetchCampaignGQL = gql`
           id
           name
           description
+          quantity
         }
       }
       ... on CampaignNotFound {

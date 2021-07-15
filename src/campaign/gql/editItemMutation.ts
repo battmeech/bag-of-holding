@@ -10,6 +10,7 @@ export const EditItemGQL = gql`
           id
           name
           description
+          quantity
         }
       }
       ... on CampaignNotFound {
