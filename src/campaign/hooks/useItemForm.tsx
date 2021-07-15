@@ -13,6 +13,7 @@ import { useEffect, useState } from "react";
 type Item = {
   name: string;
   description?: string;
+  quantity?: string;
 };
 
 export type FormProps = {
@@ -34,7 +35,7 @@ const validate = (
 };
 
 const initialiseValues = (startValues?: Item): Item => {
-  if (!startValues) return { name: "", description: undefined };
+  if (!startValues) return { name: "", description: undefined, quantity: "1" };
   else return startValues;
 };
 
@@ -137,7 +138,10 @@ export const useEditItem = ({
         id: campaignId,
         input: {
           id: existingItem.id,
-          name: formProps.values.name,
+          name:
+            formProps.values.name !== existingItem.name
+              ? formProps.values.name
+              : undefined,
           description: formProps.values.description,
         },
       },
@@ -150,6 +154,41 @@ export const useEditItem = ({
     saveLoading: loading,
     resetForm,
     isSaveEnabled,
+    formProps,
+    saveItem,
+  };
+};
+
+export const useEditQuantity = ({
+  campaignId,
+  existingItem,
+}: {
+  campaignId: string;
+  existingItem: ExistingItem;
+}) => {
+  const { formProps } = useItem({
+    name: existingItem.name,
+    quantity: existingItem.quantity.toString(),
+  });
+
+  const [mutate, { loading }] = useMutation<EditItem, EditItemVariables>(
+    EditItemGQL
+  );
+
+  const saveItem = async () => {
+    await mutate({
+      variables: {
+        id: campaignId,
+        input: {
+          id: existingItem.id,
+          quantity: Number(formProps.values.quantity),
+        },
+      },
+    });
+  };
+
+  return {
+    saveLoading: loading,
     formProps,
     saveItem,
   };
