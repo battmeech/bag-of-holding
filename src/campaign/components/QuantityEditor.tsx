@@ -13,27 +13,25 @@ export const QuantityEditor = ({
   campaignId: string;
   item: Item;
 }) => {
-  const { formProps, saveItem } = useEditQuantity({
+  const { quantity, saveItem, setQuantity } = useEditQuantity({
     campaignId,
-    existingItem: item,
+    itemId: item.id,
+    currentQuantity: item.quantity,
   });
-  const { quantity } = formProps.values;
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  const debounceSaveItem = useCallback(debounce(saveItem, 1000), [
-    formProps.values.quantity,
-  ]);
+  const debounceSaveItem = useCallback(debounce(saveItem, 1000), []);
 
   const add = async () => {
-    const newValue = Number(quantity) + 1;
-    formProps.setValues({ key: "quantity", value: newValue.toString() });
-    debounceSaveItem();
+    const newValue = quantity + 1;
+    setQuantity(newValue);
+    debounceSaveItem(newValue);
   };
 
   const deduct = () => {
-    const newValue = Number(quantity) - 1;
-    formProps.setValues({ key: "quantity", value: newValue.toString() });
-    debounceSaveItem();
+    const newValue = quantity - 1;
+    setQuantity(newValue);
+    debounceSaveItem(newValue);
   };
 
   return (
@@ -48,12 +46,12 @@ export const QuantityEditor = ({
       />
 
       <Box mx={1} my="auto">
-        {formProps.values.quantity}
+        {quantity}
       </Box>
 
       <IconButton
         variant="ghost"
-        disabled={quantity === "0"}
+        disabled={quantity === 0}
         onClick={deduct}
         aria-label={`deduct-quantity`}
         size="sm"
