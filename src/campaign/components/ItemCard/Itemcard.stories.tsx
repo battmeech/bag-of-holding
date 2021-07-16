@@ -1,23 +1,20 @@
-import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import React from "react";
+import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-import { ItemCard } from './ItemCard';
+import { ItemCard } from "./ItemCard";
+import { itemBuilder as item } from "shared/generators/item";
 
 export default {
-  title: 'Components/Item Card',
+  title: "Components/Item Card",
   component: ItemCard,
 } as ComponentMeta<typeof ItemCard>;
 
-const Template: ComponentStory<typeof ItemCard> = (args) => <ItemCard {...args} />;
+const Template: ComponentStory<typeof ItemCard> = (args) => (
+  <ItemCard {...args} />
+);
 
 export const Default = Template.bind({});
 Default.args = {
-    campaignId: 'abc123',
-    item: {
-        __typename: 'Item',
-        description: 'This is an item description',
-        id: '1',
-        name: 'Epic Item',
-        quantity: 2
-    }
+  campaignId: "abc123",
+  item: item(),
 };
