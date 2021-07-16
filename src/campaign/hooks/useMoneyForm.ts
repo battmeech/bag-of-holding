@@ -33,9 +33,7 @@ const validate = (
     if (value === "") {
       errors.set(key, true);
     } else {
-      const num = Number(value);
-      if (isNaN(num)) errors.set(key, true);
-      else errors.delete(key);
+      errors.delete(key);
     }
   } else {
     if (value < 0) errors.set(key, true);
@@ -63,7 +61,6 @@ export const useMoneyForm = ({
   const [money, setMoney] = useState<Values>(initialValue);
   const [errors, setErrors] = useState(new Map<keyof Values, boolean>());
   const [isSaveEnabled, setIsSaveEnabled] = useState(false);
-  const [mutateError, setMutateError] = useState(false);
 
   const setValues = ({
     key,
@@ -86,8 +83,7 @@ export const useMoneyForm = ({
   };
 
   const [mutate, { loading }] = useMutation<ModifyMoney, ModifyMoneyVariables>(
-    ModifyMoneyGQL,
-    { onError: () => setMutateError(true) }
+    ModifyMoneyGQL
   );
 
   const resetForm = () => {
@@ -134,6 +130,5 @@ export const useMoneyForm = ({
     modifyMoney,
     loading,
     isSaveEnabled,
-    mutateError,
   };
 };
