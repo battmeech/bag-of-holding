@@ -12,7 +12,7 @@ import {
 
 const Home = () => {
   const [campaignName, setCampaignName] = useState("");
-  const router = useRouter();
+  const { push } = useRouter();
 
   const [mutate, { loading }] = useMutation<
     CreateCampaign,
@@ -26,7 +26,7 @@ const Home = () => {
 
   const createCampaign = async () => {
     const { data } = await mutate({ variables: { name: campaignName } });
-    if (data) router.push(`/${data.createCampaign.id}`);
+    if (data) push(`/${data.createCampaign.id}`);
   };
 
   return (
