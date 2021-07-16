@@ -27,7 +27,7 @@ export function ItemForm({ errors, values, setValues }: FormProps) {
             isInvalid={errors.has("description")}
             placeholder="item description"
             my="auto"
-            value={values.description}
+            value={values.description || ""}
             onChange={(event) =>
               setValues({ key: "description", value: event.target.value })
             }
