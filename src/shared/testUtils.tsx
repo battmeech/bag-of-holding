@@ -5,6 +5,7 @@ import { MockedProvider, MockedResponse } from "@apollo/client/testing";
 import { ChakraProvider } from "@chakra-ui/react";
 import customTheme from "styles/customTheme";
 import { ModalProvider } from "./ModalProvider";
+import { Layout } from "shared";
 
 type TestContextProviderProps = {
   mocks?: MockedResponse<Record<string, any>>[];
@@ -17,7 +18,9 @@ const TestContextProvider: FC<TestContextProviderProps> = ({
   return (
     <MockedProvider mocks={mocks}>
       <ChakraProvider theme={customTheme}>
-        <ModalProvider>{children}</ModalProvider>
+        <ModalProvider>
+          <Layout>{children}</Layout>
+        </ModalProvider>
       </ChakraProvider>
     </MockedProvider>
   );
