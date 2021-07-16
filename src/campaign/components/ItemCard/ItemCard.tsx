@@ -13,8 +13,8 @@ import { FetchCampaign_fetchCampaign_Campaign_items as Item } from "campaign/gql
 import React from "react";
 import { GoKebabVertical } from "react-icons/go";
 import { useModal } from "shared";
-import { DeleteConfirmationModal } from "./DeleteConfirmationModal";
-import { EditItemModal } from "./EditItemModal";
+import { DeleteConfirmationModal } from "../DeleteConfirmationModal";
+import { EditItemModal } from "../EditItemModal";
 
 export const ItemCard = ({
   item,

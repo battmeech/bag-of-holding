@@ -19,7 +19,9 @@
     "schema:download": "apollo client:download-schema graphql-schema.json",
     "schema:codegen": "apollo client:codegen --target=typescript --passthroughCustomScalars --customScalarsPrefix=GraphQL$ --tsFileExtension=ts",
     "schema:download:dev": "apollo client:download-schema graphql-schema.json -v=dev",
-    "schema:codegen:dev": "apollo client:codegen --target=typescript --passthroughCustomScalars --customScalarsPrefix=GraphQL$ --tsFileExtension=ts -v=dev"
+    "schema:codegen:dev": "apollo client:codegen --target=typescript --passthroughCustomScalars --customScalarsPrefix=GraphQL$ --tsFileExtension=ts -v=dev",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "dependencies": {
     "@apollo/client": "^3.3.21",
@@ -38,6 +40,7 @@
     "react-icons": "^4.2.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.14.6",
     "@commitlint/cli": "^12.1.4",
     "@commitlint/config-conventional": "^12.1.4",
     "@netlify/plugin-nextjs": "^3.6.3",
@@ -48,6 +51,11 @@
     "@types/react": "^17.0.14",
     "apollo": "^2.33.4",
     "babel-jest": "^27.0.6",
+    "@storybook/addon-actions": "^6.3.4",
+    "@storybook/addon-essentials": "^6.3.4",
+    "@storybook/addon-links": "^6.3.4",
+    "@storybook/react": "^6.3.4",
+    "babel-loader": "^8.2.2",
     "eslint": "^7.30.0",
     "eslint-config-next": "^11.0.1",
     "eslint-plugin-jest": "^24.3.6",

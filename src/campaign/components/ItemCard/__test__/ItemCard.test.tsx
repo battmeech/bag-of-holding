@@ -1,8 +1,8 @@
 import { ItemCard } from "campaign/components/ItemCard";
+import { createItem } from "campaign/components/__test__/testData";
 import { FetchCampaign_fetchCampaign_Campaign_items as Item } from "campaign/gql";
 import React from "react";
 import { fireEvent, render } from "shared";
-import { createItem } from "./testData";
 
 describe("ItemCard", () => {
   const setUpComponent = ({
