@@ -1,8 +1,11 @@
 {
-  "name": "nextchakra-starter",
+  "name": "bag-of-holding-web",
   "version": "0.1.0",
-  "private": true,
-  "author": "sozonome",
+  "author": "Matt Beech, Dan Austin",
+  "repository": {
+    "url": "https://github.com/battmeech/bag-of-holding-web",
+    "type": "git"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
