@@ -1,7 +1,14 @@
 {
   "extends": ["next", "next/core-web-vitals"],
+  "plugins": ["jest"],
   "rules": {
     "no-unused-vars": "error",
-    "no-console": "error"
+    "no-console": "error",
+    "jest/expect-expect": [
+      "error",
+      {
+        "assertFunctionNames": ["expect"]
+      }
+    ]
   }
 }
