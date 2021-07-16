@@ -28,7 +28,7 @@ export function EditItemModal({
 
   return (
     <>
-      <ModalHeader>new item</ModalHeader>
+      <ModalHeader>edit item</ModalHeader>
       <ModalCloseButton />
       <ModalBody>
         <ItemForm {...formProps} />
