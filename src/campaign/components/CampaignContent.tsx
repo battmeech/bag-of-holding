@@ -30,6 +30,7 @@ function CampaignContent({ result }: CampaignContentProps) {
       return <Box>campaign not found</Box>;
     case "loaded":
       return <CampaignLoaded campaign={pageState.campaign} />;
+    /* istanbul ignore next */
     default:
       return null;
   }
