@@ -69,6 +69,7 @@ export const CampaignLoaded = ({ campaign }: { campaign: Campaign }) => {
         </Box>
       ) : (
         <SimpleGrid
+          data-testid="card-grid"
           columns={{ base: 1, sm: 2, md: 2, lg: 4 }}
           spacing={4}
           mb={6}
