@@ -4,24 +4,9 @@ import React from "react";
 import { fireEvent, render, waitFor } from "shared";
 import { EditItemModal } from "campaign/components/EditItemModal";
 import { EditItem_editItem_Campaign_items as Item } from "campaign/gql";
+import { createItem } from "./testData";
 
 describe("EditItemModal", () => {
-  const createItem = ({
-    name = "Test name",
-    description = "Test description",
-  }: {
-    name?: string;
-    description?: string;
-  }): Item => {
-    return {
-      __typename: "Item",
-      id: "item-id",
-      name,
-      description,
-      quantity: 1,
-    };
-  };
-
   const setUpComponent = ({
     campaignId = "campaign-id",
     item = createItem({}),
