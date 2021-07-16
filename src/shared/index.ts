@@ -1,3 +1,4 @@
 export * from "./components";
-export * from "./ModalProvider";
 export * from "./gqlClient";
+export * from "./ModalProvider";
+export * from "./testUtils";
