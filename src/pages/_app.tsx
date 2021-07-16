@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 import { ApolloProvider } from "@apollo/client";
 import { ChakraProvider } from "@chakra-ui/react";
 import "@fontsource/lexend/latin.css";
