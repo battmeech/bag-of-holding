@@ -1,5 +1,6 @@
-import { act, renderHook, screen, useModal } from "shared";
+import { act, screen, useModal } from "shared";
 import { ModalProvider } from "shared/ModalProvider";
+import { renderHook } from "@testing-library/react-hooks";
 
 describe("AddItemModal", () => {
   const setUpComponent = () => {
