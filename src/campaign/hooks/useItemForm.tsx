@@ -36,7 +36,7 @@ const validate = (
 
 const initialiseValues = (startValues?: Item): Item => {
   if (!startValues) return { name: "", description: undefined, quantity: "1" };
-  else return startValues;
+  else return { description: undefined, quantity: "1", ...startValues };
 };
 
 const useItem = (startingValues?: Item) => {
@@ -45,7 +45,7 @@ const useItem = (startingValues?: Item) => {
   const [isSaveEnabled, setIsSaveEnabled] = useState(false);
 
   const resetForm = () => {
-    setItem({ name: "", description: undefined });
+    setItem({ name: "", description: undefined, quantity: "1" });
     setErrors(new Map<keyof Item, boolean>());
     setIsSaveEnabled(false);
   };
