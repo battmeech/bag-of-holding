@@ -35,6 +35,7 @@ const customRender = (
   });
 
 export * from "@testing-library/react";
+export { renderHook, act as actHook } from "@testing-library/react-hooks";
 export const waitForNextTick = () =>
   new Promise((resolve) => setTimeout(resolve));
 export { customRender as render };

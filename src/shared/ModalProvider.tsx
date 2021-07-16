@@ -6,8 +6,10 @@ import {
 } from "@chakra-ui/react";
 import { createContext, FC, ReactNode, useContext, useState } from "react";
 
+/* istanbul ignore next */
 const ModalContext = createContext({
-  openModal: (_: ReactNode) => {},
+  // eslint-disable-next-line no-unused-vars
+  openModal: (content: ReactNode) => {},
   closeModal: () => {},
 });
 
@@ -34,7 +36,7 @@ export const ModalProvider: FC = ({ children }) => {
     <ModalContext.Provider value={value}>
       {children}
       <Modal isOpen={isOpen} onClose={closeModal} isCentered size="xs">
-        <ModalOverlay />
+        <ModalOverlay data-testid="modal-overlay" />
         <ModalContent>{content}</ModalContent>
       </Modal>
     </ModalContext.Provider>
