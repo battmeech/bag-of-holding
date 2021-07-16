@@ -8,6 +8,7 @@ function Return() {
   const [campaignCode, setCampaignCode] = useState("");
   const router = useRouter();
 
+  /* istanbul ignore next */
   const onSubmit: FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
     router.push(`/${campaignCode}`);
