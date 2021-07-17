@@ -3,10 +3,12 @@ import {
   useColorMode,
   useColorModeValue,
   Flex,
-  IconButton
+  IconButton,
 } from "@chakra-ui/react";
-import { FaMoon, FaSun } from "react-icons/fa"
+import { FaMoon, FaSun } from "react-icons/fa";
 import customTheme from "styles/customTheme";
+import { ModalProvider } from "shared";
+import { MockedProvider } from "@apollo/client/testing";
 
 const ColorModeToggleBar = () => {
   const { toggleColorMode } = useColorMode();
@@ -41,10 +43,13 @@ export const parameters = {
 
 export const decorators = [
   (Story) => (
-    <ChakraProvider theme={customTheme}>
-      <ColorModeToggleBar />
-
-      <Story />
-    </ChakraProvider>
+    <MockedProvider>
+      <ChakraProvider theme={customTheme}>
+        <ColorModeToggleBar />
+        <ModalProvider>
+          <Story />
+        </ModalProvider>
+      </ChakraProvider>
+    </MockedProvider>
   ),
 ];
