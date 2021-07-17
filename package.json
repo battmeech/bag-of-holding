@@ -21,7 +21,7 @@
     "schema:download:dev": "apollo client:download-schema graphql-schema.json -v=dev",
     "schema:codegen:dev": "apollo client:codegen --target=typescript --passthroughCustomScalars --customScalarsPrefix=GraphQL$ --tsFileExtension=ts -v=dev",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build:storybook": "build-storybook"
   },
   "dependencies": {
     "@apollo/client": "^3.3.21",
