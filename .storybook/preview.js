@@ -1,14 +1,15 @@
+import { MockedProvider } from "@apollo/client/testing";
 import {
   ChakraProvider,
-  useColorMode,
-  useColorModeValue,
   Flex,
   IconButton,
+  useColorMode,
+  useColorModeValue,
 } from "@chakra-ui/react";
+import "@fontsource/lexend/latin.css";
 import { FaMoon, FaSun } from "react-icons/fa";
-import customTheme from "styles/customTheme";
 import { ModalProvider } from "shared";
-import { MockedProvider } from "@apollo/client/testing";
+import customTheme from "styles/customTheme";
 
 const ColorModeToggleBar = () => {
   const { toggleColorMode } = useColorMode();
