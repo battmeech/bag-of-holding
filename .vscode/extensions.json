@@ -1,0 +1,11 @@
+{
+  "recommendations": [
+    "apollographql.vscode-apollo",
+    "coenraads.bracket-pair-colorizer-2",
+    "dbaeumer.vscode-eslint",
+    "eamodio.gitlens",
+    "esbenp.prettier-vscode",
+    "firsttris.vscode-jest-runner",
+    "streetsidesoftware.code-spell-checker"
+  ]
+}
