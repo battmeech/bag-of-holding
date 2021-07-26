@@ -7,16 +7,18 @@ import {
 export const createItem = ({
   name = "Test name",
   description = "Test description",
+  quantity = 1,
 }: {
   name?: string;
   description?: string;
+  quantity?: number;
 }): Item => {
   return {
     __typename: "Item",
     id: "item-id",
     name,
     description,
-    quantity: 1,
+    quantity,
   };
 };
 
