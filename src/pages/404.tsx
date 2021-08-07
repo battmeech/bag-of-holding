@@ -1,15 +1,13 @@
 /* istanbul ignore file */
 import { Button } from "@chakra-ui/button";
-import { useColorMode } from "@chakra-ui/color-mode";
 import { Image } from "@chakra-ui/image";
-import { Box, Heading, Text, Link as ChakraLink } from "@chakra-ui/layout";
+import { Box, Heading, Link as ChakraLink, Text } from "@chakra-ui/layout";
+import { useColorModeValue } from "@chakra-ui/react";
 import Link from "next/link";
-
 import { MotionBox } from "shared";
 
-const Page404 = () => {
-  const { colorMode } = useColorMode();
 
+const Page404 = () => {
   return (
     <>
       <MotionBox
@@ -34,9 +32,9 @@ const Page404 = () => {
 
         <Box textAlign="center" marginTop={4}>
           <Text>{"It's Okay!"}</Text>
-          <Link href="/" passHref>
-            <Button
-              backgroundColor={colorMode === "light" ? "gray.300" : "teal.500"}
+          <Link href="/">
+            <Button mt='4'
+              backgroundColor={useColorModeValue("gray.300", "teal.500")}
             >
               {"Let's Head Back"}
             </Button>
