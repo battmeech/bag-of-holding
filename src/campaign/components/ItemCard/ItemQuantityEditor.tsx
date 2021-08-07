@@ -1,5 +1,13 @@
 import { AddIcon, MinusIcon } from "@chakra-ui/icons";
-import { Box, Flex, IconButton, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Editable,
+  EditableInput,
+  EditablePreview,
+  HStack,
+  IconButton,
+  StackProps,
+} from "@chakra-ui/react";
 import { EditItem_editItem_Campaign_items as Item } from "campaign/gql";
 import { useEditQuantity } from "campaign/hooks";
 import { debounce } from "lodash";
@@ -8,11 +16,12 @@ import React, { useCallback } from "react";
 type ItemQuantityEditorProps = {
   campaignId: string;
   item: Item;
-};
+} & StackProps;
 
 export const ItemQuantityEditor = ({
   campaignId,
   item,
+  ...stackProps
 }: ItemQuantityEditorProps) => {
   const { quantity, saveItem, setQuantity } = useEditQuantity({
     campaignId,
@@ -53,20 +62,20 @@ export const ItemQuantityEditor = ({
     debounceSaveItem(newValue);
   };
 
+  const validateInput: React.KeyboardEventHandler = (event) => {
+    if (!/[0-9]/.test(event.key)) {
+      event.preventDefault();
+    }
+  };
+
+  const handleChange = (value: string) => {
+    const newValue = value ? parseInt(value) : 0;
+    setQuantity(newValue);
+    debounceSaveItem(newValue);
+  };
+
   return (
-    <Flex>
-      <IconButton
-        variant="ghost"
-        onClick={add}
-        aria-label={`add-quantity`}
-        size="xs"
-        icon={<AddIcon />}
-      />
-
-      <Box mx={0.5} my="auto">
-        <Text fontSize="xs">{quantity}</Text>
-      </Box>
-
+    <HStack {...stackProps} spacing="1">
       <IconButton
         variant="ghost"
         disabled={quantity === 0}
@@ -75,6 +84,19 @@ export const ItemQuantityEditor = ({
         size="xs"
         icon={<MinusIcon />}
       />
-    </Flex>
+      <Box>
+        <Editable onChange={handleChange} value={`${quantity}`}>
+          <EditablePreview cursor='pointer' />
+          <EditableInput maxW="35px" onKeyDown={validateInput} />
+        </Editable>
+      </Box>
+      <IconButton
+        variant="ghost"
+        onClick={add}
+        aria-label={`add-quantity`}
+        size="xs"
+        icon={<AddIcon />}
+      />
+    </HStack>
   );
 };

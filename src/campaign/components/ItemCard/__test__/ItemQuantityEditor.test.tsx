@@ -1,129 +1,211 @@
 import { createItem } from "campaign/components/__test__/testData";
-import { useEditQuantity } from "campaign/hooks";
-import { render, fireEvent } from "shared";
+import { useMutation } from "@apollo/client";
+import { render, fireEvent, screen } from "shared";
 import { ItemQuantityEditor } from "../ItemQuantityEditor";
+import user from "@testing-library/user-event";
 
-jest.mock("campaign/hooks", () => ({
-  ...jest.requireActual("campaign/hooks"),
-  useEditQuantity: jest.fn(),
-}));
+jest.mock("@apollo/client");
 
 describe("ItemQuantityEditor", () => {
-  const setUpComponent = ({ quantity = 1 }: { quantity?: number }) => {
-    const saveItem = jest.fn();
-    const setQuantity = jest.fn();
+  const commonProps = {
+    campaignId: "campaignId",
+  };
+  beforeAll(() => (useMutation as jest.Mock).mockReturnValue([jest.fn()]));
 
-    (useEditQuantity as jest.Mock).mockReturnValue({
-      quantity,
-      saveItem,
-      setQuantity,
-    });
-
-    const rendered = render(
+  it("renders the quantity provided", () => {
+    render(
       <ItemQuantityEditor
-        campaignId="campaignId"
-        item={createItem({ quantity })}
+        {...commonProps}
+        item={createItem({ quantity: 20 })}
       />
     );
 
-    return { ...rendered, saveItem, setQuantity };
-  };
-
-  it("renders the quantity provided", () => {
-    const { getByText } = setUpComponent({ quantity: 20 });
-
-    expect(getByText("20")).toBeInTheDocument();
+    expect(screen.getByText("20")).toBeInTheDocument();
   });
 
   describe("plus button", () => {
     it("adds 1 to quantity when clicking +", () => {
-      const { getByLabelText, setQuantity } = setUpComponent({ quantity: 1 });
+      render(
+        <ItemQuantityEditor
+          {...commonProps}
+          item={createItem({ quantity: 1 })}
+        />
+      );
 
-      const addButton = getByLabelText("add-quantity");
+      const addButton = screen.getByRole("button", { name: "add-quantity" });
+      user.click(addButton);
 
-      fireEvent.click(addButton);
-
-      expect(setQuantity).toHaveBeenCalledWith(2);
+      expect(screen.getByText("2")).toBeVisible();
     });
 
     it("adds 10 to quantity when shift clicking +", () => {
-      const { getByLabelText, setQuantity } = setUpComponent({ quantity: 1 });
+      render(
+        <ItemQuantityEditor
+          {...commonProps}
+          item={createItem({ quantity: 1 })}
+        />
+      );
 
-      const addButton = getByLabelText("add-quantity");
+      const addButton = screen.getByRole("button", { name: "add-quantity" });
 
-      fireEvent.click(addButton, { shiftKey: true });
+      user.click(addButton, { shiftKey: true });
 
-      expect(setQuantity).toHaveBeenCalledWith(11);
+      expect(screen.getByText("11")).toBeVisible();
     });
 
     it("adds 100 to quantity when alt clicking +", () => {
-      const { getByLabelText, setQuantity } = setUpComponent({ quantity: 1 });
+      render(
+        <ItemQuantityEditor
+          {...commonProps}
+          item={createItem({ quantity: 1 })}
+        />
+      );
 
-      const addButton = getByLabelText("add-quantity");
+      const addButton = screen.getByRole("button", { name: "add-quantity" });
 
-      fireEvent.click(addButton, { shiftKey: true });
+      user.click(addButton, { altKey: true });
 
-      expect(setQuantity).toHaveBeenCalledWith(11);
+      expect(screen.getByText("101")).toBeVisible();
     });
   });
 
   describe("deduct button", () => {
     it("deducts 1 from quantity when clicking -", () => {
-      const { getByLabelText, setQuantity } = setUpComponent({ quantity: 2 });
+      render(
+        <ItemQuantityEditor
+          {...commonProps}
+          item={createItem({ quantity: 2 })}
+        />
+      );
 
-      const deductButton = getByLabelText("deduct-quantity");
+      const deductButton = screen.getByRole("button", {
+        name: "deduct-quantity",
+      });
+      user.click(deductButton);
 
-      fireEvent.click(deductButton);
-
-      expect(setQuantity).toHaveBeenCalledWith(1);
+      expect(screen.getByText("1")).toBeVisible();
     });
 
     it("deducts 10 from quantity when shift clicking -", () => {
-      const { getByLabelText, setQuantity } = setUpComponent({ quantity: 20 });
+      render(
+        <ItemQuantityEditor
+          {...commonProps}
+          item={createItem({ quantity: 11 })}
+        />
+      );
 
-      const deductButton = getByLabelText("deduct-quantity");
+      const deductButton = screen.getByRole("button", {
+        name: "deduct-quantity",
+      });
+      user.click(deductButton, { shiftKey: true });
 
-      fireEvent.click(deductButton, { shiftKey: true });
-
-      expect(setQuantity).toHaveBeenCalledWith(10);
+      expect(screen.getByText("1")).toBeVisible();
     });
 
     it("deducts 100 from quantity when alt clicking -", () => {
-      const { getByLabelText, setQuantity } = setUpComponent({ quantity: 200 });
+      render(
+        <ItemQuantityEditor
+          {...commonProps}
+          item={createItem({ quantity: 101 })}
+        />
+      );
 
-      const deductButton = getByLabelText("deduct-quantity");
+      const deductButton = screen.getByRole("button", {
+        name: "deduct-quantity",
+      });
+      user.click(deductButton, { altKey: true });
 
-      fireEvent.click(deductButton, { altKey: true });
-
-      expect(setQuantity).toHaveBeenCalledWith(100);
+      expect(screen.getByText("1")).toBeVisible();
     });
 
     it("disables - button when value is 0", () => {
-      const { getByLabelText } = setUpComponent({ quantity: 0 });
+      render(
+        <ItemQuantityEditor
+          {...commonProps}
+          item={createItem({ quantity: 0 })}
+        />
+      );
 
-      const deductButton = getByLabelText("deduct-quantity");
+      const deductButton = screen.getByRole("button", {
+        name: "deduct-quantity",
+      });
 
       expect(deductButton).toBeDisabled();
     });
 
     it("cannot deduct below 0 when shift clicking -", () => {
-      const { getByLabelText, setQuantity } = setUpComponent({ quantity: 5 });
+      render(
+        <ItemQuantityEditor
+          {...commonProps}
+          item={createItem({ quantity: 5 })}
+        />
+      );
 
-      const deductButton = getByLabelText("deduct-quantity");
+      const deductButton = screen.getByRole("button", {
+        name: "deduct-quantity",
+      });
+      user.click(deductButton, { shiftKey: true });
 
-      fireEvent.click(deductButton, { shiftKey: true });
-
-      expect(setQuantity).toHaveBeenCalledWith(0);
+      expect(screen.getByText("0")).toBeVisible();
     });
 
     it("cannot deduct below 0 when alt clicking -", () => {
-      const { getByLabelText, setQuantity } = setUpComponent({ quantity: 5 });
+      render(
+        <ItemQuantityEditor
+          {...commonProps}
+          item={createItem({ quantity: 5 })}
+        />
+      );
 
-      const deductButton = getByLabelText("deduct-quantity");
+      const deductButton = screen.getByRole("button", {
+        name: "deduct-quantity",
+      });
+      user.click(deductButton, { altKey: true });
 
-      fireEvent.click(deductButton, { altKey: true });
-
-      expect(setQuantity).toHaveBeenCalledWith(0);
+      expect(screen.getByText("0")).toBeVisible();
+    });
+  });
+  describe("text input", () => {
+    it("should not be visible by default", () => {
+      render(
+        <ItemQuantityEditor
+          {...commonProps}
+          item={createItem({ quantity: 5 })}
+        />
+      );
+      expect(screen.queryByRole("textbox")).not.toBeInTheDocument();
+    });
+    it("should be visible when quantity is clicked", () => {
+      render(
+        <ItemQuantityEditor
+          {...commonProps}
+          item={createItem({ quantity: 5 })}
+        />
+      );
+      user.click(screen.getByText("5"));
+      expect(screen.getByRole("textbox")).toBeVisible();
+    });
+    it("should allow numeric input", () => {
+      render(
+        <ItemQuantityEditor
+          {...commonProps}
+          item={createItem({ quantity: 5 })}
+        />
+      );
+      user.click(screen.getByText("5"));
+      user.type(screen.getByRole("textbox"), "999");
+      expect(screen.getByText("999")).toBeInTheDocument();
+    });
+    it("should not allow non-numeric input", () => {
+      render(
+        <ItemQuantityEditor
+          {...commonProps}
+          item={createItem({ quantity: 5 })}
+        />
+      );
+      user.click(screen.getByText("5"));
+      user.type(screen.getByRole("textbox"), "abc");
+      expect(screen.getByText("5")).toBeInTheDocument();
     });
   });
 });
