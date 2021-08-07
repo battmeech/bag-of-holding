@@ -161,35 +161,32 @@ export const useEditItem = ({
 
 export const useEditQuantity = ({
   campaignId,
-  existingItem,
+  currentQuantity,
+  itemId,
 }: {
   campaignId: string;
-  existingItem: ExistingItem;
+  itemId: string;
+  currentQuantity: number;
 }) => {
-  const { formProps } = useItem({
-    name: existingItem.name,
-    quantity: existingItem.quantity.toString(),
-  });
+  const [quantity, setQuantity] = useState(currentQuantity);
 
-  const [mutate, { loading }] = useMutation<EditItem, EditItemVariables>(
-    EditItemGQL
-  );
+  const [mutate] = useMutation<EditItem, EditItemVariables>(EditItemGQL);
 
-  const saveItem = async () => {
+  const saveItem = async (newQuantity: number) => {
     await mutate({
       variables: {
         id: campaignId,
         input: {
-          id: existingItem.id,
-          quantity: Number(formProps.values.quantity),
+          id: itemId,
+          quantity: newQuantity,
         },
       },
     });
   };
 
   return {
-    saveLoading: loading,
-    formProps,
+    quantity,
+    setQuantity,
     saveItem,
   };
 };
