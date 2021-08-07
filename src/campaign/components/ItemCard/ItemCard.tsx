@@ -71,7 +71,7 @@ export const ItemCard = ({
         </Flex>
 
         <Text fontSize="sm">{item.description}</Text>
-        <Flex flexDirection="row-reverse">
+        <Flex mt="4" justify="flex-end">
           <ItemQuantityEditor campaignId={campaignId} item={item} />
         </Flex>
       </Flex>
