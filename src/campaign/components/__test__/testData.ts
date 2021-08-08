@@ -8,14 +8,16 @@ export const createItem = ({
   name = "Test name",
   description = "Test description",
   quantity = 1,
+  id = "item-id",
 }: {
   name?: string;
   description?: string;
   quantity?: number;
+  id?: string;
 }): Item => {
   return {
     __typename: "Item",
-    id: "item-id",
+    id,
     name,
     description,
     quantity,

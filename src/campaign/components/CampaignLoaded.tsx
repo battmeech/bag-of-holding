@@ -71,6 +71,7 @@ export const CampaignLoaded = ({ campaign }: { campaign: Campaign }) => {
       </Flex>
       <InputGroup>
         <Input
+          placeholder="Search for items..."
           value={filterText}
           onChange={(e) => setFilterText(e.target.value)}
         />
