@@ -6,7 +6,6 @@ import { useColorModeValue } from "@chakra-ui/react";
 import Link from "next/link";
 import { MotionBox } from "shared";
 
-
 const Page404 = () => {
   return (
     <>
@@ -33,7 +32,8 @@ const Page404 = () => {
         <Box textAlign="center" marginTop={4}>
           <Text>{"It's Okay!"}</Text>
           <Link href="/">
-            <Button mt='4'
+            <Button
+              mt="4"
               backgroundColor={useColorModeValue("gray.300", "teal.500")}
             >
               {"Let's Head Back"}

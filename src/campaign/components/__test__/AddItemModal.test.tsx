@@ -61,6 +61,7 @@ describe("AddItemModal", () => {
           input: {
             description: undefined,
             name: "Test Item Name",
+            quantity: 1,
           },
         },
       })
