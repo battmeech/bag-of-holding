@@ -1,15 +1,18 @@
-import { AddIcon } from "@chakra-ui/icons";
+import { AddIcon, SearchIcon } from "@chakra-ui/icons";
 import {
   Box,
   Button,
   Flex,
   IconButton,
+  Input,
+  InputGroup,
+  InputLeftElement,
   SimpleGrid,
   Text,
   Tooltip,
 } from "@chakra-ui/react";
 import { FetchCampaign_fetchCampaign_Campaign as Campaign } from "campaign/gql";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useModal } from "shared";
 import { AddItemModal } from "./AddItemModal";
 import { Currency } from "./Currency";
@@ -19,6 +22,16 @@ import { FaPiggyBank } from "react-icons/fa";
 
 export const CampaignLoaded = ({ campaign }: { campaign: Campaign }) => {
   const { openModal } = useModal();
+  const [filterText, setFilterText] = useState("");
+  const [filteredItems, setFilteredItems] = useState(campaign.items);
+  useEffect(() => {
+    const newFilteredItems = campaign.items.filter(
+      (item) =>
+        item.name.toLowerCase().includes(filterText.toLowerCase()) ||
+        item.description?.toLowerCase().includes(filterText.toLowerCase())
+    );
+    setFilteredItems(newFilteredItems);
+  }, [filterText, campaign.items]);
   return (
     <Box>
       <Flex as="header" width="full" align="center">
@@ -56,7 +69,15 @@ export const CampaignLoaded = ({ campaign }: { campaign: Campaign }) => {
           />
         </Tooltip>
       </Flex>
-
+      <InputGroup>
+        <Input
+          value={filterText}
+          onChange={(e) => setFilterText(e.target.value)}
+        />
+        <InputLeftElement>
+          <SearchIcon />
+        </InputLeftElement>
+      </InputGroup>
       {campaign.items.length === 0 ? (
         <Box mb={6}>
           <Text mb={4}>looks empty in here</Text>
@@ -69,12 +90,13 @@ export const CampaignLoaded = ({ campaign }: { campaign: Campaign }) => {
         </Box>
       ) : (
         <SimpleGrid
+          mt="4"
           data-testid="card-grid"
           columns={{ base: 1, sm: 2, md: 2, lg: 4 }}
           spacing={4}
           mb={6}
         >
-          {campaign.items.map((item) => (
+          {filteredItems.map((item) => (
             <ItemCard key={item.id} item={item} campaignId={campaign.id} />
           ))}
         </SimpleGrid>
