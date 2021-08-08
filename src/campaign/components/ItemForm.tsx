@@ -48,7 +48,7 @@ export function ItemForm({ errors, values, setValues }: FormProps) {
           defaultValue={1}
           min={0}
           onChange={(value) =>
-            setValues({ key: "quantity", value: value || "0" })
+            setValues({ key: "quantity", value: parseInt(value) || 0 })
           }
         >
           <NumberInputField />

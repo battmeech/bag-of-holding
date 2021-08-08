@@ -76,6 +76,7 @@ describe("EditItemModal", () => {
             id: "item-id",
             description: "Test description",
             name: "Test Item Name",
+            quantity: 1
           },
         },
       })

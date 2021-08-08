@@ -41,7 +41,7 @@ describe("useItemForm", () => {
       expect(result.current.formProps.values).toStrictEqual({
         name: "",
         description: undefined,
-        quantity: "1",
+        quantity: 1,
       });
     });
 
@@ -106,7 +106,7 @@ describe("useItemForm", () => {
       expect(result.current.formProps.values).toStrictEqual({
         name: "",
         description: undefined,
-        quantity: "1",
+        quantity: 1,
       });
     });
 
@@ -198,7 +198,7 @@ describe("useItemForm", () => {
         expect(result.current.formProps.values).toStrictEqual({
           name: "",
           description: undefined,
-          quantity: "1",
+          quantity: 1,
         })
       );
     });
@@ -236,7 +236,7 @@ describe("useItemForm", () => {
       expect(result.current.formProps.values).toStrictEqual({
         name: "Test name",
         description: "Test description",
-        quantity: "1",
+        quantity: 1,
       });
     });
 
@@ -261,6 +261,7 @@ describe("useItemForm", () => {
               id: "item-id",
               description: "Test description",
               name: undefined,
+              quantity: 1
             },
           },
         })
@@ -289,6 +290,7 @@ describe("useItemForm", () => {
               id: "item-id",
               description: "Test description",
               name: "Name",
+              quantity: 1
             },
           },
         })
@@ -330,7 +332,7 @@ describe("useItemForm", () => {
         expect(result.current.formProps.values).toStrictEqual({
           name: "",
           description: undefined,
-          quantity: "1",
+          quantity: 1,
         })
       );
     });
