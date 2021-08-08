@@ -14,7 +14,7 @@ import React from "react";
 
 export function ItemForm({ errors, values, setValues }: FormProps) {
   return (
-    <VStack spacing='4'>
+    <VStack spacing="4">
       <FormControl isRequired>
         <FormLabel>item name</FormLabel>
         <Input

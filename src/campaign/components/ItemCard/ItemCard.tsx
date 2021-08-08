@@ -1,13 +1,14 @@
 import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
 import {
-  Box,
   Flex,
+  HStack,
   IconButton,
   Menu,
   MenuButton,
   MenuItem,
   MenuList,
   Text,
+  VStack,
 } from "@chakra-ui/react";
 import { FetchCampaign_fetchCampaign_Campaign_items as Item } from "campaign/gql";
 import React from "react";
@@ -27,13 +28,16 @@ export const ItemCard = ({
   const { openModal } = useModal();
 
   return (
-    <Box borderWidth="1px" borderRadius="lg" overflow="hidden">
-      <Flex p="4" flexDirection="column">
-        <Flex>
+    <VStack
+      justify="space-between"
+      p="4"
+      borderWidth="1px"
+      borderRadius="lg"
+      overflow="hidden"
+    >
+      <VStack w="full">
+        <HStack w="full" justify="space-between">
           <Text fontSize="md">{item.name}</Text>
-
-          <Box flex="1 1 auto" />
-
           <Menu placement="bottom-end">
             <MenuButton
               as={IconButton}
@@ -68,13 +72,15 @@ export const ItemCard = ({
               </MenuItem>
             </MenuList>
           </Menu>
+        </HStack>
+        <Flex w="full" justify="flex-start">
+          <Text fontSize="sm">{item.description}</Text>
         </Flex>
+      </VStack>
 
-        <Text fontSize="sm">{item.description}</Text>
-        <Flex mt="4" justify="flex-end">
-          <ItemQuantityEditor campaignId={campaignId} item={item} />
-        </Flex>
+      <Flex w="full" mt="4" justify="flex-end">
+        <ItemQuantityEditor campaignId={campaignId} item={item} />
       </Flex>
-    </Box>
+    </VStack>
   );
 };
