@@ -17,11 +17,13 @@ describe("ItemForm", () => {
     );
     return { ...rendered, setValueMock };
   };
-  it("renders a field for name and description", () => {
-    const { getByText } = setUpComponent({});
+
+  it("renders a field for name, description, and quantity", () => {
+    const { getByText, getByLabelText } = setUpComponent({});
 
     expect(getByText("item name")).toBeInTheDocument();
     expect(getByText("item description")).toBeInTheDocument();
+    expect(getByLabelText("quantity")).toBeInTheDocument();
   });
 
   it("calls setValues with name as key when a name is entered", () => {
