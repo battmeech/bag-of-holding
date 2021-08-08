@@ -11,7 +11,7 @@ import {
 import { EditItem_editItem_Campaign_items as Item } from "campaign/gql";
 import { useEditQuantity } from "campaign/hooks";
 import { debounce } from "lodash";
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect } from "react";
 
 type ItemQuantityEditorProps = {
   campaignId: string;
@@ -28,6 +28,13 @@ export const ItemQuantityEditor = ({
     itemId: item.id,
     currentQuantity: item.quantity,
   });
+
+  useEffect(() => {
+    // If the quantity is updated externally, update the internal state here
+    if(item.quantity !== quantity) setQuantity(item.quantity)
+// eslint-disable-next-line react-hooks/exhaustive-deps
+}, [item.quantity])
+  
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const debounceSaveItem = useCallback(debounce(saveItem, 1000), []);
