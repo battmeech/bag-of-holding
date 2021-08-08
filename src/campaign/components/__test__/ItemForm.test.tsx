@@ -48,6 +48,18 @@ describe("ItemForm", () => {
     });
   });
 
+  it("calls setValues with quantity as key when a quantity is entered", () => {
+    const { getByLabelText, setValueMock } = setUpComponent({});
+
+    const input = getByLabelText("quantity");
+    fireEvent.change(input, { target: { value: "2" } });
+
+    expect(setValueMock).toHaveBeenCalledWith({
+      key: "quantity",
+      value: "2",
+    });
+  });
+
   it("displays an error when errors are present", () => {
     const errors = new Map<keyof FormProps["values"], boolean>([
       ["name", true],

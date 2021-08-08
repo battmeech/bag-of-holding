@@ -156,6 +156,7 @@ describe("useItemForm", () => {
             input: {
               description: undefined,
               name: "Name",
+              quantity: 1,
             },
           },
         })

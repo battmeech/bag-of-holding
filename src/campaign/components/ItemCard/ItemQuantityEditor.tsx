@@ -86,7 +86,7 @@ export const ItemQuantityEditor = ({
       />
       <Box>
         <Editable onChange={handleChange} value={`${quantity}`}>
-          <EditablePreview cursor='pointer' />
+          <EditablePreview cursor="pointer" />
           <EditableInput maxW="35px" onKeyDown={validateInput} />
         </Editable>
       </Box>

@@ -28,7 +28,7 @@ const validate = (
   key: keyof Item,
   value: string
 ) => {
-  if (key === "description") return errors;
+  if (key === "description" || key === "quantity") return errors;
   if ((key === "name" && !value) || !value.trim()) errors.set(key, true);
   else if (key === "name" && value) errors.delete(key);
   return errors;
@@ -97,6 +97,7 @@ export const useCreateItem = ({
         input: {
           name: formProps.values.name,
           description: formProps.values.description,
+          quantity: parseInt(formProps.values.quantity!),
         },
       },
     });
