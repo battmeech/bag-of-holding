@@ -25,7 +25,6 @@ export function EditItemModal({
     onSuccessCallback: closeModal,
     existingItem: item,
   });
-
   return (
     <>
       <ModalHeader>edit item</ModalHeader>

@@ -58,7 +58,7 @@ describe("ItemForm", () => {
 
     expect(setValueMock).toHaveBeenCalledWith({
       key: "quantity",
-      value: "2",
+      value: 2,
     });
   });
 
