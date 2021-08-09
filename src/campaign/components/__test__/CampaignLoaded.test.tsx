@@ -1,5 +1,5 @@
 import React from "react";
-import { render, fireEvent, screen } from "shared";
+import { render, fireEvent } from "shared";
 import { CampaignLoaded } from "../CampaignLoaded";
 import { FetchCampaign_fetchCampaign_Campaign as Campaign } from "campaign/gql";
 import { createCampaign, createItem } from "./testData";
@@ -59,8 +59,8 @@ describe("CampaignLoaded", () => {
   });
 
   it("renders a search input", () => {
-    render(<CampaignLoaded campaign={createCampaign()} />);
-    expect(screen.getByPlaceholderText(/search/i)).toBeVisible();
+    const { getByPlaceholderText } = setUpComponent({});
+    expect(getByPlaceholderText(/search/i)).toBeVisible();
   });
 
   describe("filtering", () => {
@@ -71,31 +71,33 @@ describe("CampaignLoaded", () => {
       createItem({ id: "4", name: "test4", description: "description4" }),
     ];
     it("filters items by name when searched", () => {
-      render(
-        <CampaignLoaded campaign={{ ...createCampaign(), items: items }} />
-      );
-      const textbox = screen.getByPlaceholderText(/search/i);
+      const campaign = { ...createCampaign(), items };
+      const { getByText, queryByText, getByPlaceholderText } = setUpComponent({
+        campaign,
+      });
+      const textbox = getByPlaceholderText(/search/i);
       userEvent.type(textbox, "test3");
 
-      expect(screen.getByText(/test3/)).toBeVisible();
+      expect(getByText(/test3/)).toBeVisible();
 
-      expect(screen.queryByText(/test1/)).not.toBeInTheDocument();
-      expect(screen.queryByText(/test2/)).not.toBeInTheDocument();
-      expect(screen.queryByText(/test4/)).not.toBeInTheDocument();
+      expect(queryByText(/test1/)).not.toBeInTheDocument();
+      expect(queryByText(/test2/)).not.toBeInTheDocument();
+      expect(queryByText(/test4/)).not.toBeInTheDocument();
     });
 
     it("filters items by description when searched", () => {
-      render(
-        <CampaignLoaded campaign={{ ...createCampaign(), items: items }} />
-      );
-      const textbox = screen.getByPlaceholderText(/search/i);
+      const campaign = { ...createCampaign(), items };
+      const { getByText, queryByText, getByPlaceholderText } = setUpComponent({
+        campaign,
+      });
+      const textbox = getByPlaceholderText(/search/i);
       userEvent.type(textbox, "description2");
 
-      expect(screen.getByText(/test2/)).toBeVisible();
+      expect(getByText(/test2/)).toBeVisible();
 
-      expect(screen.queryByText(/test1/)).not.toBeInTheDocument();
-      expect(screen.queryByText(/test3/)).not.toBeInTheDocument();
-      expect(screen.queryByText(/test4/)).not.toBeInTheDocument();
+      expect(queryByText(/test1/)).not.toBeInTheDocument();
+      expect(queryByText(/test3/)).not.toBeInTheDocument();
+      expect(queryByText(/test4/)).not.toBeInTheDocument();
     });
   });
 });
