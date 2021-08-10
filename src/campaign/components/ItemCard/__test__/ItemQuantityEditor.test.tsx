@@ -1,8 +1,8 @@
-import { createItem } from "campaign/components/__test__/testData";
 import { useMutation } from "@apollo/client";
-import { render, fireEvent, screen } from "shared";
-import { ItemQuantityEditor } from "../ItemQuantityEditor";
 import user from "@testing-library/user-event";
+import { createItem } from "campaign/components/__test__/testData";
+import { render, screen } from "shared";
+import { ItemQuantityEditor } from "../ItemQuantityEditor";
 
 jest.mock("@apollo/client");
 
@@ -175,6 +175,7 @@ describe("ItemQuantityEditor", () => {
       );
       expect(screen.queryByRole("textbox")).not.toBeInTheDocument();
     });
+
     it("should be visible when quantity is clicked", () => {
       render(
         <ItemQuantityEditor
@@ -185,6 +186,7 @@ describe("ItemQuantityEditor", () => {
       user.click(screen.getByText("5"));
       expect(screen.getByRole("textbox")).toBeVisible();
     });
+
     it("should allow numeric input", () => {
       render(
         <ItemQuantityEditor
@@ -196,6 +198,7 @@ describe("ItemQuantityEditor", () => {
       user.type(screen.getByRole("textbox"), "999");
       expect(screen.getByText("999")).toBeInTheDocument();
     });
+
     it("should not allow non-numeric input", () => {
       render(
         <ItemQuantityEditor
