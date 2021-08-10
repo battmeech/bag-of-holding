@@ -9,11 +9,13 @@ export const createItem = ({
   description = "Test description",
   quantity = 1,
   id = "item-id",
+  notes = "notes",
 }: {
   name?: string;
   description?: string;
   quantity?: number;
   id?: string;
+  notes?: string;
 }): Item => {
   return {
     __typename: "Item",
@@ -21,6 +23,7 @@ export const createItem = ({
     name,
     description,
     quantity,
+    notes,
   };
 };
 
@@ -34,6 +37,7 @@ export const createCampaign = (): Campaign => ({
       description: "item description",
       name: "item name",
       quantity: 1,
+      notes: "notes",
     },
   ],
   copper: 20,

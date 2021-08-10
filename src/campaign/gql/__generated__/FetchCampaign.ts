@@ -13,6 +13,7 @@ export interface FetchCampaign_fetchCampaign_Campaign_items {
   name: string;
   description: string | null;
   quantity: number;
+  notes: string | null;
 }
 
 export interface FetchCampaign_fetchCampaign_Campaign {

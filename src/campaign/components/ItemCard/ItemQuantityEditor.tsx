@@ -31,10 +31,9 @@ export const ItemQuantityEditor = ({
 
   useEffect(() => {
     // If the quantity is updated externally, update the internal state here
-    if(item.quantity !== quantity) setQuantity(item.quantity)
-// eslint-disable-next-line react-hooks/exhaustive-deps
-}, [item.quantity])
-  
+    if (item.quantity !== quantity) setQuantity(item.quantity);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [item.quantity]);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const debounceSaveItem = useCallback(debounce(saveItem, 1000), []);

@@ -15,6 +15,7 @@ export interface AddItem_addItem_Campaign_items {
   name: string;
   description: string | null;
   quantity: number;
+  notes: string | null;
 }
 
 export interface AddItem_addItem_Campaign {
