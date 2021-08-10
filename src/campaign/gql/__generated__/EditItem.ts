@@ -19,6 +19,7 @@ export interface EditItem_editItem_Campaign_items {
   name: string;
   description: string | null;
   quantity: number;
+  notes: string | null;
 }
 
 export interface EditItem_editItem_Campaign {

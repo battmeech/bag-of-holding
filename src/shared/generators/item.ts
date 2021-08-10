@@ -8,5 +8,6 @@ export const itemBuilder = build<Item>({
     name: fake((f) => f.commerce.product()),
     id: fake((f) => f.random.uuid()),
     quantity: fake((f) => f.random.number(20)),
+    notes: fake((f) => f.lorem.paragraph()),
   },
 });

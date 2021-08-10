@@ -16,6 +16,7 @@ export interface AddItemInput {
   name: string;
   description?: string | null;
   quantity?: number | null;
+  notes?: string | null;
 }
 
 export interface EditItemInput {
@@ -23,6 +24,7 @@ export interface EditItemInput {
   name?: string | null;
   description?: string | null;
   quantity?: number | null;
+  notes?: string | null;
 }
 
 export interface ModifyMoneyInput {

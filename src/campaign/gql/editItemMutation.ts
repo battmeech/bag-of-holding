@@ -11,6 +11,7 @@ export const EditItemGQL = gql`
           name
           description
           quantity
+          notes
         }
       }
       ... on CampaignNotFound {

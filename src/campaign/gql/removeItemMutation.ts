@@ -11,6 +11,7 @@ export const RemoveItemGQL = gql`
           name
           description
           quantity
+          notes
         }
       }
       ... on CampaignNotFound {

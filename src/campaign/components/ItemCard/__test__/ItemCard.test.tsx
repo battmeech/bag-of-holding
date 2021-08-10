@@ -62,4 +62,14 @@ describe("ItemCard", () => {
 
     expect(getByText("it will be deleted forever")).toBeInTheDocument();
   });
+
+  it("clicking the notes button displays the notes", () => {
+    const { getByLabelText, getByText } = setUpComponent({});
+
+    const notesButton = getByLabelText("view notes");
+
+    fireEvent.click(notesButton);
+
+    expect(getByText("notes")).toBeInTheDocument();
+  });
 });
