@@ -36,7 +36,9 @@ export const ItemNotes = ({
           placeholder="click here to add notes"
           onChange={(e) => setNotes(e.target.value)}
           value={notes || ""}
-          minHeight="60vh"
+          h="60vh"
+          minH="50vh"
+          maxH="70vh"
         />
       </ModalBody>
 
