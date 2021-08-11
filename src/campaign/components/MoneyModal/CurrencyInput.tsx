@@ -7,8 +7,7 @@ import {
   InputLeftAddon,
   InputRightAddon,
 } from "@chakra-ui/react";
-import React from "react";
-import { CurrencyDenomination, Coin } from "./Coin";
+import { Coin, CurrencyDenomination } from "campaign/components/Currency";
 
 type CurrencyInputProps = {
   denomination: CurrencyDenomination;

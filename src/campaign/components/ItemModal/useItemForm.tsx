@@ -29,7 +29,11 @@ const validate = (
   value: string | number
 ) => {
   if (key === "description" || key === "quantity") return errors;
-  if (((key === "name") && !value) || (key === 'name' && !(value as string).trim())) errors.set(key, true);
+  if (
+    (key === "name" && !value) ||
+    (key === "name" && !(value as string).trim())
+  )
+    errors.set(key, true);
   else if (key === "name" && value) errors.delete(key);
   return errors;
 };
@@ -50,7 +54,13 @@ const useItem = (startingValues?: Item) => {
     setIsSaveEnabled(false);
   };
 
-  const setValues = ({ key, value }: { key: keyof Item; value: string | number }) => {
+  const setValues = ({
+    key,
+    value,
+  }: {
+    key: keyof Item;
+    value: string | number;
+  }) => {
     setItem((currentState) => ({
       ...currentState,
       [key]: value,
@@ -128,7 +138,7 @@ export const useEditItem = ({
     description: existingItem.description
       ? existingItem.description
       : undefined,
-    quantity: existingItem.quantity
+    quantity: existingItem.quantity,
   });
   const [mutate, { loading }] = useMutation<EditItem, EditItemVariables>(
     EditItemGQL
@@ -145,7 +155,7 @@ export const useEditItem = ({
               ? formProps.values.name
               : undefined,
           description: formProps.values.description,
-          quantity: formProps.values.quantity
+          quantity: formProps.values.quantity,
         },
       },
     });
@@ -158,38 +168,6 @@ export const useEditItem = ({
     resetForm,
     isSaveEnabled,
     formProps,
-    saveItem,
-  };
-};
-
-export const useEditQuantity = ({
-  campaignId,
-  currentQuantity,
-  itemId,
-}: {
-  campaignId: string;
-  itemId: string;
-  currentQuantity: number;
-}) => {
-  const [quantity, setQuantity] = useState(currentQuantity);
-
-  const [mutate] = useMutation<EditItem, EditItemVariables>(EditItemGQL);
-
-  const saveItem = async (newQuantity: number) => {
-    await mutate({
-      variables: {
-        id: campaignId,
-        input: {
-          id: itemId,
-          quantity: newQuantity,
-        },
-      },
-    });
-  };
-
-  return {
-    quantity,
-    setQuantity,
     saveItem,
   };
 };

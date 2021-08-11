@@ -9,9 +9,9 @@ import {
   StackProps,
 } from "@chakra-ui/react";
 import { EditItem_editItem_Campaign_items as Item } from "campaign/gql";
-import { useEditQuantity } from "campaign/hooks";
 import { debounce } from "lodash";
-import React, { useCallback, useEffect } from "react";
+import { useCallback, useEffect } from "react";
+import { useEditQuantity } from "./useEditQuantity";
 
 type ItemQuantityEditorProps = {
   campaignId: string;

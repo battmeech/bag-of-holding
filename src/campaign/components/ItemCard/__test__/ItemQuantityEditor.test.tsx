@@ -1,6 +1,6 @@
 import { useMutation } from "@apollo/client";
 import user from "@testing-library/user-event";
-import { createItem } from "campaign/components/__test__/testData";
+import { createItem } from "shared/testData";
 import { render, screen } from "shared";
 import { ItemQuantityEditor } from "../ItemQuantityEditor";
 

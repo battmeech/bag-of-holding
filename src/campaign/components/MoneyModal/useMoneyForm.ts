@@ -5,7 +5,7 @@ import {
   ModifyMoneyVariables,
 } from "campaign/gql";
 import { useEffect, useState } from "react";
-import { MoneyModification } from "../../../__generated__/globalTypes";
+import { MoneyModification } from "../../../../__generated__/globalTypes";
 
 type Values = {
   platinum: number;

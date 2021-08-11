@@ -5,10 +5,9 @@ import {
   ModalFooter,
   ModalHeader,
 } from "@chakra-ui/react";
-import { useMoneyForm } from "campaign/hooks";
-import React from "react";
 import { useModal } from "shared";
 import { MoneyForm } from "./MoneyForm";
+import { useMoneyForm } from "./useMoneyForm";
 
 export function MoneyModal({ campaignId }: { campaignId: string }) {
   const { closeModal } = useModal();

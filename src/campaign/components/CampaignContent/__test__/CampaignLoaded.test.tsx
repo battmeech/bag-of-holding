@@ -1,9 +1,9 @@
-import React from "react";
-import { render, fireEvent } from "shared";
-import { CampaignLoaded } from "../CampaignLoaded";
-import { FetchCampaign_fetchCampaign_Campaign as Campaign } from "campaign/gql";
-import { createCampaign, createItem } from "./testData";
 import userEvent from "@testing-library/user-event";
+import { createCampaign, createItem } from "shared/testData";
+import { FetchCampaign_fetchCampaign_Campaign as Campaign } from "campaign/gql";
+import React from "react";
+import { fireEvent, render } from "shared";
+import { CampaignLoaded } from "../CampaignLoaded";
 
 describe("CampaignLoaded", () => {
   const setUpComponent = ({

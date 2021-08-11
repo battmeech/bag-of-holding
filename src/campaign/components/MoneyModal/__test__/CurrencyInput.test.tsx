@@ -1,4 +1,4 @@
-import { CurrencyInput } from "campaign/components/CurrencyInput";
+import { CurrencyInput } from "../CurrencyInput";
 import { fireEvent, render } from "shared";
 
 describe("CurrentInput", () => {
