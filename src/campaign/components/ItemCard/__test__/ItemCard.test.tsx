@@ -70,6 +70,6 @@ describe("ItemCard", () => {
 
     fireEvent.click(notesButton);
 
-    expect(getByText("notes")).toBeInTheDocument();
+    expect(getByText("item notes")).toBeInTheDocument();
   });
 });
