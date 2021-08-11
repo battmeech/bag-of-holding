@@ -19,7 +19,7 @@ import { GoKebabVertical } from "react-icons/go";
 import { useModal } from "shared";
 import { DeleteConfirmationModal } from "./DeleteConfirmationModal";
 import { EditItemModal } from "../ItemModal";
-import { ItemNotes } from "./ItemNotes";
+import { ItemNotes } from "./ItemNotesModal";
 import { ItemQuantityEditor } from "./ItemQuantityEditor";
 
 export const ItemCard = ({
@@ -89,7 +89,16 @@ export const ItemCard = ({
             aria-label="view notes"
             size="xs"
             icon={<CgNotes />}
-            onClick={() => openModal(<ItemNotes notes={item.notes} />)}
+            onClick={() =>
+              openModal(
+                <ItemNotes
+                  currentNotes={item.notes}
+                  campaignId={campaignId}
+                  itemId={item.id}
+                />,
+                "xl"
+              )
+            }
           />
         </Tooltip>
 
