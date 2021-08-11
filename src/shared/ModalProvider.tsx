@@ -9,16 +9,18 @@ import { createContext, FC, ReactNode, useContext, useState } from "react";
 /* istanbul ignore next */
 const ModalContext = createContext({
   // eslint-disable-next-line no-unused-vars
-  openModal: (content: ReactNode) => {},
+  openModal: (content: ReactNode, size = "xs") => {},
   closeModal: () => {},
 });
 
 export const ModalProvider: FC = ({ children }) => {
   const { isOpen, onClose, onOpen } = useDisclosure();
   const [content, setContent] = useState<ReactNode>(null);
+  const [size, setSize] = useState("xs");
 
-  const openModal = (modalContent: ReactNode) => {
+  const openModal = (modalContent: ReactNode, size = "xs") => {
     setContent(modalContent);
+    setSize(size);
     onOpen();
   };
 
@@ -35,7 +37,7 @@ export const ModalProvider: FC = ({ children }) => {
   return (
     <ModalContext.Provider value={value}>
       {children}
-      <Modal isOpen={isOpen} onClose={closeModal} isCentered size="xs">
+      <Modal isOpen={isOpen} onClose={closeModal} isCentered size={size}>
         <ModalOverlay data-testid="modal-overlay" />
         <ModalContent>{content}</ModalContent>
       </Modal>
