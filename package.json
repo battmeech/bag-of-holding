@@ -19,8 +19,10 @@
     "prettify": "prettier --write src",
     "schema:download": "apollo client:download-schema graphql-schema.json",
     "schema:codegen": "apollo client:codegen --target=typescript --passthroughCustomScalars --customScalarsPrefix=GraphQL$ --tsFileExtension=ts",
+    "schema:all": "yarn schema:download && yarn schema:codegen",
     "schema:download:dev": "apollo client:download-schema graphql-schema.json -v=dev",
     "schema:codegen:dev": "apollo client:codegen --target=typescript --passthroughCustomScalars --customScalarsPrefix=GraphQL$ --tsFileExtension=ts -v=dev",
+    "schema:all:dev": "yarn schema:download:dev && yarn schema:codegen:dev",
     "storybook": "start-storybook -p 6006",
     "build:storybook": "build-storybook"
   },

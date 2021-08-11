@@ -281,22 +281,6 @@
             "deprecationReason": null
           },
           {
-            "name": "bronze",
-            "description": null,
-            "args": [],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "Int",
-                "ofType": null
-              }
-            },
-            "isDeprecated": true,
-            "deprecationReason": "use copper instead"
-          },
-          {
             "name": "copper",
             "description": null,
             "args": [],
@@ -877,6 +861,11 @@
           {
             "kind": "OBJECT",
             "name": "InvalidInput",
+            "ofType": null
+          },
+          {
+            "kind": "OBJECT",
+            "name": "ItemNotFound",
             "ofType": null
           }
         ]

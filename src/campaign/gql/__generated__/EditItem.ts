@@ -10,7 +10,7 @@ import { EditItemInput } from "./../../../../__generated__/globalTypes";
 // ====================================================
 
 export interface EditItem_editItem_InvalidInput {
-  __typename: "InvalidInput";
+  __typename: "InvalidInput" | "ItemNotFound";
 }
 
 export interface EditItem_editItem_Campaign_items {
