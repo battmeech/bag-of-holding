@@ -33,7 +33,7 @@ describe("useEditNotes", () => {
     expect(result.current.notes).toStrictEqual("Hello");
   });
 
-  it("updates quantity", async () => {
+  it("updates value", async () => {
     const { result } = setupHook();
 
     act(() => {
@@ -59,7 +59,7 @@ describe("useEditNotes", () => {
     expect(result.current.saveActive).toStrictEqual(true);
   });
 
-  it("saves quantity", async () => {
+  it("saves note value", async () => {
     const { result, mutateMock } = setupHook("Notes");
 
     act(() => {
@@ -79,7 +79,7 @@ describe("useEditNotes", () => {
     );
   });
 
-  it("save set to false after save", async () => {
+  it("sets save active to false after saving", async () => {
     const { result } = setupHook();
 
     act(() => {
