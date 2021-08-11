@@ -24,13 +24,13 @@ describe("ItemNotesModal", () => {
     expect(getByText("save changes")).toBeInTheDocument();
   });
 
-  it("save is disabled when no name is entered", () => {
+  it("save is disabled when no note is entered", () => {
     const { getByText } = setUpComponent({});
 
     expect(getByText("save changes")).toBeDisabled();
   });
 
-  it("entering a name enables the save button", () => {
+  it("entering a note enables the save button", () => {
     const { getByText, getByPlaceholderText } = setUpComponent({});
 
     const input = getByPlaceholderText("click here to add notes");
