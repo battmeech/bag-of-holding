@@ -69,16 +69,6 @@ export const CampaignLoaded = ({ campaign }: { campaign: Campaign }) => {
           />
         </Tooltip>
       </Flex>
-      <InputGroup>
-        <Input
-          placeholder="search for items..."
-          value={filterText}
-          onChange={(e) => setFilterText(e.target.value)}
-        />
-        <InputLeftElement>
-          <SearchIcon />
-        </InputLeftElement>
-      </InputGroup>
       {campaign.items.length === 0 ? (
         <Box mb={6}>
           <Text mb={4}>looks empty in here</Text>
@@ -90,17 +80,29 @@ export const CampaignLoaded = ({ campaign }: { campaign: Campaign }) => {
           </Button>
         </Box>
       ) : (
-        <SimpleGrid
-          mt="4"
-          data-testid="card-grid"
-          columns={{ base: 1, sm: 2, md: 2, lg: 4 }}
-          spacing={4}
-          mb={6}
-        >
-          {filteredItems.map((item) => (
-            <ItemCard key={item.id} item={item} campaignId={campaign.id} />
-          ))}
-        </SimpleGrid>
+        <>
+          <InputGroup>
+            <Input
+              placeholder="search for items..."
+              value={filterText}
+              onChange={(e) => setFilterText(e.target.value)}
+            />
+            <InputLeftElement>
+              <SearchIcon />
+            </InputLeftElement>
+          </InputGroup>
+          <SimpleGrid
+            mt="4"
+            data-testid="card-grid"
+            columns={{ base: 1, sm: 2, md: 2, lg: 4 }}
+            spacing={4}
+            mb={6}
+          >
+            {filteredItems.map((item) => (
+              <ItemCard key={item.id} item={item} campaignId={campaign.id} />
+            ))}
+          </SimpleGrid>
+        </>
       )}
 
       <Text fontSize="xs">campaign id: {campaign.id}</Text>
