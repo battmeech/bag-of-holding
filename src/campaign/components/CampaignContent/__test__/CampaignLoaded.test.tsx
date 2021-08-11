@@ -58,9 +58,15 @@ describe("CampaignLoaded", () => {
     expect(getByText("new item")).toBeInTheDocument();
   });
 
-  it("renders a search input", () => {
+  it("renders a search input when items exist on the campaign", () => {
     const { getByPlaceholderText } = setUpComponent({});
     expect(getByPlaceholderText(/search/i)).toBeVisible();
+  });
+
+  it("does not render a search input when no items exist on the campaign ", () => {
+    const campaign = { ...createCampaign(), items: [] };
+    const { queryByPlaceholderText } = setUpComponent({campaign});
+    expect(queryByPlaceholderText(/search/i)).not.toBeInTheDocument();
   });
 
   describe("filtering", () => {
