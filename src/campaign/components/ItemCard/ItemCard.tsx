@@ -14,14 +14,13 @@ import {
 } from "@chakra-ui/react";
 import { FetchCampaign_fetchCampaign_Campaign_items as Item } from "campaign/gql";
 import React from "react";
-import { useState } from "react";
 import { CgNotes } from "react-icons/cg";
 import { GoKebabVertical } from "react-icons/go";
 import { useModal } from "shared";
 import { DeleteConfirmationModal } from "../DeleteConfirmationModal";
 import { EditItemModal } from "../EditItemModal";
-import { ItemQuantityEditor } from "./ItemQuantityEditor";
 import { ItemNotes } from "./ItemNotes";
+import { ItemQuantityEditor } from "./ItemQuantityEditor";
 
 export const ItemCard = ({
   item,
@@ -31,11 +30,6 @@ export const ItemCard = ({
   campaignId: string;
 }) => {
   const { openModal } = useModal();
-  const [notesOpen, setNotesOpen] = useState(false);
-
-  const toggleNotesOpen = () => {
-    setNotesOpen(!notesOpen);
-  };
 
   return (
     <VStack
@@ -95,11 +89,9 @@ export const ItemCard = ({
             aria-label="view notes"
             size="xs"
             icon={<CgNotes />}
-            onClick={toggleNotesOpen}
+            onClick={() => openModal(<ItemNotes notes={item.notes} />)}
           />
         </Tooltip>
-
-        {notesOpen && <ItemNotes notes={item.notes} />}
 
         <Box flex="1 0 auto" />
 
