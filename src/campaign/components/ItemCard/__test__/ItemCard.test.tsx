@@ -71,4 +71,18 @@ describe("ItemCard", () => {
 
     expect(getByText("item notes")).toBeInTheDocument();
   });
+
+  it("displays a blank note icon when there's no notes", () => {
+    const { getByTestId } = setUpComponent({
+      item: createItem({ notes: "" }),
+    });
+
+    expect(getByTestId("no-notes-icon")).toBeInTheDocument();
+  });
+
+  it("displays a note icon when there are notes", () => {
+    const { getByTestId } = setUpComponent({});
+
+    expect(getByTestId("notes-icon")).toBeInTheDocument();
+  });
 });

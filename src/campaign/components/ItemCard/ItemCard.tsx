@@ -14,6 +14,7 @@ import {
 import { FetchCampaign_campaign_Campaign_items as Item } from "campaign/gql";
 import React from "react";
 import { CgNotes } from "react-icons/cg";
+import { FaRegStickyNote } from "react-icons/fa";
 import { GoKebabVertical } from "react-icons/go";
 import { useModal } from "shared";
 import { EditItemModal } from "../ItemModal";
@@ -72,7 +73,13 @@ export const ItemCard = ({ item }: { item: Item }) => {
             variant="ghost"
             aria-label="view notes"
             size="xs"
-            icon={<CgNotes />}
+            icon={
+              item.notes?.trim() ? (
+                <CgNotes data-testid="notes-icon" />
+              ) : (
+                <FaRegStickyNote data-testid="no-notes-icon" />
+              )
+            }
             onClick={() =>
               openModal(
                 <ItemNotes currentNotes={item.notes} itemId={item.id} />,
