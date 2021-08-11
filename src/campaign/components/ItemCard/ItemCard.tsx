@@ -1,6 +1,5 @@
 import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
 import {
-  Box,
   Flex,
   HStack,
   IconButton,
@@ -17,8 +16,8 @@ import React from "react";
 import { CgNotes } from "react-icons/cg";
 import { GoKebabVertical } from "react-icons/go";
 import { useModal } from "shared";
-import { DeleteConfirmationModal } from "./DeleteConfirmationModal";
 import { EditItemModal } from "../ItemModal";
+import { DeleteConfirmationModal } from "./DeleteConfirmationModal";
 import { ItemNotes } from "./ItemNotesModal";
 import { ItemQuantityEditor } from "./ItemQuantityEditor";
 
@@ -82,7 +81,7 @@ export const ItemCard = ({
         </Flex>
       </VStack>
 
-      <HStack display="flex" w="full" mt="4">
+      <HStack justify="space-between" w="full">
         <Tooltip label="view notes">
           <IconButton
             variant="ghost"
@@ -101,8 +100,6 @@ export const ItemCard = ({
             }
           />
         </Tooltip>
-
-        <Box flex="1 0 auto" />
 
         <ItemQuantityEditor campaignId={campaignId} item={item} />
       </HStack>
