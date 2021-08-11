@@ -1,4 +1,4 @@
-import { FormProps } from "campaign/hooks/useItemForm";
+import { FormProps } from "campaign/components/ItemModal/useItemForm";
 import React from "react";
 import { fireEvent, render } from "shared";
 import { ItemForm } from "../ItemForm";

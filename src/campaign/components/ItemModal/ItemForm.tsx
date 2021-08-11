@@ -9,10 +9,9 @@ import {
   NumberInputStepper,
   VStack,
 } from "@chakra-ui/react";
-import { FormProps } from "campaign/hooks/useItemForm";
-import React from "react";
+import { FormProps } from "./useItemForm";
 
-export function ItemForm({ errors, values, setValues }: FormProps) {
+export const ItemForm = ({ errors, values, setValues }: FormProps) => {
   return (
     <VStack spacing="4">
       <FormControl isRequired>
@@ -60,4 +59,4 @@ export function ItemForm({ errors, values, setValues }: FormProps) {
       </FormControl>
     </VStack>
   );
-}
+};

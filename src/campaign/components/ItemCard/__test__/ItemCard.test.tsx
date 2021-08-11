@@ -1,5 +1,5 @@
 import { ItemCard } from "campaign/components/ItemCard";
-import { createItem } from "campaign/components/__test__/testData";
+import { createItem } from "shared/testData";
 import { FetchCampaign_fetchCampaign_Campaign_items as Item } from "campaign/gql";
 import React from "react";
 import { fireEvent, render } from "shared";

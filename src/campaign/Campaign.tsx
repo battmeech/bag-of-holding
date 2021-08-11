@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { CampaignContent } from "./components";
 import { FetchCampaign, FetchCampaignGQL, FetchCampaignVariables } from "./gql";
 
-function Campaign() {
+export const Campaign = () => {
   const router = useRouter();
   const { campaignId } = router.query;
 
@@ -17,6 +17,4 @@ function Campaign() {
   );
 
   return <CampaignContent result={result} />;
-}
-
-export default Campaign;
+};

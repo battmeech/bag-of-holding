@@ -1,13 +1,9 @@
+import * as GQL from "@apollo/client";
 import { MockedProvider } from "@apollo/client/testing";
 import { act, renderHook } from "@testing-library/react-hooks";
-import {
-  useCreateItem,
-  useEditItem,
-  useEditQuantity,
-} from "campaign/hooks/useItemForm";
-import * as GQL from "@apollo/client";
+import { createItem } from "shared/testData";
+import { useCreateItem, useEditItem } from "../useItemForm";
 import { waitFor } from "shared";
-import { createItem } from "campaign/components/__test__/testData";
 
 describe("useItemForm", () => {
   describe("useCreateItem", () => {
@@ -261,7 +257,7 @@ describe("useItemForm", () => {
               id: "item-id",
               description: "Test description",
               name: undefined,
-              quantity: 1
+              quantity: 1,
             },
           },
         })
@@ -290,7 +286,7 @@ describe("useItemForm", () => {
               id: "item-id",
               description: "Test description",
               name: "Name",
-              quantity: 1
+              quantity: 1,
             },
           },
         })
@@ -333,66 +329,6 @@ describe("useItemForm", () => {
           name: "",
           description: undefined,
           quantity: 1,
-        })
-      );
-    });
-  });
-
-  describe("useEditQuantity", () => {
-    const setupHook = (currentQuantity = 1) => {
-      const mutateMock = jest.fn();
-      jest.spyOn(GQL, "useMutation").mockReturnValue([mutateMock, {} as any]);
-
-      const rendered = renderHook(
-        () =>
-          useEditQuantity({
-            itemId: "itemId",
-            campaignId: "campaignId",
-            currentQuantity,
-          }),
-        {
-          wrapper: MockedProvider,
-        }
-      );
-      return { ...rendered, mutateMock };
-    };
-
-    beforeEach(() => {
-      jest.resetAllMocks();
-    });
-
-    it("initialises with values", () => {
-      const { result } = setupHook(1);
-
-      expect(result.current.quantity).toStrictEqual(1);
-    });
-
-    it("updates quantity", async () => {
-      const { result } = setupHook();
-
-      act(() => {
-        result.current.setQuantity(2);
-      });
-
-      expect(result.current.quantity).toStrictEqual(2);
-    });
-
-    it("saves quantity", async () => {
-      const { result, mutateMock } = setupHook();
-
-      act(() => {
-        result.current.saveItem(2);
-      });
-
-      await waitFor(() =>
-        expect(mutateMock).toHaveBeenCalledWith({
-          variables: {
-            id: "campaignId",
-            input: {
-              id: "itemId",
-              quantity: 2,
-            },
-          },
         })
       );
     });

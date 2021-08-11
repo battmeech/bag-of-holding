@@ -1,15 +1,15 @@
 import { QueryResult } from "@apollo/client";
 import { Box } from "@chakra-ui/react";
 import { FetchCampaign } from "campaign/gql";
-import { useCampaignPageState } from "campaign/hooks";
 import { MotionBox } from "shared";
 import { CampaignLoaded } from "./CampaignLoaded";
+import { useCampaignPageState } from "./useCampaignPageState";
 
 type CampaignContentProps = {
   result: QueryResult<FetchCampaign>;
 };
 
-function CampaignContent({ result }: CampaignContentProps) {
+export const CampaignContent = ({ result }: CampaignContentProps) => {
   const pageState = useCampaignPageState(result);
 
   switch (pageState.state) {
@@ -34,6 +34,4 @@ function CampaignContent({ result }: CampaignContentProps) {
     default:
       return null;
   }
-}
-
-export default CampaignContent;
+};

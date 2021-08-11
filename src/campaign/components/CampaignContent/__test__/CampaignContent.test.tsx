@@ -1,6 +1,6 @@
 import { render } from "shared";
-import CampaignContent from "../CampaignContent";
-import { createCampaign } from "./testData";
+import { CampaignContent } from "../CampaignContent";
+import { createCampaign } from "../../../../shared/testData";
 
 describe("CampaignContent", () => {
   it("renders loading text when gql is loading", () => {

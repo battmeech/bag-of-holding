@@ -9,7 +9,7 @@ import {
   ModalFooter,
   ModalHeader,
 } from "@chakra-ui/react";
-import React, { useState } from "react";
+import { useState } from "react";
 import { useModal } from "shared";
 
 export const ItemNotes = ({ notes }: { notes: string | null }) => {

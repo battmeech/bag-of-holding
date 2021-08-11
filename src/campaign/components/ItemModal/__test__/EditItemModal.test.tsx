@@ -2,9 +2,9 @@ import * as GQL from "@apollo/client";
 import { Modal } from "@chakra-ui/react";
 import React from "react";
 import { fireEvent, render, waitFor } from "shared";
-import { EditItemModal } from "campaign/components/EditItemModal";
+import { EditItemModal } from "campaign/components/ItemModal/EditItemModal";
 import { EditItem_editItem_Campaign_items as Item } from "campaign/gql";
-import { createItem } from "./testData";
+import { createItem } from "../../../../shared/testData";
 
 describe("EditItemModal", () => {
   const setUpComponent = ({
@@ -76,7 +76,7 @@ describe("EditItemModal", () => {
             id: "item-id",
             description: "Test description",
             name: "Test Item Name",
-            quantity: 1
+            quantity: 1,
           },
         },
       })

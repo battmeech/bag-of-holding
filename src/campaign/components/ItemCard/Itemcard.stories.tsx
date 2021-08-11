@@ -1,9 +1,7 @@
-import React from "react";
-import { ComponentStory, ComponentMeta } from "@storybook/react";
-
-import { ItemCard } from "./ItemCard";
-import { itemBuilder as item } from "shared/generators/item";
 import { SimpleGrid } from "@chakra-ui/react";
+import { ComponentMeta, ComponentStory } from "@storybook/react";
+import { itemBuilder as item } from "shared/generators/item";
+import { ItemCard } from "./ItemCard";
 
 export default {
   title: "Components/Item Card",

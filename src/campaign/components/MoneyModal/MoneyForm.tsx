@@ -1,6 +1,5 @@
 import { SimpleGrid } from "@chakra-ui/react";
-import { FormProps } from "campaign/hooks/useMoneyForm";
-import React from "react";
+import { FormProps } from "./useMoneyForm";
 import { CurrencyInput } from "./CurrencyInput";
 
 export function MoneyForm({ values, setValues, errors }: FormProps) {

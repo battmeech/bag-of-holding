@@ -11,14 +11,14 @@ import {
   Text,
   Tooltip,
 } from "@chakra-ui/react";
+import { Currency } from "campaign/components/Currency";
+import { ItemCard } from "campaign/components/ItemCard";
+import { AddItemModal } from "campaign/components/ItemModal";
+import { MoneyModal } from "campaign/components/MoneyModal";
 import { FetchCampaign_fetchCampaign_Campaign as Campaign } from "campaign/gql";
-import React, { useEffect, useState } from "react";
-import { useModal } from "shared";
-import { AddItemModal } from "./AddItemModal";
-import { Currency } from "./Currency";
-import { ItemCard } from "./ItemCard";
-import { MoneyModal } from "./MoneyModal";
+import { useEffect, useState } from "react";
 import { FaPiggyBank } from "react-icons/fa";
+import { useModal } from "shared";
 
 export const CampaignLoaded = ({ campaign }: { campaign: Campaign }) => {
   const { openModal } = useModal();

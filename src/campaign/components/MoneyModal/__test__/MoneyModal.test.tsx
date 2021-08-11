@@ -1,6 +1,6 @@
 import * as GQL from "@apollo/client";
 import { Modal } from "@chakra-ui/react";
-import { MoneyModal } from "campaign/components/MoneyModal";
+import { MoneyModal } from "../MoneyModal";
 import { EditItem_editItem_Campaign_items as Item } from "campaign/gql";
 import React from "react";
 import { fireEvent, render, waitFor } from "shared";

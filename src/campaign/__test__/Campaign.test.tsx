@@ -2,7 +2,7 @@ import * as Router from "next/router";
 import * as GQL from "@apollo/client";
 import { FetchCampaignGQL } from "campaign/gql";
 import { render } from "shared";
-import Campaign from "campaign";
+import { Campaign } from "campaign";
 
 describe("Campaign", () => {
   it("executes a gql query on load", () => {

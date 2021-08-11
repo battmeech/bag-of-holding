@@ -1,4 +1,4 @@
-import { FormProps } from "campaign/hooks/useMoneyForm";
+import { FormProps } from "../useMoneyForm";
 import React from "react";
 import { render, fireEvent } from "shared";
 import { MoneyForm } from "../MoneyForm";

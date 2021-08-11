@@ -17,8 +17,8 @@ import React from "react";
 import { CgNotes } from "react-icons/cg";
 import { GoKebabVertical } from "react-icons/go";
 import { useModal } from "shared";
-import { DeleteConfirmationModal } from "../DeleteConfirmationModal";
-import { EditItemModal } from "../EditItemModal";
+import { DeleteConfirmationModal } from "./DeleteConfirmationModal";
+import { EditItemModal } from "../ItemModal";
 import { ItemNotes } from "./ItemNotes";
 import { ItemQuantityEditor } from "./ItemQuantityEditor";
 
