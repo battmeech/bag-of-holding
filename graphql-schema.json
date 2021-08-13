@@ -10,6 +10,17 @@
     "subscriptionType": null,
     "types": [
       {
+        "kind": "SCALAR",
+        "name": "Date",
+        "description": "Date custom scalar type",
+        "specifiedByUrl": null,
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
         "kind": "OBJECT",
         "name": "CreatedCampaign",
         "description": null,
@@ -146,6 +157,34 @@
                   }
                 }
               }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "createdAt",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Date",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "updatedAt",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Date",
+              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -301,20 +340,32 @@
             "description": null,
             "args": [],
             "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "Item",
+                  "ofType": null
+                }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "createdAt",
+            "description": null,
+            "args": [],
+            "type": {
               "kind": "NON_NULL",
               "name": null,
               "ofType": {
-                "kind": "LIST",
-                "name": null,
-                "ofType": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "OBJECT",
-                    "name": "Item",
-                    "ofType": null
-                  }
-                }
+                "kind": "SCALAR",
+                "name": "Date",
+                "ofType": null
               }
             },
             "isDeprecated": false,
@@ -526,22 +577,6 @@
         "fields": null,
         "inputFields": [
           {
-            "name": "id",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "ID",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "name",
             "description": null,
             "type": {
@@ -751,50 +786,6 @@
         "possibleTypes": null
       },
       {
-        "kind": "INPUT_OBJECT",
-        "name": "ModifyTagsInput",
-        "description": null,
-        "specifiedByUrl": null,
-        "fields": null,
-        "inputFields": [
-          {
-            "name": "itemId",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "ID",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "tag",
-            "description": null,
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          }
-        ],
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": null
-      },
-      {
         "kind": "UNION",
         "name": "FetchCampaignResult",
         "description": null,
@@ -840,60 +831,6 @@
       },
       {
         "kind": "UNION",
-        "name": "EditItemResult",
-        "description": null,
-        "specifiedByUrl": null,
-        "fields": null,
-        "inputFields": null,
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": [
-          {
-            "kind": "OBJECT",
-            "name": "Campaign",
-            "ofType": null
-          },
-          {
-            "kind": "OBJECT",
-            "name": "CampaignNotFound",
-            "ofType": null
-          },
-          {
-            "kind": "OBJECT",
-            "name": "InvalidInput",
-            "ofType": null
-          },
-          {
-            "kind": "OBJECT",
-            "name": "ItemNotFound",
-            "ofType": null
-          }
-        ]
-      },
-      {
-        "kind": "UNION",
-        "name": "RemoveItemResult",
-        "description": null,
-        "specifiedByUrl": null,
-        "fields": null,
-        "inputFields": null,
-        "interfaces": null,
-        "enumValues": null,
-        "possibleTypes": [
-          {
-            "kind": "OBJECT",
-            "name": "Campaign",
-            "ofType": null
-          },
-          {
-            "kind": "OBJECT",
-            "name": "CampaignNotFound",
-            "ofType": null
-          }
-        ]
-      },
-      {
-        "kind": "UNION",
         "name": "ModifyMoneyResult",
         "description": null,
         "specifiedByUrl": null,
@@ -916,7 +853,7 @@
       },
       {
         "kind": "UNION",
-        "name": "AddTagResult",
+        "name": "RemoveItemResult",
         "description": null,
         "specifiedByUrl": null,
         "fields": null,
@@ -931,7 +868,73 @@
           },
           {
             "kind": "OBJECT",
-            "name": "CampaignNotFound",
+            "name": "ItemNotFound",
+            "ofType": null
+          }
+        ]
+      },
+      {
+        "kind": "UNION",
+        "name": "FetchItemResult",
+        "description": null,
+        "specifiedByUrl": null,
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": [
+          {
+            "kind": "OBJECT",
+            "name": "Item",
+            "ofType": null
+          },
+          {
+            "kind": "OBJECT",
+            "name": "ItemNotFound",
+            "ofType": null
+          }
+        ]
+      },
+      {
+        "kind": "UNION",
+        "name": "EditItemResult",
+        "description": null,
+        "specifiedByUrl": null,
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": [
+          {
+            "kind": "OBJECT",
+            "name": "Item",
+            "ofType": null
+          },
+          {
+            "kind": "OBJECT",
+            "name": "InvalidInput",
+            "ofType": null
+          },
+          {
+            "kind": "OBJECT",
+            "name": "ItemNotFound",
+            "ofType": null
+          }
+        ]
+      },
+      {
+        "kind": "UNION",
+        "name": "AddTagResult",
+        "description": null,
+        "specifiedByUrl": null,
+        "fields": null,
+        "inputFields": null,
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": [
+          {
+            "kind": "OBJECT",
+            "name": "Item",
             "ofType": null
           },
           {
@@ -953,12 +956,7 @@
         "possibleTypes": [
           {
             "kind": "OBJECT",
-            "name": "Campaign",
-            "ofType": null
-          },
-          {
-            "kind": "OBJECT",
-            "name": "CampaignNotFound",
+            "name": "Item",
             "ofType": null
           },
           {
@@ -975,7 +973,7 @@
         "specifiedByUrl": null,
         "fields": [
           {
-            "name": "listCampaigns",
+            "name": "campaigns",
             "description": null,
             "args": [],
             "type": {
@@ -985,9 +983,13 @@
                 "kind": "LIST",
                 "name": null,
                 "ofType": {
-                  "kind": "OBJECT",
-                  "name": "Campaign",
-                  "ofType": null
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "OBJECT",
+                    "name": "Campaign",
+                    "ofType": null
+                  }
                 }
               }
             },
@@ -995,11 +997,11 @@
             "deprecationReason": null
           },
           {
-            "name": "fetchCampaign",
+            "name": "campaign",
             "description": null,
             "args": [
               {
-                "name": "id",
+                "name": "campaignId",
                 "description": null,
                 "type": {
                   "kind": "NON_NULL",
@@ -1023,6 +1025,35 @@
                 "name": "FetchCampaignResult",
                 "ofType": null
               }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "item",
+            "description": null,
+            "args": [
+              {
+                "name": "itemId",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "ID",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "UNION",
+              "name": "FetchItemResult",
+              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -1073,11 +1104,60 @@
             "deprecationReason": null
           },
           {
+            "name": "modifyMoney",
+            "description": null,
+            "args": [
+              {
+                "name": "campaignId",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "ID",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              },
+              {
+                "name": "input",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "ModifyMoneyInput",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "UNION",
+                "name": "ModifyMoneyResult",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "addItem",
             "description": null,
             "args": [
               {
-                "name": "id",
+                "name": "campaignId",
                 "description": null,
                 "type": {
                   "kind": "NON_NULL",
@@ -1126,7 +1206,7 @@
             "description": null,
             "args": [
               {
-                "name": "id",
+                "name": "itemId",
                 "description": null,
                 "type": {
                   "kind": "NON_NULL",
@@ -1134,22 +1214,6 @@
                   "ofType": {
                     "kind": "SCALAR",
                     "name": "ID",
-                    "ofType": null
-                  }
-                },
-                "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              },
-              {
-                "name": "input",
-                "description": null,
-                "type": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "INPUT_OBJECT",
-                    "name": "RemoveItemInput",
                     "ofType": null
                   }
                 },
@@ -1175,7 +1239,7 @@
             "description": null,
             "args": [
               {
-                "name": "id",
+                "name": "itemId",
                 "description": null,
                 "type": {
                   "kind": "NON_NULL",
@@ -1220,60 +1284,11 @@
             "deprecationReason": null
           },
           {
-            "name": "modifyMoney",
-            "description": null,
-            "args": [
-              {
-                "name": "id",
-                "description": null,
-                "type": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "SCALAR",
-                    "name": "ID",
-                    "ofType": null
-                  }
-                },
-                "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              },
-              {
-                "name": "input",
-                "description": null,
-                "type": {
-                  "kind": "NON_NULL",
-                  "name": null,
-                  "ofType": {
-                    "kind": "INPUT_OBJECT",
-                    "name": "ModifyMoneyInput",
-                    "ofType": null
-                  }
-                },
-                "defaultValue": null,
-                "isDeprecated": false,
-                "deprecationReason": null
-              }
-            ],
-            "type": {
-              "kind": "NON_NULL",
-              "name": null,
-              "ofType": {
-                "kind": "UNION",
-                "name": "ModifyMoneyResult",
-                "ofType": null
-              }
-            },
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
             "name": "addTag",
             "description": null,
             "args": [
               {
-                "name": "id",
+                "name": "itemId",
                 "description": null,
                 "type": {
                   "kind": "NON_NULL",
@@ -1289,14 +1304,14 @@
                 "deprecationReason": null
               },
               {
-                "name": "input",
+                "name": "tag",
                 "description": null,
                 "type": {
                   "kind": "NON_NULL",
                   "name": null,
                   "ofType": {
-                    "kind": "INPUT_OBJECT",
-                    "name": "ModifyTagsInput",
+                    "kind": "SCALAR",
+                    "name": "String",
                     "ofType": null
                   }
                 },
@@ -1322,7 +1337,7 @@
             "description": null,
             "args": [
               {
-                "name": "id",
+                "name": "itemId",
                 "description": null,
                 "type": {
                   "kind": "NON_NULL",
@@ -1338,14 +1353,14 @@
                 "deprecationReason": null
               },
               {
-                "name": "input",
+                "name": "tag",
                 "description": null,
                 "type": {
                   "kind": "NON_NULL",
                   "name": null,
                   "ofType": {
-                    "kind": "INPUT_OBJECT",
-                    "name": "ModifyTagsInput",
+                    "kind": "SCALAR",
+                    "name": "String",
                     "ofType": null
                   }
                 },

@@ -1,7 +1,7 @@
 /* istanbul ignore file */
 import {
-  FetchCampaign_fetchCampaign_Campaign_items as Item,
-  FetchCampaign_fetchCampaign_Campaign as Campaign,
+  FetchCampaign_campaign_Campaign_items as Item,
+  FetchCampaign_campaign_Campaign as Campaign,
 } from "campaign/gql";
 
 export const createItem = ({

@@ -13,7 +13,7 @@ const List = () => {
         campaigns
       </Text>
 
-      {data?.listCampaigns.map((campaign) => (
+      {data?.campaigns.map((campaign) => (
         <Box key={campaign?.id}>
           <AccessibleLink href={`/${campaign?.id}`}>
             {campaign?.name}

@@ -21,7 +21,6 @@ export interface AddItemInput {
 }
 
 export interface EditItemInput {
-  id: string;
   name?: string | null;
   description?: string | null;
   quantity?: number | null;
@@ -36,10 +35,6 @@ export interface ModifyMoneyInput {
   gold: number;
   silver: number;
   copper: number;
-}
-
-export interface RemoveItemInput {
-  id: string;
 }
 
 //==============================================================

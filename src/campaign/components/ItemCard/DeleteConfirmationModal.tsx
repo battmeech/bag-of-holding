@@ -9,22 +9,11 @@ import {
 import { RemoveItem, RemoveItemGQL, RemoveItemVariables } from "campaign/gql";
 import { useModal } from "shared";
 
-export function DeleteConfirmationModal({
-  campaignId,
-  itemId,
-}: {
-  campaignId: string;
-  itemId: string;
-}) {
+export function DeleteConfirmationModal({ itemId }: { itemId: string }) {
   const { closeModal } = useModal();
 
   const [mutate] = useMutation<RemoveItem, RemoveItemVariables>(RemoveItemGQL, {
-    variables: {
-      id: campaignId,
-      input: {
-        id: itemId,
-      },
-    },
+    variables: { id: itemId },
   });
 
   const onClick = async () => {

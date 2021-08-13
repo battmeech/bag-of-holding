@@ -212,7 +212,6 @@ describe("useItemForm", () => {
         () =>
           useEditItem({
             existingItem: createItem({}),
-            campaignId: "campaignId",
             onSuccessCallback: successCallbackMock,
           }),
         {
@@ -252,9 +251,8 @@ describe("useItemForm", () => {
       await waitFor(() =>
         expect(mutateMock).toHaveBeenCalledWith({
           variables: {
-            id: "campaignId",
+            id: "item-id",
             input: {
-              id: "item-id",
               description: "Test description",
               name: undefined,
               quantity: 1,
@@ -281,9 +279,8 @@ describe("useItemForm", () => {
       await waitFor(() =>
         expect(mutateMock).toHaveBeenCalledWith({
           variables: {
-            id: "campaignId",
+            id: "item-id",
             input: {
-              id: "item-id",
               description: "Test description",
               name: "Name",
               quantity: 1,

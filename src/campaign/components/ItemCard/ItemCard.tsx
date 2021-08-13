@@ -11,7 +11,7 @@ import {
   Tooltip,
   VStack,
 } from "@chakra-ui/react";
-import { FetchCampaign_fetchCampaign_Campaign_items as Item } from "campaign/gql";
+import { FetchCampaign_campaign_Campaign_items as Item } from "campaign/gql";
 import React from "react";
 import { CgNotes } from "react-icons/cg";
 import { GoKebabVertical } from "react-icons/go";
@@ -21,13 +21,7 @@ import { DeleteConfirmationModal } from "./DeleteConfirmationModal";
 import { ItemNotes } from "./ItemNotesModal";
 import { ItemQuantityEditor } from "./ItemQuantityEditor";
 
-export const ItemCard = ({
-  item,
-  campaignId,
-}: {
-  item: Item;
-  campaignId: string;
-}) => {
+export const ItemCard = ({ item }: { item: Item }) => {
   const { openModal } = useModal();
 
   return (
@@ -52,23 +46,14 @@ export const ItemCard = ({
             <MenuList>
               <MenuItem
                 icon={<EditIcon />}
-                onClick={() =>
-                  openModal(
-                    <EditItemModal campaignId={campaignId} item={item} />
-                  )
-                }
+                onClick={() => openModal(<EditItemModal item={item} />)}
               >
                 edit item
               </MenuItem>
               <MenuItem
                 icon={<DeleteIcon />}
                 onClick={() =>
-                  openModal(
-                    <DeleteConfirmationModal
-                      campaignId={campaignId}
-                      itemId={item.id}
-                    />
-                  )
+                  openModal(<DeleteConfirmationModal itemId={item.id} />)
                 }
               >
                 delete item
@@ -90,18 +75,14 @@ export const ItemCard = ({
             icon={<CgNotes />}
             onClick={() =>
               openModal(
-                <ItemNotes
-                  currentNotes={item.notes}
-                  campaignId={campaignId}
-                  itemId={item.id}
-                />,
+                <ItemNotes currentNotes={item.notes} itemId={item.id} />,
                 "xl"
               )
             }
           />
         </Tooltip>
 
-        <ItemQuantityEditor campaignId={campaignId} item={item} />
+        <ItemQuantityEditor item={item} />
       </HStack>
     </VStack>
   );

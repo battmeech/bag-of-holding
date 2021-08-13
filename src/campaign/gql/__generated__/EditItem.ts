@@ -10,10 +10,10 @@ import { EditItemInput } from "./../../../../__generated__/globalTypes";
 // ====================================================
 
 export interface EditItem_editItem_InvalidInput {
-  __typename: "InvalidInput" | "ItemNotFound";
+  __typename: "InvalidInput";
 }
 
-export interface EditItem_editItem_Campaign_items {
+export interface EditItem_editItem_Item {
   __typename: "Item";
   id: string;
   name: string;
@@ -22,18 +22,12 @@ export interface EditItem_editItem_Campaign_items {
   notes: string | null;
 }
 
-export interface EditItem_editItem_Campaign {
-  __typename: "Campaign";
-  id: string;
-  items: EditItem_editItem_Campaign_items[];
-}
-
-export interface EditItem_editItem_CampaignNotFound {
-  __typename: "CampaignNotFound";
+export interface EditItem_editItem_ItemNotFound {
+  __typename: "ItemNotFound";
   message: string;
 }
 
-export type EditItem_editItem = EditItem_editItem_InvalidInput | EditItem_editItem_Campaign | EditItem_editItem_CampaignNotFound;
+export type EditItem_editItem = EditItem_editItem_InvalidInput | EditItem_editItem_Item | EditItem_editItem_ItemNotFound;
 
 export interface EditItem {
   editItem: EditItem_editItem;

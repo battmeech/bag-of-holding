@@ -1,5 +1,5 @@
 import { build, fake } from "@jackfranklin/test-data-bot";
-import { FetchCampaign_fetchCampaign_Campaign_items as Item } from "campaign/gql";
+import { FetchCampaign_campaign_Campaign_items as Item } from "campaign/gql";
 
 export const itemBuilder = build<Item>({
   fields: {

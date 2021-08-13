@@ -1,6 +1,6 @@
 import userEvent from "@testing-library/user-event";
 import { createCampaign, createItem } from "shared/testData";
-import { FetchCampaign_fetchCampaign_Campaign as Campaign } from "campaign/gql";
+import { FetchCampaign_campaign_Campaign as Campaign } from "campaign/gql";
 import React from "react";
 import { fireEvent, render } from "shared";
 import { CampaignLoaded } from "../CampaignLoaded";
@@ -65,7 +65,7 @@ describe("CampaignLoaded", () => {
 
   it("does not render a search input when no items exist on the campaign ", () => {
     const campaign = { ...createCampaign(), items: [] };
-    const { queryByPlaceholderText } = setUpComponent({campaign});
+    const { queryByPlaceholderText } = setUpComponent({ campaign });
     expect(queryByPlaceholderText(/search/i)).not.toBeInTheDocument();
   });
 

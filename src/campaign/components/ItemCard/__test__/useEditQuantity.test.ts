@@ -13,7 +13,6 @@ describe("useEditQuantity", () => {
       () =>
         useEditQuantity({
           itemId: "itemId",
-          campaignId: "campaignId",
           currentQuantity,
         }),
       {
@@ -53,9 +52,8 @@ describe("useEditQuantity", () => {
     await waitFor(() =>
       expect(mutateMock).toHaveBeenCalledWith({
         variables: {
-          id: "campaignId",
+          id: "itemId",
           input: {
-            id: "itemId",
             quantity: 2,
           },
         },

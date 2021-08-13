@@ -5,22 +5,15 @@ import {
   ModalFooter,
   ModalHeader,
 } from "@chakra-ui/react";
-import { EditItem_editItem_Campaign_items as ExistingItem } from "campaign/gql";
+import { EditItem_editItem_Item as ExistingItem } from "campaign/gql";
 import { useModal } from "shared";
 import { ItemForm } from "./ItemForm";
 import { useEditItem } from "./useItemForm";
 
-export function EditItemModal({
-  campaignId,
-  item,
-}: {
-  campaignId: string;
-  item: ExistingItem;
-}) {
+export function EditItemModal({ item }: { item: ExistingItem }) {
   const { closeModal } = useModal();
 
   const { saveItem, isSaveEnabled, formProps } = useEditItem({
-    campaignId,
     onSuccessCallback: closeModal,
     existingItem: item,
   });

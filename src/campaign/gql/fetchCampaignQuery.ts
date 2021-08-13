@@ -2,7 +2,7 @@ import gql from "graphql-tag";
 
 export const FetchCampaignGQL = gql`
   query FetchCampaign($id: ID!) {
-    fetchCampaign(id: $id) {
+    campaign(campaignId: $id) {
       __typename
       ... on Campaign {
         id

@@ -6,7 +6,6 @@ import { DeleteConfirmationModal } from "../DeleteConfirmationModal";
 
 describe("DeleteConfirmationModal", () => {
   const setUpComponent = ({
-    campaignId = "campaign-id",
     itemId = "item-id",
   }: {
     campaignId?: string;
@@ -14,7 +13,7 @@ describe("DeleteConfirmationModal", () => {
   }) => {
     const rendered = render(
       <Modal isOpen={true} onClose={jest.fn()}>
-        <DeleteConfirmationModal campaignId={campaignId} itemId={itemId} />
+        <DeleteConfirmationModal itemId={itemId} />
       </Modal>
     );
     return rendered;

@@ -12,17 +12,14 @@ import { useEditNotes } from "./useEditNotes";
 
 export const ItemNotes = ({
   currentNotes,
-  campaignId,
   itemId,
 }: {
   currentNotes: string | null;
-  campaignId: string;
   itemId: string;
 }) => {
   const { closeModal } = useModal();
 
   const { notes, setNotes, saveItem, saveActive } = useEditNotes({
-    campaignId,
     itemId,
     currentNotes,
   });

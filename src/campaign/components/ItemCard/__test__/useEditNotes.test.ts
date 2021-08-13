@@ -1,5 +1,4 @@
 import * as GQL from "@apollo/client";
-import { MockedProvider } from "@apollo/client/testing";
 import { act, renderHook } from "@testing-library/react-hooks";
 import { waitFor } from "shared";
 import { useEditNotes } from "../useEditNotes";
@@ -9,16 +8,11 @@ describe("useEditNotes", () => {
     const mutateMock = jest.fn();
     jest.spyOn(GQL, "useMutation").mockReturnValue([mutateMock, {} as any]);
 
-    const rendered = renderHook(
-      () =>
-        useEditNotes({
-          itemId: "itemId",
-          campaignId: "campaignId",
-          currentNotes,
-        }),
-      {
-        wrapper: MockedProvider,
-      }
+    const rendered = renderHook(() =>
+      useEditNotes({
+        itemId: "itemId",
+        currentNotes,
+      })
     );
     return { ...rendered, mutateMock };
   };
@@ -69,9 +63,8 @@ describe("useEditNotes", () => {
     await waitFor(() =>
       expect(mutateMock).toHaveBeenCalledWith({
         variables: {
-          id: "campaignId",
+          id: "itemId",
           input: {
-            id: "itemId",
             notes: "Notes",
           },
         },

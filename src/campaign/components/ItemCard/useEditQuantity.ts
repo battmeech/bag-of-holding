@@ -3,11 +3,9 @@ import { EditItem, EditItemGQL, EditItemVariables } from "campaign/gql";
 import { useState } from "react";
 
 export const useEditQuantity = ({
-  campaignId,
   currentQuantity,
   itemId,
 }: {
-  campaignId: string;
   itemId: string;
   currentQuantity: number;
 }) => {
@@ -18,9 +16,8 @@ export const useEditQuantity = ({
   const saveItem = async (newQuantity: number) => {
     await mutate({
       variables: {
-        id: campaignId,
+        id: itemId,
         input: {
-          id: itemId,
           quantity: newQuantity,
         },
       },

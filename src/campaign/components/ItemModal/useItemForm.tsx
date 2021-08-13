@@ -6,7 +6,7 @@ import {
   EditItem,
   EditItemGQL,
   EditItemVariables,
-  EditItem_editItem_Campaign_items as ExistingItem,
+  EditItem_editItem_Item as ExistingItem,
 } from "campaign/gql";
 import { useEffect, useState } from "react";
 
@@ -125,11 +125,9 @@ export const useCreateItem = ({
 };
 
 export const useEditItem = ({
-  campaignId,
   existingItem,
   onSuccessCallback,
 }: {
-  campaignId: string;
   existingItem: ExistingItem;
   onSuccessCallback: () => void;
 }) => {
@@ -147,9 +145,8 @@ export const useEditItem = ({
   const saveItem = async () => {
     await mutate({
       variables: {
-        id: campaignId,
+        id: existingItem.id,
         input: {
-          id: existingItem.id,
           name:
             formProps.values.name !== existingItem.name
               ? formProps.values.name

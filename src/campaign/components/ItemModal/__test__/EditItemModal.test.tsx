@@ -3,20 +3,14 @@ import { Modal } from "@chakra-ui/react";
 import React from "react";
 import { fireEvent, render, waitFor } from "shared";
 import { EditItemModal } from "campaign/components/ItemModal/EditItemModal";
-import { EditItem_editItem_Campaign_items as Item } from "campaign/gql";
+import { EditItem_editItem_Item as Item } from "campaign/gql";
 import { createItem } from "../../../../shared/testData";
 
 describe("EditItemModal", () => {
-  const setUpComponent = ({
-    campaignId = "campaign-id",
-    item = createItem({}),
-  }: {
-    campaignId?: string;
-    item?: Item;
-  }) => {
+  const setUpComponent = ({ item = createItem({}) }: { item?: Item }) => {
     const rendered = render(
       <Modal isOpen={true} onClose={jest.fn()}>
-        <EditItemModal campaignId={campaignId} item={item} />
+        <EditItemModal item={item} />
       </Modal>
     );
     return rendered;
@@ -71,9 +65,8 @@ describe("EditItemModal", () => {
     await waitFor(() =>
       expect(mutateMock).toHaveBeenCalledWith({
         variables: {
-          id: "campaign-id",
+          id: "item-id",
           input: {
-            id: "item-id",
             description: "Test description",
             name: "Test Item Name",
             quantity: 1,

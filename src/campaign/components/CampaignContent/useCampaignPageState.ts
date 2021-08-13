@@ -1,7 +1,7 @@
 import { QueryResult } from "@apollo/client";
 import {
   FetchCampaign,
-  FetchCampaign_fetchCampaign_Campaign as Campaign,
+  FetchCampaign_campaign_Campaign as Campaign,
 } from "campaign/gql";
 import { useEffect, useState } from "react";
 
@@ -31,10 +31,10 @@ export function useCampaignPageState({
   useEffect(() => {
     if (loading) setState({ state: "loading" });
     if (error) setState({ state: "error", message: error.message });
-    if (data && data.fetchCampaign.__typename === "CampaignNotFound")
+    if (data && data.campaign.__typename === "CampaignNotFound")
       setState({ state: "not found" });
-    if (data && data.fetchCampaign.__typename === "Campaign")
-      setState({ state: "loaded", campaign: data.fetchCampaign });
+    if (data && data.campaign.__typename === "Campaign")
+      setState({ state: "loaded", campaign: data.campaign });
   }, [loading, data, error]);
 
   return state;

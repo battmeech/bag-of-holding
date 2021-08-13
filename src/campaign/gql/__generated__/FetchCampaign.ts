@@ -7,7 +7,7 @@
 // GraphQL query operation: FetchCampaign
 // ====================================================
 
-export interface FetchCampaign_fetchCampaign_Campaign_items {
+export interface FetchCampaign_campaign_Campaign_items {
   __typename: "Item";
   id: string;
   name: string;
@@ -16,7 +16,7 @@ export interface FetchCampaign_fetchCampaign_Campaign_items {
   notes: string | null;
 }
 
-export interface FetchCampaign_fetchCampaign_Campaign {
+export interface FetchCampaign_campaign_Campaign {
   __typename: "Campaign";
   id: string;
   name: string;
@@ -25,18 +25,18 @@ export interface FetchCampaign_fetchCampaign_Campaign {
   gold: number;
   silver: number;
   copper: number;
-  items: FetchCampaign_fetchCampaign_Campaign_items[];
+  items: FetchCampaign_campaign_Campaign_items[] | null;
 }
 
-export interface FetchCampaign_fetchCampaign_CampaignNotFound {
+export interface FetchCampaign_campaign_CampaignNotFound {
   __typename: "CampaignNotFound";
   message: string;
 }
 
-export type FetchCampaign_fetchCampaign = FetchCampaign_fetchCampaign_Campaign | FetchCampaign_fetchCampaign_CampaignNotFound;
+export type FetchCampaign_campaign = FetchCampaign_campaign_Campaign | FetchCampaign_campaign_CampaignNotFound;
 
 export interface FetchCampaign {
-  fetchCampaign: FetchCampaign_fetchCampaign;
+  campaign: FetchCampaign_campaign;
 }
 
 export interface FetchCampaignVariables {

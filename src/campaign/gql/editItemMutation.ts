@@ -2,19 +2,16 @@ import gql from "graphql-tag";
 
 export const EditItemGQL = gql`
   mutation EditItem($id: ID!, $input: EditItemInput!) {
-    editItem(id: $id, input: $input) {
+    editItem(itemId: $id, input: $input) {
       __typename
-      ... on Campaign {
+      ... on Item {
         id
-        items {
-          id
-          name
-          description
-          quantity
-          notes
-        }
+        name
+        description
+        quantity
+        notes
       }
-      ... on CampaignNotFound {
+      ... on ItemNotFound {
         message
       }
     }

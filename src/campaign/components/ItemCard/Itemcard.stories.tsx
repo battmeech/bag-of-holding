@@ -17,6 +17,5 @@ const Template: ComponentStory<typeof ItemCard> = (args) => (
 
 export const Default = Template.bind({});
 Default.args = {
-  campaignId: "abc123",
   item: item(),
 };

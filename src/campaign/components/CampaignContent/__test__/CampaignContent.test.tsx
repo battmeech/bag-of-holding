@@ -28,7 +28,7 @@ describe("CampaignContent", () => {
     const result = {
       loading: false,
       data: {
-        fetchCampaign: {
+        campaign: {
           __typename: "CampaignNotFound",
         },
       },
@@ -43,7 +43,7 @@ describe("CampaignContent", () => {
     const result = {
       loading: false,
       data: {
-        fetchCampaign: createCampaign(),
+        campaign: createCampaign(),
       },
     } as any;
 

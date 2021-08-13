@@ -7,11 +7,7 @@ describe("ItemNotesModal", () => {
   const setUpComponent = ({ notes = "test notes" }: { notes?: string }) => {
     const rendered = render(
       <Modal isOpen={true} onClose={jest.fn()}>
-        <ItemNotes
-          campaignId="campaignId"
-          itemId="itemId"
-          currentNotes={notes}
-        />
+        <ItemNotes itemId="itemId" currentNotes={notes} />
       </Modal>
     );
     return rendered;

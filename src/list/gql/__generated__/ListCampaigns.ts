@@ -7,12 +7,12 @@
 // GraphQL query operation: ListCampaigns
 // ====================================================
 
-export interface ListCampaigns_listCampaigns {
+export interface ListCampaigns_campaigns {
   __typename: "Campaign";
   id: string;
   name: string;
 }
 
 export interface ListCampaigns {
-  listCampaigns: (ListCampaigns_listCampaigns | null)[];
+  campaigns: ListCampaigns_campaigns[];
 }

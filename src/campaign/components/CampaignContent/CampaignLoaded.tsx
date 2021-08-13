@@ -15,7 +15,7 @@ import { Currency } from "campaign/components/Currency";
 import { ItemCard } from "campaign/components/ItemCard";
 import { AddItemModal } from "campaign/components/ItemModal";
 import { MoneyModal } from "campaign/components/MoneyModal";
-import { FetchCampaign_fetchCampaign_Campaign as Campaign } from "campaign/gql";
+import { FetchCampaign_campaign_Campaign as Campaign } from "campaign/gql";
 import { useEffect, useState } from "react";
 import { FaPiggyBank } from "react-icons/fa";
 import { useModal } from "shared";
@@ -23,15 +23,17 @@ import { useModal } from "shared";
 export const CampaignLoaded = ({ campaign }: { campaign: Campaign }) => {
   const { openModal } = useModal();
   const [filterText, setFilterText] = useState("");
-  const [filteredItems, setFilteredItems] = useState(campaign.items);
+  const [filteredItems, setFilteredItems] = useState(campaign.items ?? []);
+
   useEffect(() => {
-    const newFilteredItems = campaign.items.filter(
+    const newFilteredItems = campaign.items?.filter(
       (item) =>
         item.name.toLowerCase().includes(filterText.toLowerCase()) ||
         item.description?.toLowerCase().includes(filterText.toLowerCase())
     );
-    setFilteredItems(newFilteredItems);
+    setFilteredItems(newFilteredItems ?? []);
   }, [filterText, campaign.items]);
+
   return (
     <Box>
       <Flex as="header" width="full" align="center">
@@ -69,7 +71,7 @@ export const CampaignLoaded = ({ campaign }: { campaign: Campaign }) => {
           />
         </Tooltip>
       </Flex>
-      {campaign.items.length === 0 ? (
+      {campaign.items?.length === 0 ? (
         <Box mb={6}>
           <Text mb={4}>looks empty in here</Text>
           <Button
@@ -99,7 +101,7 @@ export const CampaignLoaded = ({ campaign }: { campaign: Campaign }) => {
             mb={6}
           >
             {filteredItems.map((item) => (
-              <ItemCard key={item.id} item={item} campaignId={campaign.id} />
+              <ItemCard key={item.id} item={item} />
             ))}
           </SimpleGrid>
         </>

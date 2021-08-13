@@ -21,7 +21,7 @@ export interface AddItem_addItem_Campaign_items {
 export interface AddItem_addItem_Campaign {
   __typename: "Campaign";
   id: string;
-  items: AddItem_addItem_Campaign_items[];
+  items: AddItem_addItem_Campaign_items[] | null;
 }
 
 export interface AddItem_addItem_CampaignNotFound {

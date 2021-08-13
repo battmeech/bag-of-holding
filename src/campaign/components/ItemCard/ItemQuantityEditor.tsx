@@ -8,23 +8,20 @@ import {
   IconButton,
   StackProps,
 } from "@chakra-ui/react";
-import { EditItem_editItem_Campaign_items as Item } from "campaign/gql";
+import { EditItem_editItem_Item as Item } from "campaign/gql";
 import { debounce } from "lodash";
 import { useCallback, useEffect } from "react";
 import { useEditQuantity } from "./useEditQuantity";
 
 type ItemQuantityEditorProps = {
-  campaignId: string;
   item: Item;
 } & StackProps;
 
 export const ItemQuantityEditor = ({
-  campaignId,
   item,
   ...stackProps
 }: ItemQuantityEditorProps) => {
   const { quantity, saveItem, setQuantity } = useEditQuantity({
-    campaignId,
     itemId: item.id,
     currentQuantity: item.quantity,
   });

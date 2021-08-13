@@ -1,16 +1,14 @@
 import * as GQL from "@apollo/client";
 import { Modal } from "@chakra-ui/react";
-import { MoneyModal } from "../MoneyModal";
-import { EditItem_editItem_Campaign_items as Item } from "campaign/gql";
 import React from "react";
 import { fireEvent, render, waitFor } from "shared";
+import { MoneyModal } from "../MoneyModal";
 
 describe("MoneyModal", () => {
   const setUpComponent = ({
     campaignId = "campaign-id",
   }: {
     campaignId?: string;
-    item?: Item;
   }) => {
     const rendered = render(
       <Modal isOpen={true} onClose={jest.fn()}>

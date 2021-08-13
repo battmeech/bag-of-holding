@@ -1,18 +1,17 @@
 import { ItemCard } from "campaign/components/ItemCard";
 import { createItem } from "shared/testData";
-import { FetchCampaign_fetchCampaign_Campaign_items as Item } from "campaign/gql";
+import { FetchCampaign_campaign_Campaign_items as Item } from "campaign/gql";
 import React from "react";
 import { fireEvent, render } from "shared";
 
 describe("ItemCard", () => {
   const setUpComponent = ({
-    campaignId = "campaign-id",
     item = createItem({}),
   }: {
     campaignId?: string;
     item?: Item;
   }) => {
-    const rendered = render(<ItemCard campaignId={campaignId} item={item} />);
+    const rendered = render(<ItemCard item={item} />);
     return rendered;
   };
 
