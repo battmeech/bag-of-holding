@@ -7,6 +7,7 @@ import {
   NumberInput,
   NumberInputField,
   NumberInputStepper,
+  Textarea,
   VStack,
 } from "@chakra-ui/react";
 import { FormProps } from "./useItemForm";
@@ -29,8 +30,9 @@ export const ItemForm = ({ errors, values, setValues }: FormProps) => {
 
       <FormControl>
         <FormLabel>item description</FormLabel>
-        <Input
+        <Textarea
           isInvalid={errors.has("description")}
+          maxH="30vh"
           placeholder="item description"
           my="auto"
           value={values.description || ""}
