@@ -9,5 +9,6 @@ export const itemBuilder = build<Item>({
     id: fake((f) => f.random.uuid()),
     quantity: fake((f) => f.random.number(20)),
     notes: fake((f) => f.lorem.paragraph()),
+    createdAt: fake((f) => f.date),
   },
 });
