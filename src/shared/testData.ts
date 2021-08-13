@@ -24,6 +24,7 @@ export const createItem = ({
     description,
     quantity,
     notes,
+    createdAt: new Date(),
   };
 };
 
@@ -38,6 +39,7 @@ export const createCampaign = (): Campaign => ({
       name: "item name",
       quantity: 1,
       notes: "notes",
+      createdAt: new Date(),
     },
   ],
   copper: 20,
