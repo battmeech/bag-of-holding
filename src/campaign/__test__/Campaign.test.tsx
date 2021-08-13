@@ -1,22 +1,25 @@
-import * as Router from "next/router";
-import * as GQL from "@apollo/client";
-import { FetchCampaignGQL } from "campaign/gql";
-import { render } from "shared";
+import { useQuery } from "@apollo/client";
 import { Campaign } from "campaign";
+import { FetchCampaignGQL } from "campaign/gql";
+import { useRouter } from "next/router";
+import { render } from "shared";
+
+jest.mock("@apollo/client");
+jest.mock("next/router");
 
 describe("Campaign", () => {
   it("executes a gql query on load", () => {
-    jest.spyOn(Router, "useRouter").mockReturnValue({
+    (useRouter as jest.Mock).mockReturnValueOnce({
       query: {
         campaignId: "campaign-id",
       },
-    } as any);
+    });
 
-    const gqlSpy = jest.spyOn(GQL, "useQuery").mockReturnValue({} as any);
+    (useQuery as jest.Mock).mockReturnValueOnce({} as any);
 
     render(<Campaign />);
 
-    expect(gqlSpy).toHaveBeenCalledWith(FetchCampaignGQL, {
+    expect(useQuery).toHaveBeenCalledWith(FetchCampaignGQL, {
       variables: { id: "campaign-id" },
     });
   });
