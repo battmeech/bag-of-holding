@@ -17,5 +17,5 @@ export const useSortItems = () => {
   };
 
   const sortItems = (a: Item, b: Item) => sortByDate(a, b);
-  return { sortItems, toggleSortingOrder };
+  return { sortItems, toggleSortingOrder, sortingOrder };
 };

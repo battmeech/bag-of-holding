@@ -3,6 +3,7 @@ import {
   Box,
   Button,
   Flex,
+  HStack,
   IconButton,
   Input,
   InputGroup,
@@ -19,11 +20,15 @@ import { FetchCampaign_campaign_Campaign as Campaign } from "campaign/gql";
 import { useEffect, useState } from "react";
 import { FaPiggyBank } from "react-icons/fa";
 import { useModal } from "shared";
+import { Sorting } from "./Sorting";
+import { useSortItems } from "./useSortItems";
 
 export const CampaignLoaded = ({ campaign }: { campaign: Campaign }) => {
   const { openModal } = useModal();
   const [filterText, setFilterText] = useState("");
   const [filteredItems, setFilteredItems] = useState(campaign.items ?? []);
+
+  const { sortItems, sortingOrder, toggleSortingOrder } = useSortItems();
 
   useEffect(() => {
     const newFilteredItems = campaign.items?.filter(
@@ -83,16 +88,23 @@ export const CampaignLoaded = ({ campaign }: { campaign: Campaign }) => {
         </Box>
       ) : (
         <>
-          <InputGroup>
-            <Input
-              placeholder="search for items..."
-              value={filterText}
-              onChange={(e) => setFilterText(e.target.value)}
+          <HStack>
+            <InputGroup>
+              <Input
+                placeholder="search for items..."
+                value={filterText}
+                onChange={(e) => setFilterText(e.target.value)}
+              />
+              <InputLeftElement>
+                <SearchIcon />
+              </InputLeftElement>
+            </InputGroup>
+
+            <Sorting
+              sortingOrder={sortingOrder}
+              toggleSortingOrder={toggleSortingOrder}
             />
-            <InputLeftElement>
-              <SearchIcon />
-            </InputLeftElement>
-          </InputGroup>
+          </HStack>
           <SimpleGrid
             mt="4"
             data-testid="card-grid"
@@ -100,9 +112,12 @@ export const CampaignLoaded = ({ campaign }: { campaign: Campaign }) => {
             spacing={4}
             mb={6}
           >
-            {filteredItems.map((item) => (
-              <ItemCard key={item.id} item={item} />
-            ))}
+            {filteredItems
+              .slice()
+              .sort(sortItems)
+              .map((item) => (
+                <ItemCard key={item.id} item={item} />
+              ))}
           </SimpleGrid>
         </>
       )}
