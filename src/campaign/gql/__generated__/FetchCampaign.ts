@@ -14,6 +14,7 @@ export interface FetchCampaign_campaign_Campaign_items {
   description: string | null;
   quantity: number;
   notes: string | null;
+  createdAt: Date;
 }
 
 export interface FetchCampaign_campaign_Campaign {

@@ -18,6 +18,7 @@ export const FetchCampaignGQL = gql`
           description
           quantity
           notes
+          createdAt
         }
       }
       ... on CampaignNotFound {
