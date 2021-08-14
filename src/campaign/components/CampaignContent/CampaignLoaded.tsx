@@ -34,7 +34,10 @@ export const CampaignLoaded = ({ campaign }: { campaign: Campaign }) => {
     const newFilteredItems = campaign.items?.filter(
       (item) =>
         item.name.toLowerCase().includes(filterText.toLowerCase()) ||
-        item.description?.toLowerCase().includes(filterText.toLowerCase())
+        item.description?.toLowerCase().includes(filterText.toLowerCase()) ||
+        item.tags.filter((tag) =>
+          tag.toLowerCase().includes(filterText.toLowerCase())
+        ).length > 0
     );
     setFilteredItems(newFilteredItems ?? []);
   }, [filterText, campaign.items]);
