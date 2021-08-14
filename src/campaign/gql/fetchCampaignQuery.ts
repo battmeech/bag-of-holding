@@ -19,6 +19,7 @@ export const FetchCampaignGQL = gql`
           quantity
           notes
           createdAt
+          tags
         }
       }
       ... on CampaignNotFound {
