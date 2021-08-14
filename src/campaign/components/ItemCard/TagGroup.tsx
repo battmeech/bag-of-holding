@@ -15,7 +15,7 @@ type TagGroupProps = {
 } & Pick<BadgeProps, "variant" | "colorScheme"> &
   WrapProps;
 
-const TagGroup: React.FC<TagGroupProps> = ({
+export const TagGroup: React.FC<TagGroupProps> = ({
   displayLimit,
   tags,
   variant,
@@ -51,5 +51,3 @@ const TagGroup: React.FC<TagGroupProps> = ({
     </Wrap>
   );
 };
-
-export default TagGroup;

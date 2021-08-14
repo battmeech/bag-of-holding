@@ -21,7 +21,7 @@ import { EditItemModal } from "../ItemModal";
 import { DeleteConfirmationModal } from "./DeleteConfirmationModal";
 import { ItemNotes } from "./ItemNotesModal";
 import { ItemQuantityEditor } from "./ItemQuantityEditor";
-import TagGroup from "./TagGroup";
+import { TagGroup } from "./TagGroup";
 
 export const ItemCard = ({ item }: { item: Item }) => {
   const { openModal } = useModal();

@@ -14,7 +14,7 @@ export type TagInputProps = {
   tags?: string[];
 } & TagProps;
 
-const TagInput: React.FC<TagInputProps> = ({
+export const TagInput: React.FC<TagInputProps> = ({
   tags = [],
   onTagsChanged,
   ...tagProps
@@ -57,5 +57,3 @@ const TagInput: React.FC<TagInputProps> = ({
     </>
   );
 };
-
-export default TagInput;

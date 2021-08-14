@@ -11,7 +11,7 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import React from "react";
-import TagInput from "./TagInput";
+import { TagInput } from "./TagInput";
 import { FormProps } from "./useItemForm";
 
 export const ItemForm = ({ errors, values, setValues }: FormProps) => {

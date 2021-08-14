@@ -32,28 +32,33 @@ describe("AddItemModal", () => {
   });
 
   it("entering a name enables the save button", () => {
+    // Setup
     const { getByText, getByPlaceholderText } = setUpComponent({});
 
+    // Run
     const input = getByPlaceholderText("item name");
-
     fireEvent.change(input, { target: { value: "Test Item Name" } });
 
+    // Assert
     expect(getByText("save item")).not.toBeDisabled();
   });
 
   it("pressing save sends a gql request", async () => {
+    // Setup
     const mutateMock = jest.fn(() => Promise.resolve({}));
     jest
       .spyOn(GQL, "useMutation")
       .mockReturnValue([mutateMock, { loading: false } as any]);
     const { getByText, getByPlaceholderText } = setUpComponent({});
 
+    // Run
     const input = getByPlaceholderText("item name");
     fireEvent.change(input, { target: { value: "Test Item Name" } });
 
     const saveButton = getByText("save item");
     fireEvent.click(saveButton);
 
+    // Assert
     await waitFor(() =>
       expect(mutateMock).toHaveBeenCalledWith({
         variables: {

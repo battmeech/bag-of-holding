@@ -1,6 +1,6 @@
 import userEvent from "@testing-library/user-event";
 import { render, screen } from "shared";
-import TagGroup from "../TagGroup";
+import { TagGroup } from "../TagGroup";
 
 describe("TagGroup", () => {
   const tags = [
@@ -19,8 +19,13 @@ describe("TagGroup", () => {
   });
 
   it("should display allowed number only when display limit is set", () => {
+    // Setup
     const limit = 3;
+
+    // Run
     render(<TagGroup tags={tags} displayLimit={limit} />);
+
+    // Assert
     tags.forEach((tag, index) => {
       index < limit
         ? expect(screen.getByText(tag)).toBeVisible()
@@ -30,20 +35,34 @@ describe("TagGroup", () => {
 
   describe('"show all tags" button', () => {
     it("should be visible when limit is less than tag count", () => {
+      // Setup
       const limit = 3;
+
+      // Run
       render(<TagGroup tags={tags} displayLimit={limit} />);
+
+      // Assert
       expect(screen.getByLabelText(/show all tags/i)).toBeVisible();
     });
     it("should not be visible when limit is greater than or equal to tag count", () => {
+      // Setup
       const limit = 8;
+
+      // Run
       render(<TagGroup tags={tags} displayLimit={limit} />);
+
+      // Assert
       expect(screen.queryByLabelText(/show all tags/i)).not.toBeInTheDocument();
     });
     it("should display all tags when clicked", () => {
+      // Setup
       const limit = 1;
-      render(<TagGroup tags={tags} displayLimit={limit} />);
 
+      // Run
+      render(<TagGroup tags={tags} displayLimit={limit} />);
       userEvent.click(screen.getByLabelText(/show all tags/i));
+
+      // Assert
       tags.forEach((tag) => expect(screen.getByText(tag)).toBeVisible());
     });
   });

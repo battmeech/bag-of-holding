@@ -4,7 +4,7 @@ import React from "react";
 import { fireEvent, render, waitFor } from "shared";
 import { EditItemModal } from "campaign/components/ItemModal/EditItemModal";
 import { EditItem_editItem_Item as Item } from "campaign/gql";
-import { createItem } from "../../../../shared/testData";
+import { createItem } from "shared/testData";
 
 describe("EditItemModal", () => {
   const setUpComponent = ({ item = createItem({}) }: { item?: Item }) => {
@@ -50,18 +50,21 @@ describe("EditItemModal", () => {
   });
 
   it("pressing save sends a gql request", async () => {
-    const mutateMock = jest.fn(() => Promise.resolve({}));
+    // Setup
+    const mutateMock = jest.fn().mockResolvedValue({});
     jest
       .spyOn(GQL, "useMutation")
       .mockReturnValue([mutateMock, { loading: false } as any]);
     const { getByText, getByPlaceholderText } = setUpComponent({});
 
+    // Run
     const input = getByPlaceholderText("item name");
     fireEvent.change(input, { target: { value: "Test Item Name" } });
 
     const saveButton = getByText("save item");
     fireEvent.click(saveButton);
 
+    // Assert
     await waitFor(() =>
       expect(mutateMock).toHaveBeenCalledWith({
         variables: {
