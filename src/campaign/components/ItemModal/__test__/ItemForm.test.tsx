@@ -29,11 +29,14 @@ describe("ItemForm", () => {
   });
 
   it("calls setValues with name as key when a name is entered", () => {
+    // Setup
     const { getByPlaceholderText, setValueMock } = setUpComponent({});
 
+    // Run
     const input = getByPlaceholderText("item name");
     fireEvent.change(input, { target: { value: "Test Item Name" } });
 
+    // Assert
     expect(setValueMock).toHaveBeenCalledWith({
       key: "name",
       value: "Test Item Name",
@@ -41,11 +44,14 @@ describe("ItemForm", () => {
   });
 
   it("calls setValues with description as key when a description is entered", () => {
+    // Setup
     const { getByPlaceholderText, setValueMock } = setUpComponent({});
 
+    // Run
     const input = getByPlaceholderText("item description");
     fireEvent.change(input, { target: { value: "Test Item Description" } });
 
+    // Assert
     expect(setValueMock).toHaveBeenCalledWith({
       key: "description",
       value: "Test Item Description",
@@ -53,11 +59,14 @@ describe("ItemForm", () => {
   });
 
   it("calls setValues with quantity as key when a quantity is entered", () => {
+    // Setup
     const { getByLabelText, setValueMock } = setUpComponent({});
 
+    // Run
     const input = getByLabelText("quantity");
     fireEvent.change(input, { target: { value: "2" } });
 
+    // Assert
     expect(setValueMock).toHaveBeenCalledWith({
       key: "quantity",
       value: 2,
@@ -65,11 +74,14 @@ describe("ItemForm", () => {
   });
 
   it("calls setValues with tags as key when a tag is added", () => {
+    // Setup
     const { getByPlaceholderText, setValueMock } = setUpComponent({});
 
+    // Run
     const input = getByPlaceholderText(/enter tags/i);
     userEvent.type(input, "test-tag{space}");
 
+    // Assert
     expect(setValueMock).toHaveBeenCalledWith({
       key: "tags",
       value: ["test-tag"],
@@ -77,12 +89,14 @@ describe("ItemForm", () => {
   });
 
   it("displays an error when errors are present", () => {
+    // Setup/Run
     const errors = new Map<keyof FormProps["values"], boolean>([
       ["name", true],
       ["description", true],
     ]);
     const { getByPlaceholderText } = setUpComponent({ errors });
 
+    // Assert
     expect(getByPlaceholderText("item name")).toBeInvalid();
     expect(getByPlaceholderText("item description")).toBeInvalid();
   });
