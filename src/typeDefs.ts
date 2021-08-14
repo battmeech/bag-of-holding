@@ -39,11 +39,26 @@ export const typeDefs = gql`
     createdAt: Date!
   }
 
+  type User {
+    id: ID!
+    email: String!
+    firstName: String
+    lastName: String
+    lastLogin: Date!
+    createdAt: Date!
+    updatedAt: Date
+    campaigns: [Campaign!]!
+  }
+
   type CampaignNotFound {
     message: String!
   }
 
   type ItemNotFound {
+    message: String!
+  }
+
+  type UserNotFound {
     message: String!
   }
 
@@ -88,6 +103,12 @@ export const typeDefs = gql`
     copper: Int!
   }
 
+  input LoginInput {
+    email: String!
+    firstName: String
+    lastName: String
+  }
+
   union FetchCampaignResult = Campaign | CampaignNotFound
   union AddItemResult = Campaign | CampaignNotFound
   union ModifyMoneyResult = Campaign | CampaignNotFound
@@ -97,11 +118,13 @@ export const typeDefs = gql`
   union EditItemResult = Item | InvalidInput | ItemNotFound
   union AddTagResult = Item | ItemNotFound
   union RemoveTagResult = Item | ItemNotFound
+  union MeResult = User | UserNotFound
 
   type Query {
     campaigns: [Campaign!]!
     campaign(campaignId: ID!): FetchCampaignResult!
     item(itemId: ID!): FetchItemResult
+    me(userId: ID!): MeResult
   }
 
   type Mutation {
@@ -113,5 +136,7 @@ export const typeDefs = gql`
     editItem(itemId: ID!, input: EditItemInput!): EditItemResult!
     addTag(itemId: ID!, tag: String!): AddTagResult!
     removeTag(itemId: ID!, tag: String!): RemoveTagResult!
+
+    login(input: LoginInput!): User!
   }
 `;

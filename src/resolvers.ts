@@ -10,6 +10,8 @@ import { modifyMoney } from './modifyMoney';
 import { removeItem } from './removeItem';
 import { removeTag } from './removeTag';
 import { dateScalar, Resolvers } from './shared';
+import { login } from './login';
+import { me } from './me';
 
 export const resolvers: Resolvers = {
   Campaign: { items },
@@ -21,11 +23,13 @@ export const resolvers: Resolvers = {
     editItem,
     addTag,
     removeTag,
+    login,
   },
   Query: {
     campaigns,
     campaign,
     item,
+    me,
   },
   Date: dateScalar,
 };

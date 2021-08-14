@@ -17,6 +17,7 @@ model Campaign {
   silver    Int      @default(0)
   copper    Int      @default(0)
   items     Item[]
+  users     User[]
 }
 
 model Item {
@@ -30,4 +31,16 @@ model Item {
   createdAt   DateTime  @default(now())
   campaign    Campaign  @relation(fields: [campaignId], references: [id])
   campaignId  String
+}
+
+model User {
+  id        String     @id @default(uuid())
+  email     String     @unique
+  firstName String?
+  lastName  String?
+  lastLogin DateTime   @default(now())
+  createdAt DateTime   @default(now())
+  updatedAt DateTime?
+  campaigns Campaign[]
+
 }

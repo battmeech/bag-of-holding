@@ -92,6 +92,14 @@ export type ItemNotFound = {
   message: Scalars['String'];
 };
 
+export type LoginInput = {
+  email: Scalars['String'];
+  firstName?: Maybe<Scalars['String']>;
+  lastName?: Maybe<Scalars['String']>;
+};
+
+export type MeResult = User | UserNotFound;
+
 export type ModifyMoneyInput = {
   modification: MoneyModification;
   electrum: Scalars['Int'];
@@ -117,6 +125,7 @@ export type Mutation = {
   editItem: EditItemResult;
   addTag: AddTagResult;
   removeTag: RemoveTagResult;
+  login: User;
 };
 
 
@@ -159,11 +168,17 @@ export type MutationRemoveTagArgs = {
   tag: Scalars['String'];
 };
 
+
+export type MutationLoginArgs = {
+  input: LoginInput;
+};
+
 export type Query = {
   __typename: 'Query';
   campaigns: Array<Campaign>;
   campaign: FetchCampaignResult;
   item?: Maybe<FetchItemResult>;
+  me?: Maybe<MeResult>;
 };
 
 
@@ -176,6 +191,11 @@ export type QueryItemArgs = {
   itemId: Scalars['ID'];
 };
 
+
+export type QueryMeArgs = {
+  userId: Scalars['ID'];
+};
+
 export type RemoveItemInput = {
   /** ID of the item to be removed */
   id: Scalars['ID'];
@@ -184,6 +204,23 @@ export type RemoveItemInput = {
 export type RemoveItemResult = Campaign | ItemNotFound;
 
 export type RemoveTagResult = Item | ItemNotFound;
+
+export type User = {
+  __typename: 'User';
+  id: Scalars['ID'];
+  email: Scalars['String'];
+  firstName?: Maybe<Scalars['String']>;
+  lastName?: Maybe<Scalars['String']>;
+  lastLogin: Scalars['Date'];
+  createdAt: Scalars['Date'];
+  updatedAt?: Maybe<Scalars['Date']>;
+  campaigns: Array<Campaign>;
+};
+
+export type UserNotFound = {
+  __typename: 'UserNotFound';
+  message: Scalars['String'];
+};
 
 
 export type WithIndex<TObject> = TObject & Record<string, any>;
@@ -269,6 +306,8 @@ export type ResolversTypes = ResolversObject<{
   InvalidInput: ResolverTypeWrapper<InvalidInput>;
   Item: ResolverTypeWrapper<Item>;
   ItemNotFound: ResolverTypeWrapper<ItemNotFound>;
+  LoginInput: LoginInput;
+  MeResult: ResolversTypes['User'] | ResolversTypes['UserNotFound'];
   ModifyMoneyInput: ModifyMoneyInput;
   ModifyMoneyResult: ResolversTypes['Campaign'] | ResolversTypes['CampaignNotFound'];
   MoneyModification: MoneyModification;
@@ -277,6 +316,8 @@ export type ResolversTypes = ResolversObject<{
   RemoveItemInput: RemoveItemInput;
   RemoveItemResult: ResolversTypes['Campaign'] | ResolversTypes['ItemNotFound'];
   RemoveTagResult: ResolversTypes['Item'] | ResolversTypes['ItemNotFound'];
+  User: ResolverTypeWrapper<User>;
+  UserNotFound: ResolverTypeWrapper<UserNotFound>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
 }>;
 
@@ -299,6 +340,8 @@ export type ResolversParentTypes = ResolversObject<{
   InvalidInput: InvalidInput;
   Item: Item;
   ItemNotFound: ItemNotFound;
+  LoginInput: LoginInput;
+  MeResult: ResolversParentTypes['User'] | ResolversParentTypes['UserNotFound'];
   ModifyMoneyInput: ModifyMoneyInput;
   ModifyMoneyResult: ResolversParentTypes['Campaign'] | ResolversParentTypes['CampaignNotFound'];
   Mutation: {};
@@ -306,6 +349,8 @@ export type ResolversParentTypes = ResolversObject<{
   RemoveItemInput: RemoveItemInput;
   RemoveItemResult: ResolversParentTypes['Campaign'] | ResolversParentTypes['ItemNotFound'];
   RemoveTagResult: ResolversParentTypes['Item'] | ResolversParentTypes['ItemNotFound'];
+  User: User;
+  UserNotFound: UserNotFound;
   Boolean: Scalars['Boolean'];
 }>;
 
@@ -378,6 +423,10 @@ export type ItemNotFoundResolvers<ContextType = GQLContext, ParentType = Resolve
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
+export type MeResultResolvers<ContextType = GQLContext, ParentType = ResolversParentTypes['MeResult']> = ResolversObject<{
+  __resolveType: TypeResolveFn<'User' | 'UserNotFound', ParentType, ContextType>;
+}>;
+
 export type ModifyMoneyResultResolvers<ContextType = GQLContext, ParentType = ResolversParentTypes['ModifyMoneyResult']> = ResolversObject<{
   __resolveType: TypeResolveFn<'Campaign' | 'CampaignNotFound', ParentType, ContextType>;
 }>;
@@ -390,12 +439,14 @@ export type MutationResolvers<ContextType = GQLContext, ParentType = ResolversPa
   editItem?: Resolver<ResolversTypes['EditItemResult'], ParentType, ContextType, RequireFields<MutationEditItemArgs, 'itemId' | 'input'>>;
   addTag?: Resolver<ResolversTypes['AddTagResult'], ParentType, ContextType, RequireFields<MutationAddTagArgs, 'itemId' | 'tag'>>;
   removeTag?: Resolver<ResolversTypes['RemoveTagResult'], ParentType, ContextType, RequireFields<MutationRemoveTagArgs, 'itemId' | 'tag'>>;
+  login?: Resolver<ResolversTypes['User'], ParentType, ContextType, RequireFields<MutationLoginArgs, 'input'>>;
 }>;
 
 export type QueryResolvers<ContextType = GQLContext, ParentType = ResolversParentTypes['Query']> = ResolversObject<{
   campaigns?: Resolver<Array<ResolversTypes['Campaign']>, ParentType, ContextType>;
   campaign?: Resolver<ResolversTypes['FetchCampaignResult'], ParentType, ContextType, RequireFields<QueryCampaignArgs, 'campaignId'>>;
   item?: Resolver<Maybe<ResolversTypes['FetchItemResult']>, ParentType, ContextType, RequireFields<QueryItemArgs, 'itemId'>>;
+  me?: Resolver<Maybe<ResolversTypes['MeResult']>, ParentType, ContextType, RequireFields<QueryMeArgs, 'userId'>>;
 }>;
 
 export type RemoveItemResultResolvers<ContextType = GQLContext, ParentType = ResolversParentTypes['RemoveItemResult']> = ResolversObject<{
@@ -404,6 +455,23 @@ export type RemoveItemResultResolvers<ContextType = GQLContext, ParentType = Res
 
 export type RemoveTagResultResolvers<ContextType = GQLContext, ParentType = ResolversParentTypes['RemoveTagResult']> = ResolversObject<{
   __resolveType: TypeResolveFn<'Item' | 'ItemNotFound', ParentType, ContextType>;
+}>;
+
+export type UserResolvers<ContextType = GQLContext, ParentType = ResolversParentTypes['User']> = ResolversObject<{
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  email?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  firstName?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  lastName?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  lastLogin?: Resolver<ResolversTypes['Date'], ParentType, ContextType>;
+  createdAt?: Resolver<ResolversTypes['Date'], ParentType, ContextType>;
+  updatedAt?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;
+  campaigns?: Resolver<Array<ResolversTypes['Campaign']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+}>;
+
+export type UserNotFoundResolvers<ContextType = GQLContext, ParentType = ResolversParentTypes['UserNotFound']> = ResolversObject<{
+  message?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 
 export type Resolvers<ContextType = GQLContext> = ResolversObject<{
@@ -419,11 +487,14 @@ export type Resolvers<ContextType = GQLContext> = ResolversObject<{
   InvalidInput?: InvalidInputResolvers<ContextType>;
   Item?: ItemResolvers<ContextType>;
   ItemNotFound?: ItemNotFoundResolvers<ContextType>;
+  MeResult?: MeResultResolvers<ContextType>;
   ModifyMoneyResult?: ModifyMoneyResultResolvers<ContextType>;
   Mutation?: MutationResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
   RemoveItemResult?: RemoveItemResultResolvers<ContextType>;
   RemoveTagResult?: RemoveTagResultResolvers<ContextType>;
+  User?: UserResolvers<ContextType>;
+  UserNotFound?: UserNotFoundResolvers<ContextType>;
 }>;
 
 
