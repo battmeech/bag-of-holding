@@ -14,13 +14,14 @@ import {
 import { FetchCampaign_campaign_Campaign_items as Item } from "campaign/gql";
 import React from "react";
 import { CgNotes } from "react-icons/cg";
-import { BsPencil } from "react-icons/bs";
 import { GoKebabVertical } from "react-icons/go";
+import { RiPencilFill } from "react-icons/ri";
 import { useModal } from "shared";
 import { EditItemModal } from "../ItemModal";
 import { DeleteConfirmationModal } from "./DeleteConfirmationModal";
 import { ItemNotes } from "./ItemNotesModal";
 import { ItemQuantityEditor } from "./ItemQuantityEditor";
+import TagGroup from "./TagGroup";
 
 export const ItemCard = ({ item }: { item: Item }) => {
   const { openModal } = useModal();
@@ -67,30 +68,40 @@ export const ItemCard = ({ item }: { item: Item }) => {
         </Flex>
       </VStack>
 
-      <HStack justify="space-between" w="full">
-        <Tooltip label="view notes">
-          <IconButton
-            variant="ghost"
-            aria-label="view notes"
-            size="xs"
-            icon={
-              item.notes?.trim() ? (
-                <CgNotes data-testid="notes-icon" />
-              ) : (
-                <BsPencil data-testid="no-notes-icon" />
-              )
-            }
-            onClick={() =>
-              openModal(
-                <ItemNotes currentNotes={item.notes} itemId={item.id} />,
-                "xl"
-              )
-            }
-          />
-        </Tooltip>
+      <VStack w="full">
+        <TagGroup
+          variant="outline"
+          colorScheme="teal"
+          w="full"
+          displayLimit={10}
+          tags={item.tags}
+        />
 
-        <ItemQuantityEditor item={item} />
-      </HStack>
+        <HStack justify="space-between" w="full">
+          <Tooltip label="view notes">
+            <IconButton
+              variant="ghost"
+              aria-label="view notes"
+              size="xs"
+              icon={
+                item.notes?.trim() ? (
+                  <CgNotes data-testid="notes-icon" />
+                ) : (
+                  <RiPencilFill data-testid="no-notes-icon" />
+                )
+              }
+              onClick={() =>
+                openModal(
+                  <ItemNotes currentNotes={item.notes} itemId={item.id} />,
+                  "xl"
+                )
+              }
+            />
+          </Tooltip>
+
+          <ItemQuantityEditor item={item} />
+        </HStack>
+      </VStack>
     </VStack>
   );
 };
