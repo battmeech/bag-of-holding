@@ -1,3 +1,4 @@
+import userEvent from "@testing-library/user-event";
 import { FormProps } from "campaign/components/ItemModal/useItemForm";
 import React from "react";
 import { fireEvent, render } from "shared";
@@ -18,12 +19,13 @@ describe("ItemForm", () => {
     return { ...rendered, setValueMock };
   };
 
-  it("renders a field for name, description, and quantity", () => {
+  it("renders a field for name, description, quantity, and tags", () => {
     const { getByText, getByLabelText } = setUpComponent({});
 
     expect(getByText("item name")).toBeInTheDocument();
     expect(getByText("item description")).toBeInTheDocument();
     expect(getByLabelText("quantity")).toBeInTheDocument();
+    expect(getByLabelText("tags")).toBeInTheDocument();
   });
 
   it("calls setValues with name as key when a name is entered", () => {
@@ -59,6 +61,18 @@ describe("ItemForm", () => {
     expect(setValueMock).toHaveBeenCalledWith({
       key: "quantity",
       value: 2,
+    });
+  });
+
+  it("calls setValues with tags as key when a tag is added", () => {
+    const { getByPlaceholderText, setValueMock } = setUpComponent({});
+
+    const input = getByPlaceholderText(/enter tags/i);
+    userEvent.type(input, "test-tag{space}");
+
+    expect(setValueMock).toHaveBeenCalledWith({
+      key: "tags",
+      value: ["test-tag"],
     });
   });
 

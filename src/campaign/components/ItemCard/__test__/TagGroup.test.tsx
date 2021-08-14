@@ -29,23 +29,22 @@ describe("TagGroup", () => {
   });
 
   describe('"show all tags" button', () => {
-    it('should be visible when limit is less than tag count', () => {
+    it("should be visible when limit is less than tag count", () => {
       const limit = 3;
       render(<TagGroup tags={tags} displayLimit={limit} />);
-      expect(screen.getByLabelText(/show all tags/i)).toBeVisible()
-    })
-    it('should not be visible when limit is greater than or equal to tag count', () => {
+      expect(screen.getByLabelText(/show all tags/i)).toBeVisible();
+    });
+    it("should not be visible when limit is greater than or equal to tag count", () => {
       const limit = 8;
       render(<TagGroup tags={tags} displayLimit={limit} />);
-      expect(screen.queryByLabelText(/show all tags/i)).not.toBeInTheDocument()
-    })
-    it('should display all tags when clicked', () => {
+      expect(screen.queryByLabelText(/show all tags/i)).not.toBeInTheDocument();
+    });
+    it("should display all tags when clicked", () => {
       const limit = 1;
       render(<TagGroup tags={tags} displayLimit={limit} />);
 
       userEvent.click(screen.getByLabelText(/show all tags/i));
       tags.forEach((tag) => expect(screen.getByText(tag)).toBeVisible());
-    })
-  })
-  
+    });
+  });
 });

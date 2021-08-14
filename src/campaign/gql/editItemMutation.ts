@@ -10,6 +10,7 @@ export const EditItemGQL = gql`
         description
         quantity
         notes
+        tags
       }
       ... on ItemNotFound {
         message

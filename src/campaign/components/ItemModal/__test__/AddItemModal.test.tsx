@@ -62,6 +62,7 @@ describe("AddItemModal", () => {
             description: undefined,
             name: "Test Item Name",
             quantity: 1,
+            tags: [],
           },
         },
       })

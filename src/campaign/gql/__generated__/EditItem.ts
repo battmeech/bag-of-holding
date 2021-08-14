@@ -20,6 +20,7 @@ export interface EditItem_editItem_Item {
   description: string | null;
   quantity: number;
   notes: string | null;
+  tags: string[];
 }
 
 export interface EditItem_editItem_ItemNotFound {

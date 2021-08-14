@@ -14,19 +14,23 @@ type Item = {
   name: string;
   description?: string;
   quantity?: number;
+  tags?: string[];
 };
 
 export type FormProps = {
   errors: Map<keyof Item, boolean>;
   // eslint-disable-next-line no-unused-vars
-  setValues: (value: { key: keyof Item; value: string | number }) => void;
+  setValues: (value: {
+    key: keyof Item;
+    value: string | number | string[];
+  }) => void;
   values: Item;
 };
 
 const validate = (
   errors: Map<keyof Item, boolean>,
   key: keyof Item,
-  value: string | number
+  value: string | number | string[]
 ) => {
   if (key === "description" || key === "quantity") return errors;
   if (
@@ -39,7 +43,8 @@ const validate = (
 };
 
 const initialiseValues = (startValues?: Item): Item => {
-  if (!startValues) return { name: "", description: undefined, quantity: 1 };
+  if (!startValues)
+    return { name: "", description: undefined, quantity: 1, tags: [] };
   else return { description: undefined, quantity: 1, ...startValues };
 };
 
@@ -49,7 +54,7 @@ const useItem = (startingValues?: Item) => {
   const [isSaveEnabled, setIsSaveEnabled] = useState(false);
 
   const resetForm = () => {
-    setItem({ name: "", description: undefined, quantity: 1 });
+    setItem({ name: "", description: undefined, quantity: 1, tags: [] });
     setErrors(new Map<keyof Item, boolean>());
     setIsSaveEnabled(false);
   };
@@ -59,7 +64,7 @@ const useItem = (startingValues?: Item) => {
     value,
   }: {
     key: keyof Item;
-    value: string | number;
+    value: string | number | string[];
   }) => {
     setItem((currentState) => ({
       ...currentState,
@@ -108,6 +113,7 @@ export const useCreateItem = ({
           name: formProps.values.name,
           description: formProps.values.description,
           quantity: formProps.values.quantity || 1,
+          tags: formProps.values.tags,
         },
       },
     });
@@ -137,6 +143,7 @@ export const useEditItem = ({
       ? existingItem.description
       : undefined,
     quantity: existingItem.quantity,
+    tags: existingItem.tags,
   });
   const [mutate, { loading }] = useMutation<EditItem, EditItemVariables>(
     EditItemGQL
@@ -153,6 +160,7 @@ export const useEditItem = ({
               : undefined,
           description: formProps.values.description,
           quantity: formProps.values.quantity,
+          tags: formProps.values.tags,
         },
       },
     });
