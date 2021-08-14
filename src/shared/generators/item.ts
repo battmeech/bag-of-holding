@@ -10,6 +10,6 @@ export const itemBuilder = build<Item>({
     quantity: fake((f) => f.random.number(20)),
     notes: fake((f) => f.lorem.paragraph()),
     createdAt: fake((f) => f.date),
-    tags: fake(f => [f.hacker.adjective(), f.hacker.adjective()])
+    tags: fake((f) => [f.hacker.adjective(), f.hacker.adjective()]),
   },
 });

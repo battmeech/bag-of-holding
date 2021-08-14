@@ -10,7 +10,7 @@ export const createItem = ({
   quantity = 1,
   id = "item-id",
   notes = "notes",
-  tags = ['tag-a', 'tag-b']
+  tags = ["tag-a", "tag-b"],
 }: {
   name?: string;
   description?: string;
@@ -27,7 +27,7 @@ export const createItem = ({
     quantity,
     notes,
     createdAt: new Date(),
-    tags
+    tags,
   };
 };
 
@@ -43,7 +43,7 @@ export const createCampaign = (): Campaign => ({
       quantity: 1,
       notes: "notes",
       createdAt: new Date(),
-      tags: ['tag-a', 'tag-b']
+      tags: ["tag-a", "tag-b"],
     },
   ],
   copper: 20,

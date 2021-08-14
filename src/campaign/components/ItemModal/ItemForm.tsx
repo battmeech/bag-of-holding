@@ -10,6 +10,8 @@ import {
   Textarea,
   VStack,
 } from "@chakra-ui/react";
+import React from "react";
+import TagInput from "./TagInput";
 import { FormProps } from "./useItemForm";
 
 export const ItemForm = ({ errors, values, setValues }: FormProps) => {
@@ -58,6 +60,14 @@ export const ItemForm = ({ errors, values, setValues }: FormProps) => {
             <NumberDecrementStepper />
           </NumberInputStepper>
         </NumberInput>
+      </FormControl>
+      <FormControl>
+        <FormLabel>tags</FormLabel>
+        <TagInput
+          colorScheme="teal"
+          tags={values.tags}
+          onTagsChanged={(tags) => setValues({ key: "tags", value: tags })}
+        />
       </FormControl>
     </VStack>
   );

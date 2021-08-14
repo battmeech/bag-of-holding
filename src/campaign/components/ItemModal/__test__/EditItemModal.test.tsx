@@ -70,6 +70,7 @@ describe("EditItemModal", () => {
             description: "Test description",
             name: "Test Item Name",
             quantity: 1,
+            tags: ["tag-a", "tag-b"],
           },
         },
       })

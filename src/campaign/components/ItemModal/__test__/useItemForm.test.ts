@@ -38,6 +38,7 @@ describe("useItemForm", () => {
         name: "",
         description: undefined,
         quantity: 1,
+        tags: [],
       });
     });
 
@@ -103,6 +104,7 @@ describe("useItemForm", () => {
         name: "",
         description: undefined,
         quantity: 1,
+        tags: [],
       });
     });
 
@@ -153,6 +155,7 @@ describe("useItemForm", () => {
               description: undefined,
               name: "Name",
               quantity: 1,
+              tags: [],
             },
           },
         })
@@ -195,6 +198,7 @@ describe("useItemForm", () => {
           name: "",
           description: undefined,
           quantity: 1,
+          tags: [],
         })
       );
     });
@@ -232,6 +236,7 @@ describe("useItemForm", () => {
         name: "Test name",
         description: "Test description",
         quantity: 1,
+        tags: ["tag-a", "tag-b"],
       });
     });
 
@@ -256,6 +261,7 @@ describe("useItemForm", () => {
               description: "Test description",
               name: undefined,
               quantity: 1,
+              tags: ["tag-a", "tag-b"],
             },
           },
         })
@@ -284,6 +290,7 @@ describe("useItemForm", () => {
               description: "Test description",
               name: "Name",
               quantity: 1,
+              tags: ["tag-a", "tag-b"],
             },
           },
         })
@@ -326,6 +333,7 @@ describe("useItemForm", () => {
           name: "",
           description: undefined,
           quantity: 1,
+          tags: [],
         })
       );
     });
