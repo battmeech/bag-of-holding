@@ -1,2 +1,2 @@
 export { auth } from "./auth";
-export { me } from "./me";
+export { graphqlProxy } from "./graphql";

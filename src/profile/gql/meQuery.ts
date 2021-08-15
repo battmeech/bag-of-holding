@@ -1,8 +1,8 @@
 import gql from "graphql-tag";
 
 export const MeGQL = gql`
-  query Me($userId: ID!) {
-    me(userId: $userId) {
+  query Me {
+    me {
       ... on User {
         email
         campaigns {

@@ -1,4 +1,4 @@
-import { config } from "config";
+import { graphUrl } from "api/config";
 import { request } from "graphql-request";
 import NextAuth from "next-auth";
 import Providers from "next-auth/providers";
@@ -15,9 +15,9 @@ export const auth = NextAuth({
     // Fetch the ID of the user from the database and attach to the JWT
     jwt: async (token, user) => {
       if (!user) return token;
-      const res = await request<Login>(config.graphURL, LoginGQL, {
+      const res = await request<Login>(graphUrl, LoginGQL, {
         input: {
-          email: user.email,
+          email: user.email ?? (user.id as any).toString(),
         },
       });
       token.userId = res.login.id;

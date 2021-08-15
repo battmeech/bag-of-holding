@@ -37,6 +37,7 @@
     "framer-motion": "^4.1.17",
     "graphql": "^15.5.1",
     "graphql-request": "^3.5.0",
+    "http-proxy-middleware": "^2.0.1",
     "next": "^11.0.0",
     "next-auth": "^3.28.0",
     "next-pwa": "^5.2.23",
