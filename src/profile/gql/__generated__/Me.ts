@@ -27,9 +27,5 @@ export interface Me_me_UserNotFound {
 export type Me_me = Me_me_User | Me_me_UserNotFound;
 
 export interface Me {
-  me: Me_me | null;
-}
-
-export interface MeVariables {
-  userId: string;
+  me: Me_me;
 }
