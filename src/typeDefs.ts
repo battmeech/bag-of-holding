@@ -45,7 +45,7 @@ export const typeDefs = gql`
     lastLogin: Date!
     createdAt: Date!
     updatedAt: Date
-    campaigns: [Campaign!]!
+    campaigns: [Campaign!]
   }
 
   type CampaignNotFound {

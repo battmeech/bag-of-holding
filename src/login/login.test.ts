@@ -1,20 +1,18 @@
 import { login } from './login';
 
-const findUnique = jest.fn();
-const create = jest.fn();
+const upsert = jest.fn();
 
 const prisma = {
   user: {
-    findUnique,
-    create,
+    upsert,
   },
 } as any;
 
 const resolveInfo: any = {};
 
 describe('login', () => {
-  it('searches for existing user & campaigns by email', async () => {
-    findUnique.mockResolvedValueOnce({
+  it('creates or updates user record', async () => {
+    upsert.mockResolvedValueOnce({
       email: 'a@b.com',
       campaigns: [],
     });
@@ -30,32 +28,17 @@ describe('login', () => {
       resolveInfo,
     );
 
-    expect(findUnique).toHaveBeenCalledWith({
-      where: { email: 'a@b.com' },
-      include: { campaigns: true },
-    });
-  });
-
-  it('creates a user if none exists', async () => {
-    findUnique.mockResolvedValueOnce(null);
-    create.mockResolvedValueOnce({
-      email: 'a@b.com',
-      campaigns: [],
-    });
-    await login!(
-      {},
-      {
-        input: {
-          email: 'a@b.com',
-        },
+    expect(upsert).toHaveBeenCalledWith({
+      where: {
+        email: 'a@b.com',
       },
-      { prisma },
-      resolveInfo,
-    );
-
-    expect(create).toHaveBeenCalledWith({
-      data: { email: 'a@b.com' },
-      include: { campaigns: true },
+      create: {
+        email: 'a@b.com',
+        lastLogin: expect.any(Date),
+      },
+      update: {
+        lastLogin: expect.any(Date),
+      },
     });
   });
 });

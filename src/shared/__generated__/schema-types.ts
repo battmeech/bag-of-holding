@@ -212,7 +212,7 @@ export type User = {
   lastLogin: Scalars['Date'];
   createdAt: Scalars['Date'];
   updatedAt?: Maybe<Scalars['Date']>;
-  campaigns: Array<Campaign>;
+  campaigns?: Maybe<Array<Campaign>>;
 };
 
 export type UserNotFound = {
@@ -461,7 +461,7 @@ export type UserResolvers<ContextType = GQLContext, ParentType = ResolversParent
   lastLogin?: Resolver<ResolversTypes['Date'], ParentType, ContextType>;
   createdAt?: Resolver<ResolversTypes['Date'], ParentType, ContextType>;
   updatedAt?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;
-  campaigns?: Resolver<Array<ResolversTypes['Campaign']>, ParentType, ContextType>;
+  campaigns?: Resolver<Maybe<Array<ResolversTypes['Campaign']>>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 }>;
 

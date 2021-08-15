@@ -16,16 +16,9 @@ export const login: MutationResolvers['login'] = async (
     update: {
       lastLogin: new Date(),
     },
-    include: {
-      campaigns: true,
-    },
   });
   return {
     ...user,
-    campaigns: user.campaigns.map((campaign) => ({
-      ...campaign,
-      __typename: 'Campaign',
-    })),
     __typename: 'User',
   };
 };

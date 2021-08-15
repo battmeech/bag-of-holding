@@ -5,9 +5,6 @@ export const me: QueryResolvers['me'] = async (_, { userId }, { prisma }) => {
     where: {
       id: userId,
     },
-    include: {
-      campaigns: true,
-    },
   });
 
   if (!user) {
@@ -19,10 +16,6 @@ export const me: QueryResolvers['me'] = async (_, { userId }, { prisma }) => {
 
   return {
     ...user,
-    campaigns: user.campaigns.map((campaign) => ({
-      ...campaign,
-      __typename: 'Campaign',
-    })),
     __typename: 'User',
   };
 };

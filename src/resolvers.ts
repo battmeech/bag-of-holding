@@ -1,7 +1,7 @@
 import { addItem } from './addItem';
 import { addTag } from './addTag';
 import { campaign } from './campaign';
-import { campaigns } from './campaigns';
+import { campaigns, userCampaigns } from './campaigns';
 import { createCampaign } from './createCampaign';
 import { editItem } from './editItem';
 import { item } from './item';
@@ -30,6 +30,9 @@ export const resolvers: Resolvers = {
     campaign,
     item,
     me,
+  },
+  User: {
+    campaigns: userCampaigns,
   },
   Date: dateScalar,
 };

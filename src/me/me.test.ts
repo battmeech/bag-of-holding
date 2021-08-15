@@ -23,14 +23,11 @@ describe('me', () => {
 
     expect(findUnique).toHaveBeenCalledWith({
       where: { id: 'user-id' },
-      include: {
-        campaigns: true,
-      },
     });
   });
 
   it('returns a user', async () => {
-    findUnique.mockResolvedValueOnce({ email: 'email', campaigns: [] });
+    findUnique.mockResolvedValueOnce({ email: 'email' });
 
     const result = await me!(
       {},
@@ -44,7 +41,6 @@ describe('me', () => {
     expect(result).toStrictEqual({
       __typename: 'User',
       email: 'email',
-      campaigns: [],
     });
   });
 
