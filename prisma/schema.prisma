@@ -36,8 +36,6 @@ model Item {
 model User {
   id        String     @id @default(uuid())
   email     String     @unique
-  firstName String?
-  lastName  String?
   lastLogin DateTime   @default(now())
   createdAt DateTime   @default(now())
   updatedAt DateTime?

@@ -5,23 +5,21 @@ export const login: MutationResolvers['login'] = async (
   { input },
   { prisma },
 ) => {
-  // Check if user already exists with that email address, return it if so
-  let user = await prisma.user.findUnique({
+  const user = await prisma.user.upsert({
     where: {
       email: input.email,
+    },
+    create: {
+      email: input.email,
+      lastLogin: new Date(),
+    },
+    update: {
+      lastLogin: new Date(),
     },
     include: {
       campaigns: true,
     },
   });
-
-  // Create the user with provided details and return it
-  if (!user) {
-    user = await prisma.user.create({
-      data: input,
-      include: { campaigns: true },
-    });
-  }
   return {
     ...user,
     campaigns: user.campaigns.map((campaign) => ({

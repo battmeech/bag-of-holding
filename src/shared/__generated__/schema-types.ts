@@ -209,8 +209,6 @@ export type User = {
   __typename: 'User';
   id: Scalars['ID'];
   email: Scalars['String'];
-  firstName?: Maybe<Scalars['String']>;
-  lastName?: Maybe<Scalars['String']>;
   lastLogin: Scalars['Date'];
   createdAt: Scalars['Date'];
   updatedAt?: Maybe<Scalars['Date']>;
@@ -460,8 +458,6 @@ export type RemoveTagResultResolvers<ContextType = GQLContext, ParentType = Reso
 export type UserResolvers<ContextType = GQLContext, ParentType = ResolversParentTypes['User']> = ResolversObject<{
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   email?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
-  firstName?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  lastName?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   lastLogin?: Resolver<ResolversTypes['Date'], ParentType, ContextType>;
   createdAt?: Resolver<ResolversTypes['Date'], ParentType, ContextType>;
   updatedAt?: Resolver<Maybe<ResolversTypes['Date']>, ParentType, ContextType>;

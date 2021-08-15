@@ -42,8 +42,6 @@ export const typeDefs = gql`
   type User {
     id: ID!
     email: String!
-    firstName: String
-    lastName: String
     lastLogin: Date!
     createdAt: Date!
     updatedAt: Date
