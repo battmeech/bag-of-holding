@@ -1,11 +1,10 @@
 import { createProxyMiddleware } from "http-proxy-middleware";
 import { NextApiHandler } from "next";
-import { getSession } from "next-auth/client";
+import { getUserId } from "shared/session";
 import { graphUrl } from "./config";
 
 export const graphqlProxy: NextApiHandler = async (req, res) => {
-  const session = await getSession({ req });
-  const userId = (session?.userId as string) || "";
+  const userId = await getUserId({ req });
 
   const apiProxy: any = createProxyMiddleware({
     headers: { "bag-user-id": userId },
