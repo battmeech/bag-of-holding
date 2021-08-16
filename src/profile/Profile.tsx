@@ -8,13 +8,14 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react";
-import { signIn, signOut, useSession } from "next-auth/client";
+import { signIn, signOut } from "next-auth/client";
 import NextLink from "next/link";
 import React from "react";
+import { useSession } from "shared/session";
 import { MeGQL } from "./gql";
 
 export const Profile = () => {
-  const [session, loading] = useSession();
+  const { session, loading } = useSession();
 
   const { data } = useQuery(MeGQL);
 
