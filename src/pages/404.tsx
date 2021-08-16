@@ -2,7 +2,6 @@
 import { Button } from "@chakra-ui/button";
 import { Image } from "@chakra-ui/image";
 import { Box, Heading, Link as ChakraLink, Text } from "@chakra-ui/layout";
-import { useColorModeValue } from "@chakra-ui/react";
 import Link from "next/link";
 import { MotionBox } from "shared";
 
@@ -22,21 +21,17 @@ const Page404 = () => {
       </MotionBox>
       <Text textAlign="center" fontSize="xs">
         <ChakraLink href="https://stories.freepik.com/web" isExternal>
-          Illustration by Freepik Stories
+          illustration by Freepik Stories
         </ChakraLink>
       </Text>
 
       <Box marginY={4}>
-        <Heading textAlign="center">Page not Found.</Heading>
+        <Heading textAlign="center">page not found</Heading>
 
         <Box textAlign="center" marginTop={4}>
-          <Text>{"It's Okay!"}</Text>
-          <Link href="/">
-            <Button
-              mt="4"
-              backgroundColor={useColorModeValue("gray.300", "teal.500")}
-            >
-              {"Let's Head Back"}
+          <Link href="/" passHref>
+            <Button mt="4" colorScheme="teal">
+              head back
             </Button>
           </Link>
         </Box>
