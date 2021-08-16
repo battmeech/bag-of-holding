@@ -10,14 +10,19 @@ export const auth = NextAuth({
       clientId: process.env.GITHUB_CLIENT_ID,
       clientSecret: process.env.GITHUB_CLIENT_SECRET,
     }),
+    Providers.Google({
+      clientId: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    }),
   ],
   callbacks: {
     // Fetch the ID of the user from the database and attach to the JWT
     jwt: async (token, user) => {
       if (!user) return token;
+
       const res = await request<Login>(graphUrl, LoginGQL, {
         input: {
-          email: user.email ?? (user.id as any).toString(),
+          email: (user.id as any).toString(),
         },
       });
       token.userId = res.login.id;
