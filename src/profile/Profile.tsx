@@ -8,7 +8,7 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react";
-import { signIn, signOut } from "next-auth/client";
+import { signOut } from "next-auth/client";
 import NextLink from "next/link";
 import React from "react";
 import { useSession } from "shared/session";
@@ -20,15 +20,7 @@ export const Profile = () => {
   const { data } = useQuery(MeGQL);
 
   if (loading) return null;
-  if (!loading && !session)
-    return (
-      <>
-        <Text>log in to view your profile...</Text>
-        <Button mt="8" colorScheme="teal" onClick={() => signIn()}>
-          sign in
-        </Button>
-      </>
-    );
+  if (!session) return null; // shouldn't get here due to SSR
 
   return (
     <>
