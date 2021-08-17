@@ -17,11 +17,11 @@ export const auth = NextAuth({
   ],
   callbacks: {
     // Fetch the ID of the user from the database and attach to the JWT
-    jwt: async (token, user) => {
-      if (!user) return token;
+    jwt: async (token, user, account) => {
+      if (!user || !account) return token;
 
       const res = await request<Login, LoginVariables>(graphUrl, LoginGQL, {
-        externalId: (user.id as any).toString(),
+        externalId: `${account.provider}-${(user.id as any).toString()}`,
       });
       token.userId = res.login.id;
       return token;
