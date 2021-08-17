@@ -2,11 +2,11 @@ import { graphUrl } from "api/config";
 import { request } from "graphql-request";
 import { NextPageContext } from "next";
 import absolute from "next-absolute-url";
-import { getSession } from "next-auth/client";
+import { getUserId } from "shared/session";
 import { AddUser, AddUserGQL, AddUserVariables } from "./gql";
 
 export const addToCampaign = async (ctx: NextPageContext) => {
-  const session = await getSession(ctx);
+  const userId = await getUserId(ctx);
   const { req } = ctx;
 
   if (!req?.url) {
@@ -20,7 +20,7 @@ export const addToCampaign = async (ctx: NextPageContext) => {
 
   const { url } = req;
 
-  if (!session) {
+  if (!userId) {
     const { origin } = absolute(req);
 
     const callbackUrl = `?callbackUrl=${origin}${url}`;
@@ -39,7 +39,7 @@ export const addToCampaign = async (ctx: NextPageContext) => {
     graphUrl,
     AddUserGQL,
     { campaignId },
-    { "bag-user-id": session.userId as string }
+    { "bag-user-id": userId as string }
   );
 
   if (res.addUser.__typename !== "Campaign") {
