@@ -15,7 +15,6 @@ export interface Me_me_User_campaigns {
 
 export interface Me_me_User {
   __typename: "User";
-  email: string;
   campaigns: Me_me_User_campaigns[];
 }
 
