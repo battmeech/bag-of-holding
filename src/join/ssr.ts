@@ -27,7 +27,7 @@ export const addToCampaign = async (ctx: NextPageContext) => {
 
     return {
       redirect: {
-        destination: `/auth/signin${callbackUrl}`,
+        destination: `/login${callbackUrl}`,
         permanent: false,
       },
     };
