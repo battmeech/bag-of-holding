@@ -5,13 +5,15 @@ import React from "react";
 import { fireEvent, render } from "shared";
 
 describe("ItemCard", () => {
+  const tagClickMock = jest.fn();
+  afterEach(() => jest.resetAllMocks());
   const setUpComponent = ({
     item = createItem({}),
   }: {
     campaignId?: string;
     item?: Item;
   }) => {
-    const rendered = render(<ItemCard item={item} />);
+    const rendered = render(<ItemCard onTagClick={tagClickMock} item={item} />);
     return rendered;
   };
 
@@ -84,5 +86,15 @@ describe("ItemCard", () => {
     const { getByTestId } = setUpComponent({});
 
     expect(getByTestId("notes-icon")).toBeInTheDocument();
+  });
+
+  it("calls the onTagClick function with the tag name when a tag is clicked", () => {
+    const { getByText } = setUpComponent({});
+
+    const tag = getByText("tag-a");
+
+    fireEvent.click(tag);
+
+    expect(tagClickMock).toHaveBeenCalledWith("tag-a");
   });
 });

@@ -23,7 +23,12 @@ import { ItemNotes } from "./ItemNotesModal";
 import { ItemQuantityEditor } from "./ItemQuantityEditor";
 import { TagGroup } from "./TagGroup";
 
-export const ItemCard = ({ item }: { item: Item }) => {
+type ItemCardProps = {
+  item: Item;
+  onTagClick?: (tag: string) => void;
+};
+
+export const ItemCard = ({ item, onTagClick = () => {} }: ItemCardProps) => {
   const { openModal } = useModal();
 
   return (
@@ -70,6 +75,7 @@ export const ItemCard = ({ item }: { item: Item }) => {
 
       <VStack w="full">
         <TagGroup
+          onTagClick={onTagClick}
           variant="outline"
           colorScheme="teal"
           w="full"
