@@ -1,15 +1,27 @@
 import { NextPageContext } from "next";
 import absolute from "next-absolute-url";
-import { getSession } from "next-auth/client";
+import { getUserId } from "./session";
 
-export async function redirect(ctx: NextPageContext) {
-  const session = await getSession(ctx);
+export const redirect = async (ctx: NextPageContext) => {
+  const userId = await getUserId(ctx);
+  const { req } = ctx;
 
-  if (!session) {
+  if (!req) {
+    return {
+      redirect: {
+        destination: "/404",
+        permanent: false,
+      },
+    };
+  }
+
+  const { url } = req;
+
+  if (!userId) {
     const { req } = ctx;
     const { origin } = absolute(req);
 
-    const callbackUrl = `?callbackUrl=${origin}${req?.url}`;
+    const callbackUrl = `?callbackUrl=${origin}${url}`;
 
     return {
       redirect: {
@@ -20,4 +32,4 @@ export async function redirect(ctx: NextPageContext) {
   }
 
   return { props: {} };
-}
+};
