@@ -28,12 +28,6 @@ export interface EditItemInput {
   tags?: string[] | null;
 }
 
-export interface LoginInput {
-  email: string;
-  firstName?: string | null;
-  lastName?: string | null;
-}
-
 export interface ModifyMoneyInput {
   modification: MoneyModification;
   electrum: number;

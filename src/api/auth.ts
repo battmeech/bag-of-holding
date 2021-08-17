@@ -2,7 +2,7 @@ import { graphUrl } from "api/config";
 import { request } from "graphql-request";
 import NextAuth from "next-auth";
 import Providers from "next-auth/providers";
-import { Login, LoginGQL } from "./gql";
+import { Login, LoginGQL, LoginVariables } from "./gql";
 
 export const auth = NextAuth({
   providers: [
@@ -20,10 +20,8 @@ export const auth = NextAuth({
     jwt: async (token, user) => {
       if (!user) return token;
 
-      const res = await request<Login>(graphUrl, LoginGQL, {
-        input: {
-          email: (user.id as any).toString(),
-        },
+      const res = await request<Login, LoginVariables>(graphUrl, LoginGQL, {
+        externalId: (user.id as any).toString(),
       });
       token.userId = res.login.id;
       return token;
