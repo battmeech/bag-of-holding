@@ -27,7 +27,7 @@ export interface FetchCampaign_campaign_Campaign {
   gold: number;
   silver: number;
   copper: number;
-  items: FetchCampaign_campaign_Campaign_items[] | null;
+  items: FetchCampaign_campaign_Campaign_items[];
 }
 
 export interface FetchCampaign_campaign_CampaignNotFound {

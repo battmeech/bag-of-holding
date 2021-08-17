@@ -1,65 +1,36 @@
-import { useMutation } from "@apollo/client";
-import { Box } from "@chakra-ui/layout";
-import { Button, Input, SimpleGrid, Text } from "@chakra-ui/react";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import { FormEventHandler, useState } from "react";
 import {
-  CreateCampaign,
-  CreateCampaignGQL,
-  CreateCampaignVariables,
-} from "./gql";
+  Button,
+  Center,
+  Image,
+  Text,
+  useColorMode,
+  VStack,
+} from "@chakra-ui/react";
+import Link from "next/link";
 
-const Home = () => {
-  const [campaignName, setCampaignName] = useState("");
-  const { push } = useRouter();
+export const Home = () => {
+  const { colorMode } = useColorMode();
 
-  const [mutate, { loading }] = useMutation<
-    CreateCampaign,
-    CreateCampaignVariables
-  >(CreateCampaignGQL);
-
-  const onSubmit: FormEventHandler<HTMLFormElement> = (event) => {
-    event.preventDefault();
-    createCampaign();
-  };
-
-  const createCampaign = async () => {
-    const { data } = await mutate({ variables: { name: campaignName } });
-    if (data) push(`/${data.createCampaign.id}`);
-  };
+  /* istanbul ignore next */
+  const logo = colorMode === "dark" ? "/dark-logo.png" : "/light-logo.png";
 
   return (
-    <Box mb={8} width={{ base: "100%", md: "75%", lg: "50%" }}>
-      <Text mb={4}>create a new campaign</Text>
-      <form onSubmit={onSubmit}>
-        <Box mb={4}>
-          <Input
-            my="auto"
-            placeholder="campaign name"
-            value={campaignName}
-            onChange={(event) => setCampaignName(event.target.value)}
+    <Center h="80vh" w="100%">
+      <VStack spacing="8" textAlign="center">
+        <VStack spacing="0">
+          <Image
+            src={logo}
+            boxSize={{ base: "250px", md: "325px", lg: "500px" }}
+            alt="bag of holding logo"
           />
-        </Box>
-      </form>
+          <Text fontSize="5xl">bag of holding</Text>
+          <Text>a place to store all your treasure</Text>
+        </VStack>
 
-      <SimpleGrid columns={{ sm: 1, lg: 2 }} spacing={8}>
-        <Button
-          disabled={loading || !campaignName}
-          onClick={createCampaign}
-          colorScheme="teal"
-        >
-          create new campaign
-        </Button>
-
-        <Link href="/return" passHref>
-          <Button colorScheme="teal" variant="link">
-            already have one?
-          </Button>
+        <Link href="/campaigns" passHref>
+          <Button colorScheme="teal">get started</Button>
         </Link>
-      </SimpleGrid>
-    </Box>
+      </VStack>
+    </Center>
   );
 };
-
-export default Home;
