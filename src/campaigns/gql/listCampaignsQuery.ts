@@ -6,6 +6,7 @@ export const ListCampaignsGQL = gql`
       __typename
       id
       name
+      createdAt
     }
   }
 `;

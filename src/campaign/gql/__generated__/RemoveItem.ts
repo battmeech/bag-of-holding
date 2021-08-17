@@ -19,7 +19,7 @@ export interface RemoveItem_removeItem_Campaign_items {
 export interface RemoveItem_removeItem_Campaign {
   __typename: "Campaign";
   id: string;
-  items: RemoveItem_removeItem_Campaign_items[] | null;
+  items: RemoveItem_removeItem_Campaign_items[];
 }
 
 export interface RemoveItem_removeItem_ItemNotFound {

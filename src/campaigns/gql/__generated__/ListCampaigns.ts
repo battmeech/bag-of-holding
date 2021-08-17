@@ -11,6 +11,7 @@ export interface ListCampaigns_campaigns {
   __typename: "Campaign";
   id: string;
   name: string;
+  createdAt: Date;
 }
 
 export interface ListCampaigns {
