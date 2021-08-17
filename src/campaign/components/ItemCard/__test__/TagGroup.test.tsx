@@ -1,5 +1,5 @@
 import userEvent from "@testing-library/user-event";
-import { render, screen } from "shared";
+import { fireEvent, render, screen } from "shared";
 import { TagGroup } from "../TagGroup";
 
 describe("TagGroup", () => {
@@ -65,5 +65,16 @@ describe("TagGroup", () => {
       // Assert
       tags.forEach((tag) => expect(screen.getByText(tag)).toBeVisible());
     });
+  });
+
+  it("should call the onTagClick function with the tag name when a tag is clicked", () => {
+    const tagClickMock = jest.fn();
+    render(<TagGroup tags={tags} onTagClick={tagClickMock} />);
+
+    const tag = screen.getByText("tag-1");
+
+    fireEvent.click(tag);
+
+    expect(tagClickMock).toHaveBeenCalledWith("tag-1");
   });
 });

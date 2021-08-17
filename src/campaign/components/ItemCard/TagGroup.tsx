@@ -1,16 +1,17 @@
 import {
+  BadgeProps,
+  IconButton,
+  Tag,
+  useBoolean,
   Wrap,
   WrapProps,
-  useBoolean,
-  IconButton,
-  BadgeProps,
-  Tag,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import { CgMoreAlt, CgMore } from "react-icons/cg";
+import { CgMore, CgMoreAlt } from "react-icons/cg";
 
 type TagGroupProps = {
   displayLimit?: number;
+  onTagClick?: (tag: string) => void;
   tags: string[];
 } & Pick<BadgeProps, "variant" | "colorScheme"> &
   WrapProps;
@@ -20,6 +21,7 @@ export const TagGroup: React.FC<TagGroupProps> = ({
   tags,
   variant,
   colorScheme,
+  onTagClick = () => {},
   ...wrapProps
 }) => {
   const [showAll, setShowAll] = useBoolean(false);
@@ -35,7 +37,13 @@ export const TagGroup: React.FC<TagGroupProps> = ({
   return (
     <Wrap {...wrapProps}>
       {displayedTags.map((tag) => (
-        <Tag key={tag} variant={variant} colorScheme={colorScheme}>
+        <Tag
+          cursor="pointer"
+          onClick={() => onTagClick(tag)}
+          key={tag}
+          variant={variant}
+          colorScheme={colorScheme}
+        >
           {tag.toLowerCase()}
         </Tag>
       ))}

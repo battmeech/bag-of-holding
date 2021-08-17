@@ -8,6 +8,7 @@ import {
   Input,
   InputGroup,
   InputLeftElement,
+  InputRightElement,
   SimpleGrid,
   Text,
   Tooltip,
@@ -19,6 +20,7 @@ import { MoneyModal } from "campaign/components/MoneyModal";
 import { FetchCampaign_campaign_Campaign as Campaign } from "campaign/gql";
 import { useEffect, useState } from "react";
 import { FaPiggyBank } from "react-icons/fa";
+import { MdClear } from "react-icons/md";
 import { useModal } from "shared";
 import { Sorting } from "./Sorting";
 import { useSortItems } from "./useSortItems";
@@ -101,6 +103,14 @@ export const CampaignLoaded = ({ campaign }: { campaign: Campaign }) => {
               <InputLeftElement>
                 <SearchIcon />
               </InputLeftElement>
+              {filterText && (
+                <InputRightElement
+                  cursor="pointer"
+                  onClick={() => setFilterText("")}
+                >
+                  <MdClear aria-label="clear filter" />
+                </InputRightElement>
+              )}
             </InputGroup>
 
             <Sorting
@@ -119,7 +129,11 @@ export const CampaignLoaded = ({ campaign }: { campaign: Campaign }) => {
               .slice()
               .sort(sortItems)
               .map((item) => (
-                <ItemCard key={item.id} item={item} />
+                <ItemCard
+                  onTagClick={(tag) => setFilterText(tag.toLowerCase())}
+                  key={item.id}
+                  item={item}
+                />
               ))}
           </SimpleGrid>
         </>
