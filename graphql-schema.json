@@ -1712,7 +1712,7 @@
             "deprecationReason": null
           },
           {
-            "name": "addUser",
+            "name": "joinCampaign",
             "description": null,
             "args": [
               {

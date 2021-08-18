@@ -1,2 +1,2 @@
-export { AddUserGQL } from "./addUserMutation";
-export * from "./__generated__/AddUser";
+export { JoinCampaignGQL } from "./joinCampaignMutation";
+export * from "./__generated__/JoinCampaign";
