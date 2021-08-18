@@ -1,8 +1,11 @@
 import { Box, Flex, Heading } from "@chakra-ui/layout";
-import { Avatar, HStack, Menu, MenuButton } from "@chakra-ui/react";
+import { HStack, IconButton } from "@chakra-ui/react";
 import { AccessibleLink } from "shared";
 import { WithMaybeSession } from "types/withSession";
 import { ThemeToggle } from "./ThemeToggle";
+import { UserAvatar } from "./UserAvatar";
+import { SiDiscord } from "react-icons/si";
+import NextLink from "next/link";
 
 export const Header: React.FC<WithMaybeSession> = ({ session }) => {
   return (
@@ -15,12 +18,16 @@ export const Header: React.FC<WithMaybeSession> = ({ session }) => {
 
       <Box marginLeft="auto">
         <HStack>
+          <NextLink href="https://discord.gg/yKMDkaUgEv">
+            <IconButton
+              variant="ghost"
+              size="md"
+              aria-label="join our discord"
+              icon={<SiDiscord />}
+            />
+          </NextLink>
           <ThemeToggle />
-          <Menu>
-            <MenuButton>
-              <Avatar size="sm" src={session?.user.image} />
-            </MenuButton>
-          </Menu>
+          <UserAvatar session={session} />
         </HStack>
       </Box>
     </Flex>

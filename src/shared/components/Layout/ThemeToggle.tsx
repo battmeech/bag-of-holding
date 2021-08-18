@@ -9,7 +9,7 @@ export const ThemeToggle = () => {
     <IconButton
       aria-label="theme toggle"
       variant="ghost"
-      size="lg"
+      size="md"
       icon={
         colorMode === "light" ? (
           <RiMoonFill data-testid="moon-icon" />
