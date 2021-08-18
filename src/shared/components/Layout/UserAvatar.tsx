@@ -1,12 +1,18 @@
-import { Avatar, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
+import {
+  Avatar,
+  Link,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
+} from "@chakra-ui/react";
 import { signOut } from "next-auth/client";
-import { useRouter } from "next/router";
+import NextLink from "next/link";
 import React from "react";
 import { useSession } from "shared/session";
 
 export const UserAvatar = () => {
   const { session } = useSession();
-  const router = useRouter();
 
   return (
     <Menu placement="bottom-end">
@@ -18,11 +24,13 @@ export const UserAvatar = () => {
         />
       </MenuButton>
       <MenuList>
-        <MenuItem onClick={() => router.push("/campaigns")}>
-          view campaigns
-        </MenuItem>
+        <Link as={NextLink} href="/campaigns">
+          <MenuItem>view campaigns</MenuItem>
+        </Link>
 
-        <MenuItem onClick={() => router.push("/profile")}>profile</MenuItem>
+        <Link as={NextLink} href="/profile">
+          <MenuItem>profile</MenuItem>
+        </Link>
 
         <MenuItem onClick={() => signOut({ callbackUrl: "/" })}>
           sign out
