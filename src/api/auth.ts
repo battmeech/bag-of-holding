@@ -4,8 +4,8 @@ import NextAuth from "next-auth";
 import Providers from "next-auth/providers";
 import { Login, LoginGQL, LoginVariables } from "./gql";
 
-export const auth = NextAuth({
-  providers: [
+const getAppProviders = () => {
+  const providers = [
     Providers.GitHub({
       clientId: process.env.GITHUB_CLIENT_ID,
       clientSecret: process.env.GITHUB_CLIENT_SECRET,
@@ -14,7 +14,20 @@ export const auth = NextAuth({
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     }),
-  ],
+    Providers.Twitch({
+      clientId: process.env.TWITCH_CLIENT_ID,
+      clientSecret: process.env.TWITCH_CLIENT_SECRET,
+    }),
+  ].filter(
+    (provider) =>
+      provider.clientId !== undefined && provider.clientSecret !== undefined
+  );
+
+  return providers;
+};
+
+export const auth = NextAuth({
+  providers: getAppProviders(),
   callbacks: {
     // Fetch the ID of the user from the database and attach to the JWT
     jwt: async (token, user, account) => {
