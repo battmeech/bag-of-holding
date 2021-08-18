@@ -15,7 +15,7 @@
     "test:type": "tsc --noEmit",
     "test:unit": "jest",
     "test:coverage": "jest --coverage",
-    "lint": "eslint ./src --ext ts",
+    "lint": "eslint ./src --ext ts,tsx",
     "prettify": "prettier --write src",
     "schema:download": "apollo client:download-schema graphql-schema.json",
     "schema:codegen": "apollo client:codegen --target=typescript --passthroughCustomScalars --tsFileExtension=ts",
