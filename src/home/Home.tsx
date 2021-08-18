@@ -1,36 +1,37 @@
 import {
-  Button,
-  Center,
-  Image,
+  Box,
+  Flex,
+  Stack,
   Text,
   useColorMode,
+  useColorModeValue,
   VStack,
 } from "@chakra-ui/react";
-import Link from "next/link";
+import Image from "next/image";
+import React from "react";
+import darkLogo from "../../public/dark-logo.png";
+import lightLogo from "../../public/light-logo.png";
+import { CTA } from "./components/CTA";
 
 export const Home = () => {
   const { colorMode } = useColorMode();
-
-  /* istanbul ignore next */
-  const logo = colorMode === "dark" ? "/dark-logo.png" : "/light-logo.png";
-
   return (
-    <Center h="80vh" w="100%">
-      <VStack spacing="8" textAlign="center">
-        <VStack spacing="0">
-          <Image
-            src={logo}
-            boxSize={{ base: "250px", md: "325px", lg: "500px" }}
-            alt="bag of holding logo"
-          />
+    <>
+      <Stack w="full" align="center" direction={{ base: "column", sm: "row" }}>
+        <Flex justify="center" flex="1">
+          <Box boxSize="2xs">
+            <Image
+              src={useColorModeValue(lightLogo, darkLogo)}
+              alt="bag of holding logo"
+            />
+          </Box>
+        </Flex>
+        <VStack flex="1" w="full" spacing="0">
           <Text fontSize="5xl">bag of holding</Text>
           <Text>a place to store all your treasure</Text>
         </VStack>
-
-        <Link href="/campaigns" passHref>
-          <Button colorScheme="teal">get started</Button>
-        </Link>
-      </VStack>
-    </Center>
+      </Stack>
+      <CTA />
+    </>
   );
 };
