@@ -10,7 +10,7 @@ export type WithSession = {
 
 export type WithMaybeSession = {
   session?: {
-    user: {
+    user?: {
       email: string;
       image: string;
       name: string;
