@@ -3,11 +3,10 @@ import { HStack, IconButton } from "@chakra-ui/react";
 import NextLink from "next/link";
 import { SiDiscord } from "react-icons/si";
 import { AccessibleLink } from "shared";
-import { WithMaybeSession } from "types/withSession";
 import { ThemeToggle } from "./ThemeToggle";
 import { UserAvatar } from "./UserAvatar";
 
-export const Header: React.FC<WithMaybeSession> = ({ session }) => {
+export const Header = () => {
   return (
     <HStack as="header" width="full" justify="space-between">
       <AccessibleLink href="/">
@@ -26,7 +25,7 @@ export const Header: React.FC<WithMaybeSession> = ({ session }) => {
           />
         </NextLink>
         <ThemeToggle />
-        <UserAvatar session={session} />
+        <UserAvatar />
       </HStack>
     </HStack>
   );

@@ -1,13 +1,15 @@
 import { Avatar, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
 import { signIn, signOut } from "next-auth/client";
 import React from "react";
-import { WithMaybeSession } from "types";
+import { useSession } from "shared/session";
 
-export const UserAvatar: React.FC<WithMaybeSession> = ({ session }) => {
+export const UserAvatar = () => {
+  const { session } = useSession();
+
   return (
     <Menu>
       <MenuButton>
-        <Avatar size="sm" src={session?.user?.image} />
+        <Avatar size="sm" src={session?.user?.image || undefined} />
       </MenuButton>
       <MenuList>
         {session?.user ? (
