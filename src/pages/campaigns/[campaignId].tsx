@@ -1,2 +1,2 @@
 export { Campaign as default } from "campaign";
-export { redirect as getServerSideProps } from "shared";
+export { requireLogin as getServerSideProps } from "shared";

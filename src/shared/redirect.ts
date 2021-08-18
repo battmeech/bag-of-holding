@@ -2,7 +2,7 @@ import { GetServerSideProps } from "next";
 import absolute from "next-absolute-url";
 import { getSession } from "./session";
 
-export const redirect: GetServerSideProps = async (ctx) => {
+export const requireLogin: GetServerSideProps = async (ctx) => {
   const session = await getSession(ctx);
 
   if (!session.userId) {
@@ -19,5 +19,10 @@ export const redirect: GetServerSideProps = async (ctx) => {
     };
   }
 
+  return { props: { session } };
+};
+
+export const provideSession: GetServerSideProps = async (ctx) => {
+  const session = await getSession(ctx);
   return { props: { session } };
 };
