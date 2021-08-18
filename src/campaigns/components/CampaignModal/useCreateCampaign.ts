@@ -29,7 +29,7 @@ export const useCreateCampaign = ({ onSuccessCallback }: Input) => {
   const createCampaign = async () => {
     const { data } = await mutate({ variables: { name: campaignName } });
 
-    if (data?.createCampaign.id) {
+    if (data?.createCampaign.__typename === "Campaign") {
       onSuccessCallback(data.createCampaign.id);
     }
   };

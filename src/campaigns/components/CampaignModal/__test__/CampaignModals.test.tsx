@@ -15,7 +15,7 @@ describe("CampaignModal", () => {
 
     const mutateMock = jest.fn();
     mutateMock.mockResolvedValue({
-      data: { createCampaign: { id: "123" } },
+      data: { createCampaign: { __typename: "Campaign", id: "123" } },
     });
 
     (useMutation as jest.Mock).mockReturnValue([
