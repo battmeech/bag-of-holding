@@ -74,7 +74,7 @@ describe("useCreateCampaign", () => {
   });
 
   it("on success callback on success", async () => {
-    const { result, successCallbackMock, mutateMock } = setupHook({
+    const { result, successCallbackMock } = setupHook({
       loading: true,
     });
 

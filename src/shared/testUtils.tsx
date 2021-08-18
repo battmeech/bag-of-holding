@@ -18,9 +18,7 @@ const TestContextProvider: FC<TestContextProviderProps> = ({
   return (
     <MockedProvider mocks={mocks}>
       <ChakraProvider theme={customTheme}>
-        <ModalProvider>
-          <Layout>{children}</Layout>
-        </ModalProvider>
+        <ModalProvider>{children}</ModalProvider>
       </ChakraProvider>
     </MockedProvider>
   );
