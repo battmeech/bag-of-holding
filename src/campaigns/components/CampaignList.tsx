@@ -12,7 +12,7 @@ export const CampaignList = ({
     <SimpleGrid
       mt="4"
       data-testid="card-grid"
-      columns={{ base: 1, sm: 2 }}
+      columns={{ base: 1, md: 2, lg: 3 }}
       spacing={4}
       mb={6}
     >

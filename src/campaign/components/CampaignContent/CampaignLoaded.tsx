@@ -138,8 +138,6 @@ export const CampaignLoaded = ({ campaign }: { campaign: Campaign }) => {
           </SimpleGrid>
         </>
       )}
-
-      <Text fontSize="xs">campaign id: {campaign.id}</Text>
     </Box>
   );
 };

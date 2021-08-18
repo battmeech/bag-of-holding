@@ -1,7 +1,6 @@
 import { useQuery } from "@apollo/client";
 import { AddIcon } from "@chakra-ui/icons";
 import { Box, Flex, IconButton, Text, Tooltip } from "@chakra-ui/react";
-import Link from "next/link";
 import React from "react";
 import { useModal } from "shared";
 import { CampaignList } from "./components/CampaignList";
