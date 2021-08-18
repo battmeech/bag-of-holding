@@ -9,7 +9,11 @@ export const UserAvatar = () => {
   return (
     <Menu>
       <MenuButton>
-        <Avatar size="sm" src={session?.user?.image || undefined} />
+        <Avatar
+          size="sm"
+          src={session?.user?.image || undefined}
+          name={session?.user?.name || undefined}
+        />
       </MenuButton>
       <MenuList>
         {session?.user ? (
