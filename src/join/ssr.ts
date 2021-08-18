@@ -3,7 +3,7 @@ import { request } from "graphql-request";
 import { NextPageContext } from "next";
 import absolute from "next-absolute-url";
 import { getUserId } from "shared/session";
-import { AddUser, AddUserGQL, AddUserVariables } from "./gql";
+import { JoinCampaign, JoinCampaignGQL, JoinCampaignVariables } from "./gql";
 
 export const addToCampaign = async (ctx: NextPageContext) => {
   const userId = await getUserId(ctx);
@@ -35,14 +35,14 @@ export const addToCampaign = async (ctx: NextPageContext) => {
 
   const campaignId = url.split("/")[2];
 
-  const res = await request<AddUser, AddUserVariables>(
+  const res = await request<JoinCampaign, JoinCampaignVariables>(
     graphUrl,
-    AddUserGQL,
+    JoinCampaignGQL,
     { campaignId },
     { "bag-user-id": userId as string }
   );
 
-  if (res.addUser.__typename !== "Campaign") {
+  if (res.joinCampaign.__typename !== "Campaign") {
     return {
       redirect: {
         destination: "/404",
@@ -53,7 +53,7 @@ export const addToCampaign = async (ctx: NextPageContext) => {
 
   return {
     redirect: {
-      destination: `/campaigns/${res.addUser.id}`,
+      destination: `/campaigns/${res.joinCampaign.id}`,
     },
   };
 };
