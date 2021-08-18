@@ -1,10 +1,15 @@
+import { Session } from "next-auth";
 import {
   getSession as nextGetSession,
   GetSessionOptions,
   useSession as useNextSession,
 } from "next-auth/client";
 
-export const getSession = async (options?: GetSessionOptions | undefined) => {
+export type SessionWithID = Session & { userId: string };
+
+export const getSession = async (
+  options?: GetSessionOptions | undefined
+): Promise<SessionWithID> => {
   if (process.env.NEXT_PUBLIC_SKIP_SESSION) {
     return {
       user: {
