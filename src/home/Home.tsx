@@ -27,7 +27,9 @@ export const Home = () => {
           </Box>
         </Flex>
         <VStack flex="1" w="full" spacing="0">
-          <Text fontSize="5xl">bag of holding</Text>
+          <Text textAlign="center" fontSize="5xl">
+            bag of holding
+          </Text>
           <Text>a place to store all your treasure</Text>
         </VStack>
       </Stack>
