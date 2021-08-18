@@ -18,6 +18,10 @@ const getAppProviders = () => {
       clientId: process.env.TWITCH_CLIENT_ID,
       clientSecret: process.env.TWITCH_CLIENT_SECRET,
     }),
+    Providers.Discord({
+      clientId: process.env.DISCORD_CLIENT_ID,
+      clientSecret: process.env.DISCORD_CLIENT_SECRET,
+    }),
   ].filter(
     (provider) =>
       provider.clientId !== undefined && provider.clientSecret !== undefined
