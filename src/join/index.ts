@@ -1,2 +1,2 @@
 export { Join } from "./Join";
-export { addToCampaign } from "./ssr";
+export { joinCampaign } from "./ssr";

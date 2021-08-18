@@ -1,39 +1,28 @@
 import { graphUrl } from "api/config";
 import { request } from "graphql-request";
-import { NextPageContext } from "next";
+import { GetServerSideProps } from "next";
 import absolute from "next-absolute-url";
-import { getUserId } from "shared/session";
+import { getSession } from "shared/session";
 import { JoinCampaign, JoinCampaignGQL, JoinCampaignVariables } from "./gql";
 
-export const addToCampaign = async (ctx: NextPageContext) => {
-  const userId = await getUserId(ctx);
-  const { req } = ctx;
-
-  if (!req?.url) {
-    return {
-      redirect: {
-        destination: "/404",
-        permanent: false,
-      },
-    };
-  }
-
-  const { url } = req;
+export const joinCampaign: GetServerSideProps = async (ctx) => {
+  const { userId } = await getSession(ctx);
+  const { req, resolvedUrl } = ctx;
 
   if (!userId) {
     const { origin } = absolute(req);
 
-    const callbackUrl = `?callbackUrl=${origin}${url}`;
+    const callbackUrl = `${origin}${resolvedUrl}`;
 
     return {
       redirect: {
-        destination: `/login${callbackUrl}`,
+        destination: `/login?callbackUrl=${callbackUrl}`,
         permanent: false,
       },
     };
   }
 
-  const campaignId = url.split("/")[2];
+  const campaignId = resolvedUrl.split("/")[2];
 
   const res = await request<JoinCampaign, JoinCampaignVariables>(
     graphUrl,
@@ -54,6 +43,7 @@ export const addToCampaign = async (ctx: NextPageContext) => {
   return {
     redirect: {
       destination: `/campaigns/${res.joinCampaign.id}`,
+      permanent: false,
     },
   };
 };
