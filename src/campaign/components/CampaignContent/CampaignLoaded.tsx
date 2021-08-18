@@ -47,7 +47,9 @@ export const CampaignLoaded = ({ campaign }: { campaign: Campaign }) => {
   return (
     <Box>
       <Flex as="header" width="full" align="center">
-        <Text fontSize="xl">{campaign.name}</Text>
+        <Text fontSize="xl" textTransform="lowercase">
+          {campaign.name}
+        </Text>
 
         <Box ml="auto">
           <Tooltip label="add item">
