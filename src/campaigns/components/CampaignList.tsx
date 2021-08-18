@@ -1,11 +1,13 @@
-import { SimpleGrid } from "@chakra-ui/react";
+import { SimpleGrid, Skeleton } from "@chakra-ui/react";
 import { ListCampaigns_campaigns } from "campaigns/gql";
 import React from "react";
 import { CampaignCard } from "./CampaignCard";
 
 export const CampaignList = ({
+  loading = false,
   campaigns = [],
 }: {
+  loading?: boolean;
   campaigns?: ListCampaigns_campaigns[];
 }) => {
   return (
@@ -16,9 +18,15 @@ export const CampaignList = ({
       spacing={4}
       mb={6}
     >
-      {campaigns.map((campaign) => (
-        <CampaignCard key={campaign.id} campaign={campaign} />
-      ))}
+      {loading
+        ? Array(10)
+            .fill(undefined)
+            .map((_, i) => (
+              <Skeleton borderRadius="lg" h="145" w="330" key={i} />
+            ))
+        : campaigns.map((campaign) => (
+            <CampaignCard key={campaign.id} campaign={campaign} />
+          ))}
     </SimpleGrid>
   );
 };

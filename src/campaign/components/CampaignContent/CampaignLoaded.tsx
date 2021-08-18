@@ -11,6 +11,8 @@ import {
   InputRightElement,
   SimpleGrid,
   Text,
+  Center,
+  VStack,
   Tooltip,
 } from "@chakra-ui/react";
 import { Currency } from "campaign/components/Currency";
@@ -84,15 +86,19 @@ export const CampaignLoaded = ({ campaign }: { campaign: Campaign }) => {
         </Tooltip>
       </Flex>
       {campaign.items?.length === 0 ? (
-        <Box mb={6}>
-          <Text mb={4}>looks empty in here</Text>
-          <Button
-            colorScheme="teal"
-            onClick={() => openModal(<AddItemModal campaignId={campaign.id} />)}
-          >
-            add an item
-          </Button>
-        </Box>
+        <Center w="full" h="50vh">
+          <VStack spacing="8">
+            <Text>nothing to see here!</Text>
+            <Button
+              colorScheme="teal"
+              onClick={() =>
+                openModal(<AddItemModal campaignId={campaign.id} />)
+              }
+            >
+              add an item
+            </Button>
+          </VStack>
+        </Center>
       ) : (
         <>
           <HStack>
