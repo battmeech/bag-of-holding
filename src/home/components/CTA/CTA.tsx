@@ -40,7 +40,7 @@ export const CTA: React.FC = () => (
         </Text>
       </Box>
       <Link as={NextLink} href="/campaigns" passHref>
-        <Button colorScheme="teal" size="lg">
+        <Button w={{ base: "full", md: "auto" }} colorScheme="teal" size="lg">
           get started
         </Button>
       </Link>
