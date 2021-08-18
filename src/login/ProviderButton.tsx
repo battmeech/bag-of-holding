@@ -1,16 +1,12 @@
 import { Button } from "@chakra-ui/react";
 import { ClientSafeProvider, signIn } from "next-auth/client";
+import { SiGithub, SiGoogle, SiTwitch } from "react-icons/si";
 import React from "react";
 
-type ButtonStyling = {
-  bgColor: string;
-  color: string;
-};
-
-const colours: Record<string, ButtonStyling> = {
-  GitHub: { bgColor: "black", color: "white" },
-  Google: { bgColor: "blue", color: "red" },
-  Twitch: { bgColor: "purple", color: "white" },
+const icons: Record<string, React.ReactElement> = {
+  GitHub: <SiGithub />,
+  Google: <SiGoogle />,
+  Twitch: <SiTwitch />,
 };
 
 export const ProviderButton = ({
@@ -22,8 +18,7 @@ export const ProviderButton = ({
 }) => {
   return (
     <Button
-      bgColor={colours[provider.name].bgColor}
-      color={colours[provider.name].color}
+      leftIcon={icons[provider.name]}
       key={provider.id}
       colorScheme="teal"
       onClick={() =>
