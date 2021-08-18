@@ -1,2 +1,11 @@
+import { requireLogin } from "shared";
+
 export { Profile as default } from "profile/Profile";
-export { requireLogin as getServerSideProps } from "shared";
+
+export const getServerSideProps = requireLogin((_, session) => {
+  return {
+    props: {
+      session,
+    },
+  };
+});

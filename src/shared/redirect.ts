@@ -1,8 +1,19 @@
-import { GetServerSideProps, GetServerSidePropsContext } from "next";
+import {
+  GetServerSideProps,
+  GetServerSidePropsContext,
+  GetServerSidePropsResult,
+} from "next";
 import absolute from "next-absolute-url";
-import { getSession } from "./session";
+import { getSession, SessionWithID } from "./session";
 
-export const requireLogin = (gssp?: GetServerSideProps) => {
+export const requireLogin = (
+  gssp?: (
+    // eslint-disable-next-line no-unused-vars
+    context: GetServerSidePropsContext,
+    // eslint-disable-next-line no-unused-vars
+    session: SessionWithID
+  ) => GetServerSidePropsResult<any> | Promise<GetServerSidePropsResult<any>>
+) => {
   return async (ctx: GetServerSidePropsContext) => {
     const session = await getSession(ctx);
 
@@ -20,7 +31,7 @@ export const requireLogin = (gssp?: GetServerSideProps) => {
       };
     }
 
-    return gssp ? gssp(ctx) : { props: {} };
+    return gssp ? gssp(ctx, session) : { props: {} };
   };
 };
 
