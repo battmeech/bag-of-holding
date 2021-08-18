@@ -1,13 +1,15 @@
 import { Avatar, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
-import { signIn, signOut } from "next-auth/client";
+import { signOut } from "next-auth/client";
+import { useRouter } from "next/router";
 import React from "react";
 import { useSession } from "shared/session";
 
 export const UserAvatar = () => {
   const { session } = useSession();
+  const router = useRouter();
 
   return (
-    <Menu>
+    <Menu placement="bottom-end">
       <MenuButton>
         <Avatar
           size="sm"
@@ -16,13 +18,13 @@ export const UserAvatar = () => {
         />
       </MenuButton>
       <MenuList>
-        {session?.user ? (
-          <MenuItem onClick={() => signOut({ callbackUrl: "/" })}>
-            sign out
-          </MenuItem>
-        ) : (
-          <MenuItem onClick={() => signIn()}>sign in</MenuItem>
-        )}
+        <MenuItem onClick={() => router.push("/campaigns")}>
+          view campaigns
+        </MenuItem>
+
+        <MenuItem onClick={() => signOut({ callbackUrl: "/" })}>
+          sign out
+        </MenuItem>
       </MenuList>
     </Menu>
   );
