@@ -1,9 +1,10 @@
 import { Box, Flex, Heading } from "@chakra-ui/layout";
-
+import { Avatar, HStack, Menu, MenuButton } from "@chakra-ui/react";
 import { AccessibleLink } from "shared";
-import ThemeToggle from "./ThemeToggle";
+import { WithMaybeSession } from "types/withSession";
+import { ThemeToggle } from "./ThemeToggle";
 
-const Header = () => {
+export const Header: React.FC<WithMaybeSession> = ({ session }) => {
   return (
     <Flex as="header" width="full" align="center">
       <AccessibleLink href="/">
@@ -13,10 +14,15 @@ const Header = () => {
       </AccessibleLink>
 
       <Box marginLeft="auto">
-        <ThemeToggle />
+        <HStack>
+          <ThemeToggle />
+          <Menu>
+            <MenuButton>
+              <Avatar size="sm" src={session?.user.image} />
+            </MenuButton>
+          </Menu>
+        </HStack>
       </Box>
     </Flex>
   );
 };
-
-export default Header;

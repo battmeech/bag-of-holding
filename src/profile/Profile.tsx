@@ -11,16 +11,11 @@ import {
 import { signOut } from "next-auth/client";
 import NextLink from "next/link";
 import React from "react";
-import { useSession } from "shared/session";
+import { WithSession } from "types";
 import { MeGQL } from "./gql";
 
-export const Profile = () => {
-  const { session, loading } = useSession();
-
+export const Profile: React.FC<WithSession> = ({ session }) => {
   const { data } = useQuery(MeGQL);
-
-  if (loading) return null;
-  if (!session) return null; // shouldn't get here due to SSR
 
   return (
     <>

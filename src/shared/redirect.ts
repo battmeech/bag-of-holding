@@ -19,5 +19,5 @@ export const redirect: GetServerSideProps = async (ctx) => {
     };
   }
 
-  return { props: {} };
+  return { props: { session } };
 };
