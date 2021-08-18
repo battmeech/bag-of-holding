@@ -1,31 +1,19 @@
-import { NextPageContext } from "next";
+import { GetServerSideProps } from "next";
 import absolute from "next-absolute-url";
-import { getUserId } from "./session";
+import { getSession } from "./session";
 
-export const redirect = async (ctx: NextPageContext) => {
-  const userId = await getUserId(ctx);
-  const { req } = ctx;
+export const redirect: GetServerSideProps = async (ctx) => {
+  const session = await getSession(ctx);
 
-  if (!req) {
-    return {
-      redirect: {
-        destination: "/404",
-        permanent: false,
-      },
-    };
-  }
-
-  const { url } = req;
-
-  if (!userId) {
-    const { req } = ctx;
+  if (!session.userId) {
+    const { req, resolvedUrl } = ctx;
     const { origin } = absolute(req);
 
-    const callbackUrl = `?callbackUrl=${origin}${url}`;
+    const callbackUrl = `${origin}${resolvedUrl}`;
 
     return {
       redirect: {
-        destination: `/login${callbackUrl}`,
+        destination: `/login?callbackUrl=${callbackUrl}`,
         permanent: false,
       },
     };

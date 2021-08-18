@@ -1,1 +1,1 @@
-export { addToCampaign as getServerSideProps, Join as default } from "join";
+export { joinCampaign as getServerSideProps, Join as default } from "join";
