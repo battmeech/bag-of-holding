@@ -1,12 +1,16 @@
 import { Heading } from "@chakra-ui/layout";
-import { HStack, IconButton } from "@chakra-ui/react";
+import { Button, HStack, IconButton, Link } from "@chakra-ui/react";
+import { signIn } from "next-auth/client";
 import NextLink from "next/link";
 import { SiDiscord } from "react-icons/si";
 import { AccessibleLink } from "shared";
+import { useSession } from "shared/session";
 import { ThemeToggle } from "./ThemeToggle";
 import { UserAvatar } from "./UserAvatar";
 
 export const Header = () => {
+  const { session } = useSession();
+
   return (
     <HStack as="header" width="full" justify="space-between">
       <AccessibleLink href="/">
@@ -16,16 +20,22 @@ export const Header = () => {
       </AccessibleLink>
 
       <HStack>
-        <NextLink href="https://discord.gg/yKMDkaUgEv">
+        <Link as={NextLink} href="https://discord.gg/yKMDkaUgEv">
           <IconButton
             variant="ghost"
             size="md"
             aria-label="join our discord"
             icon={<SiDiscord />}
           />
-        </NextLink>
+        </Link>
         <ThemeToggle />
-        <UserAvatar />
+        {session?.user ? (
+          <UserAvatar />
+        ) : (
+          <Button colorScheme="teal" onClick={() => signIn()}>
+            sign in
+          </Button>
+        )}
       </HStack>
     </HStack>
   );
