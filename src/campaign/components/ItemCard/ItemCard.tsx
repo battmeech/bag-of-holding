@@ -25,6 +25,7 @@ import { TagGroup } from "./TagGroup";
 
 type ItemCardProps = {
   item: Item;
+  // eslint-disable-next-line no-unused-vars
   onTagClick?: (tag: string) => void;
 };
 
