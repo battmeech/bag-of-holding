@@ -1,6 +1,6 @@
 import * as ColourContext from "@chakra-ui/color-mode";
 import { render } from "shared";
-import ThemeToggle from "../ThemeToggle";
+import { ThemeToggle } from "../ThemeToggle";
 
 describe("ThemeToggle", () => {
   const testCases = [
