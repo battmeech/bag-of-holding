@@ -1,11 +1,10 @@
 /* istanbul ignore file */
-import React, { FC, ReactElement } from "react";
-import { render, RenderOptions } from "@testing-library/react";
 import { MockedProvider, MockedResponse } from "@apollo/client/testing";
 import { ChakraProvider } from "@chakra-ui/react";
+import { render, RenderOptions } from "@testing-library/react";
+import React, { FC, ReactElement } from "react";
 import customTheme from "styles/customTheme";
 import { ModalProvider } from "./ModalProvider";
-import { Layout } from "shared";
 
 type TestContextProviderProps = {
   mocks?: MockedResponse<Record<string, any>>[];
@@ -36,6 +35,6 @@ const customRender = (
   });
 
 export * from "@testing-library/react";
+export { customRender as render };
 export const waitForNextTick = () =>
   new Promise((resolve) => setTimeout(resolve));
-export { customRender as render };
