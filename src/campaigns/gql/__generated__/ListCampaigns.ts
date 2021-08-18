@@ -11,7 +11,8 @@ export interface ListCampaigns_campaigns {
   __typename: "Campaign";
   id: string;
   name: string;
-  createdAt: Date;
+  userCount: number;
+  itemCount: number;
 }
 
 export interface ListCampaigns {

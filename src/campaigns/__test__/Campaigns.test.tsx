@@ -20,7 +20,11 @@ describe("Campaigns", () => {
 
   it("displays campaigns that are returned", () => {
     jest.spyOn(require("@apollo/client"), "useQuery").mockReturnValue({
-      data: { campaigns: [{ name: "My campaign", id: "12" }] },
+      data: {
+        campaigns: [
+          { name: "My campaign", id: "12", itemCount: 0, userCount: 0 },
+        ],
+      },
     } as any);
 
     const { getByText } = render(<Campaigns />);
