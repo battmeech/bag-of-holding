@@ -11,6 +11,7 @@ import { CgMore, CgMoreAlt } from "react-icons/cg";
 
 type TagGroupProps = {
   displayLimit?: number;
+  // eslint-disable-next-line no-unused-vars
   onTagClick?: (tag: string) => void;
   tags: string[];
 } & Pick<BadgeProps, "variant" | "colorScheme"> &

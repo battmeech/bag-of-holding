@@ -3,7 +3,6 @@ import {
   Flex,
   Stack,
   Text,
-  useColorMode,
   useColorModeValue,
   VStack,
 } from "@chakra-ui/react";
@@ -11,10 +10,9 @@ import Image from "next/image";
 import React from "react";
 import darkLogo from "../../public/dark-logo.png";
 import lightLogo from "../../public/light-logo.png";
-import { CTA } from "./components/CTA";
+import { CTA } from "./components";
 
 export const Home = () => {
-  const { colorMode } = useColorMode();
   return (
     <>
       <Stack w="full" align="center" direction={{ base: "column", sm: "row" }}>
