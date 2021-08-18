@@ -22,6 +22,8 @@ export const UserAvatar = () => {
           view campaigns
         </MenuItem>
 
+        <MenuItem onClick={() => router.push("/profile")}>profile</MenuItem>
+
         <MenuItem onClick={() => signOut({ callbackUrl: "/" })}>
           sign out
         </MenuItem>
