@@ -48,7 +48,7 @@ export const SignUpForm: React.FC<SignUpFormProps> = ({
   return (
     <chakra.form {...spaceProps} onSubmit={handleSubmit(onSubmit)}>
       <VStack spacing="6">
-        <FormControl isRequired isInvalid={!!errors.username}>
+        <FormControl isInvalid={!!errors.username}>
           <FormLabel>username</FormLabel>
           <Input
             {...register("username", {
