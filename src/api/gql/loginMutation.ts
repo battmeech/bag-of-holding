@@ -5,6 +5,8 @@ export const LoginGQL = gql`
     login(externalId: $externalId) {
       __typename
       id
+      createdAt
+      updatedAt
     }
   }
 `;

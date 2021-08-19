@@ -1,5 +1,6 @@
 import { graphUrl } from "api/config";
 import { request } from "graphql-request";
+import moment from "moment";
 import NextAuth from "next-auth";
 import Providers from "next-auth/providers";
 import { Login, LoginGQL, LoginVariables } from "./gql";
@@ -33,20 +34,33 @@ const getAppProviders = () => {
 export const auth = NextAuth({
   providers: getAppProviders(),
   callbacks: {
-    // Fetch the ID of the user from the database and attach to the JWT
+    // Fetch the user details from the database and attach to the JWT
     jwt: async (token, user, account) => {
       if (!user || !account) return token;
 
       const res = await request<Login, LoginVariables>(graphUrl, LoginGQL, {
         externalId: `${account.provider}-${(user.id as any).toString()}`,
       });
+
+      if (moment(res.login.createdAt).diff(res.login.updatedAt, "seconds") < 1)
+        token.isNewUser = true;
+
       token.userId = res.login.id;
       return token;
     },
     // Expose the user ID in the next-auth session
     session: async (session, token) => {
       session.userId = token.userId;
+      session.isNewUser = token.isNewUser;
       return session;
+    },
+    redirect: async (url, baseUrl) => {
+      const callbackUrl = url.startsWith(baseUrl) ? url : baseUrl;
+      // return url.startsWith(baseUrl) ? url : baseUrl;
+      const result = callbackUrl.match(/\/api\/redirect/i)
+        ? callbackUrl
+        : `${baseUrl}/api/redirect?callbackUrl=${callbackUrl}`;
+      return result;
     },
   },
   pages: {
