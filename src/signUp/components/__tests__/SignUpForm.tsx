@@ -22,7 +22,7 @@ describe("SignUpForm", () => {
     render(<SignUpForm />);
     expect(screen.getByRole("button", { name: /submit/i })).toBeVisible();
   });
-  it("should prepopulate the avatar url with the session image URL if availavle", () => {
+  it("should prepopulate the avatar url with the session image URL if available", () => {
     render(<SignUpForm />);
     expect(screen.getByLabelText(/avatar url/i)).toHaveValue("test-image-url");
   });

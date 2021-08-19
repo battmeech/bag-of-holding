@@ -56,11 +56,9 @@ export const auth = NextAuth({
     },
     redirect: async (url, baseUrl) => {
       const callbackUrl = url.startsWith(baseUrl) ? url : baseUrl;
-      // return url.startsWith(baseUrl) ? url : baseUrl;
-      const result = callbackUrl.match(/\/api\/redirect/i)
+      return callbackUrl.match(/\/api\/redirect/i)
         ? callbackUrl
         : `${baseUrl}/api/redirect?callbackUrl=${callbackUrl}`;
-      return result;
     },
   },
   pages: {
