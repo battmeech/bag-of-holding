@@ -13,17 +13,16 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { useSession } from "next-auth/client";
-import React from "react";
-import { useForm } from "react-hook-form";
+import React, { useEffect } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
 
-type Inputs = {
+export type SignUpInputs = {
   avatarUrl: string;
   username: string;
 };
 
 type SignUpFormProps = {
-  // eslint-disable-next-line no-unused-vars
-  onSubmit?: (data: Inputs) => void;
+  onSubmit?: SubmitHandler<SignUpInputs>;
 } & SpaceProps;
 
 export const SignUpForm: React.FC<SignUpFormProps> = ({
@@ -34,9 +33,15 @@ export const SignUpForm: React.FC<SignUpFormProps> = ({
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
     watch,
-  } = useForm<Inputs>();
+  } = useForm<SignUpInputs>();
+
+  useEffect(() => {
+    setValue("avatarUrl", session?.user?.image || "");
+  }, [setValue, session?.user?.image]);
+
   return (
     <chakra.form {...spaceProps} onSubmit={handleSubmit(onSubmit)}>
       <VStack spacing="6">
