@@ -1,4 +1,4 @@
-import { Tooltip } from "@chakra-ui/react";
+import { Tooltip, useColorModeValue } from "@chakra-ui/react";
 import { RiCopperCoinFill } from "react-icons/ri";
 
 export type CurrencyDenomination =
@@ -12,12 +12,17 @@ export type CoinProps = {
   denomination: CurrencyDenomination;
 };
 
-const colorMap: Record<CurrencyDenomination, string> = {
-  electrum: "#f2e279",
-  platinum: "#e5e4e2",
-  copper: "#c26737",
-  silver: "c0c0c0",
-  gold: "#d4af37",
+type CoinColor = {
+  darkMode: string;
+  lightMode: string;
+};
+
+const colorMap: Record<CurrencyDenomination, CoinColor> = {
+  electrum: { lightMode: "#ffd700", darkMode: "#f2e279" },
+  platinum: { lightMode: "#a0a09e", darkMode: "#e5e4e2" },
+  copper: { lightMode: "#c26737", darkMode: "#c26737" },
+  silver: { lightMode: "#868686", darkMode: "#c0c0c0" },
+  gold: { lightMode: "#d4af37", darkMode: "#d4af37" },
 };
 
 export const Coin: React.FC<CoinProps> = ({ denomination }) => {
@@ -26,7 +31,10 @@ export const Coin: React.FC<CoinProps> = ({ denomination }) => {
       <span>
         <RiCopperCoinFill
           aria-label={denomination}
-          color={colorMap[denomination]}
+          color={useColorModeValue(
+            colorMap[denomination].lightMode,
+            colorMap[denomination].darkMode
+          )}
         />
       </span>
     </Tooltip>
