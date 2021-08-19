@@ -18,7 +18,7 @@ export const SignUp: React.FC = () => {
       <Heading mt="2" size="sm">
         we just need a few more things to get you set up...
       </Heading>
-      <SignUpForm onSubmit={onSubmit} />
+      <SignUpForm mt="8" onSubmit={onSubmit} />
     </Container>
   );
 };

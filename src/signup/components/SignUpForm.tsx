@@ -6,6 +6,7 @@ import {
   FormErrorMessage,
   FormLabel,
   Input,
+  SpaceProps,
   Stack,
   Text,
   Tooltip,
@@ -23,10 +24,11 @@ type Inputs = {
 type SignUpFormProps = {
   // eslint-disable-next-line no-unused-vars
   onSubmit?: (data: Inputs) => void;
-};
+} & SpaceProps;
 
 export const SignUpForm: React.FC<SignUpFormProps> = ({
   onSubmit = () => {},
+  ...spaceProps
 }) => {
   const [session] = useSession();
   const {
@@ -36,7 +38,7 @@ export const SignUpForm: React.FC<SignUpFormProps> = ({
     watch,
   } = useForm<Inputs>();
   return (
-    <chakra.form mt="8" onSubmit={handleSubmit(onSubmit)}>
+    <chakra.form {...spaceProps} onSubmit={handleSubmit(onSubmit)}>
       <VStack spacing="6">
         <FormControl isRequired isInvalid={!!errors.username}>
           <FormLabel>username</FormLabel>
