@@ -10,6 +10,8 @@
 export interface Login_login {
   __typename: "User";
   id: string;
+  createdAt: Date;
+  updatedAt: Date | null;
 }
 
 export interface Login {
