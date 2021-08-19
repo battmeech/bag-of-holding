@@ -1,20 +1,18 @@
-import { Flex, FlexProps, Text } from "@chakra-ui/react";
+import { Flex, Text } from "@chakra-ui/react";
 import { Coin, CurrencyDenomination } from "./Coin";
 
 type CurrencyProps = {
   denomination: CurrencyDenomination;
   value: number;
-} & FlexProps;
+};
 
-export const Currency: React.FC<CurrencyProps> = ({
-  denomination,
-  value,
-  ...flexProps
-}) => {
+export const Currency: React.FC<CurrencyProps> = ({ denomination, value }) => {
   return (
-    <Flex {...flexProps} display="flex" alignItems="center">
+    <Flex alignItems="center">
       <Coin denomination={denomination} />
-      <Text ml={1}>{value}</Text>
+      <Text fontSize={{ base: "xs" }} ml={1}>
+        {value}
+      </Text>
     </Flex>
   );
 };
