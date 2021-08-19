@@ -24,6 +24,7 @@ import { useEffect, useState } from "react";
 import { FaPiggyBank } from "react-icons/fa";
 import { MdClear } from "react-icons/md";
 import { useModal } from "shared";
+import { ShareCampaign } from "../ShareCampaign";
 import { Sorting } from "./Sorting";
 import { useSortItems } from "./useSortItems";
 
@@ -48,25 +49,21 @@ export const CampaignLoaded = ({ campaign }: { campaign: Campaign }) => {
 
   return (
     <Box>
-      <Flex as="header" width="full" align="center">
+      <HStack justify="space-between" w="full">
         <Text fontSize="xl" textTransform="lowercase">
           {campaign.name}
         </Text>
 
-        <Box ml="auto">
-          <Tooltip label="add item">
-            <IconButton
-              aria-label="add item"
-              variant="ghost"
-              size="lg"
-              icon={<AddIcon />}
-              onClick={() =>
-                openModal(<AddItemModal campaignId={campaign.id} />)
-              }
-            />
-          </Tooltip>
-        </Box>
-      </Flex>
+        <Tooltip label="add item">
+          <IconButton
+            aria-label="add item"
+            variant="ghost"
+            size="lg"
+            icon={<AddIcon />}
+            onClick={() => openModal(<AddItemModal campaignId={campaign.id} />)}
+          />
+        </Tooltip>
+      </HStack>
 
       <Flex mb={2}>
         <Currency denomination="platinum" value={campaign.platinum} mr={3} />
@@ -85,6 +82,7 @@ export const CampaignLoaded = ({ campaign }: { campaign: Campaign }) => {
           />
         </Tooltip>
       </Flex>
+
       {campaign.items?.length === 0 ? (
         <Center w="full" h="50vh">
           <VStack spacing="8">
@@ -146,6 +144,8 @@ export const CampaignLoaded = ({ campaign }: { campaign: Campaign }) => {
           </SimpleGrid>
         </>
       )}
+
+      <ShareCampaign />
     </Box>
   );
 };
