@@ -1,6 +1,5 @@
 import { graphUrl } from "api/config";
 import { request } from "graphql-request";
-import moment from "moment";
 import NextAuth from "next-auth";
 import Providers from "next-auth/providers";
 import { Login, LoginGQL, LoginVariables } from "./gql";
@@ -42,10 +41,9 @@ export const auth = NextAuth({
         externalId: `${account.provider}-${(user.id as any).toString()}`,
       });
 
-      if (moment(res.login.createdAt).diff(res.login.updatedAt, "seconds") < 1)
-        token.isNewUser = true;
-
+      token.isNewUser = !res.login.username;
       token.userId = res.login.id;
+
       return token;
     },
     // Expose the user ID in the next-auth session
