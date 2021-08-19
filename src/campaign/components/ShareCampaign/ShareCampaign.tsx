@@ -9,20 +9,18 @@ import {
 import React, { useState } from "react";
 
 export const ShareCampaign = () => {
-  const [value] = useState(
-    window.location.href.replace("/campaigns/", "/join/")
-  );
+  const [url] = useState(window.location.href.replace("/campaigns/", "/join/"));
 
-  const { hasCopied, onCopy } = useClipboard(value);
+  const { hasCopied, onCopy } = useClipboard(url);
   const breakpoint = useBreakpoint();
 
   const onClick = async () => {
     onCopy();
     if (navigator.share)
       await navigator.share({
-        text: `Hello! I need some help managing all our treasure, come to ${value} to help bear the load.`,
+        text: `Hello! I need some help managing all our treasure.`,
         title: "Bag of Holding",
-        url: value,
+        url,
       });
   };
 
@@ -37,7 +35,7 @@ export const ShareCampaign = () => {
     default:
       return (
         <InputGroup w="md">
-          <Input defaultValue={value} />
+          <Input defaultValue={url} />
           <InputRightElement w="fit-content">
             <Button
               colorScheme="teal"
