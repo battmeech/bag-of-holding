@@ -1,8 +1,9 @@
 import {
-  InputGroup,
-  Input,
-  InputRightElement,
   Button,
+  Input,
+  InputGroup,
+  InputRightElement,
+  useBreakpoint,
   useClipboard,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
@@ -13,22 +14,43 @@ export const ShareCampaign = () => {
   );
 
   const { hasCopied, onCopy } = useClipboard(value);
+  const breakpoint = useBreakpoint();
 
-  return (
-    <InputGroup w="md">
-      <Input pr="4.5rem" value={value} />
-      <InputRightElement w="fit-content">
-        <Button
-          colorScheme="teal"
-          w="full"
-          h="1.75rem"
-          size="sm"
-          onClick={onCopy}
-          mx="1"
-        >
+  const onClick = async () => {
+    onCopy();
+    if (navigator.share)
+      await navigator.share({
+        text: `Hello! I need some help managing all our treasure, come to ${value} to help bear the load.`,
+        title: "Bag of Holding",
+        url: value,
+      });
+  };
+
+  switch (breakpoint) {
+    case "base":
+    case "sm":
+      return (
+        <Button colorScheme="teal" onClick={onClick}>
           {hasCopied ? "copied" : "share"}
         </Button>
-      </InputRightElement>
-    </InputGroup>
-  );
+      );
+    default:
+      return (
+        <InputGroup w="md">
+          <Input defaultValue={value} />
+          <InputRightElement w="fit-content">
+            <Button
+              colorScheme="teal"
+              w="full"
+              h="1.75rem"
+              size="sm"
+              onClick={onClick}
+              mx={2}
+            >
+              {hasCopied ? "copied" : "share"}
+            </Button>
+          </InputRightElement>
+        </InputGroup>
+      );
+  }
 };
