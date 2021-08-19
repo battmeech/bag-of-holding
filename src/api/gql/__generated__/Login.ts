@@ -11,6 +11,7 @@ export interface Login_login {
   __typename: "User";
   id: string;
   username: string | null;
+  imageUrl: string | null;
 }
 
 export interface Login {

@@ -41,7 +41,8 @@ export const auth = NextAuth({
         externalId: `${account.provider}-${(user.id as any).toString()}`,
       });
 
-      token.isNewUser = !res.login.username;
+      token.picture = res.login.imageUrl || token.picture;
+      token.username = res.login.username;
       token.userId = res.login.id;
 
       return token;
@@ -49,6 +50,7 @@ export const auth = NextAuth({
     // Expose the user ID in the next-auth session
     session: async (session, token) => {
       session.userId = token.userId;
+      session.username = token.username;
       session.isNewUser = token.isNewUser;
       return session;
     },
