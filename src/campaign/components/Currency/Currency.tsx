@@ -10,9 +10,7 @@ export const Currency: React.FC<CurrencyProps> = ({ denomination, value }) => {
   return (
     <Flex alignItems="center">
       <Coin denomination={denomination} />
-      <Text fontSize={{ base: "xs" }} ml={1}>
-        {value}
-      </Text>
+      <Text ml={1}>{value}</Text>
     </Flex>
   );
 };

@@ -46,7 +46,7 @@ export const CampaignLoaded = ({ campaign }: { campaign: Campaign }) => {
 
   return (
     <Box>
-      <VStack>
+      <VStack mb={1}>
         <HStack justify="space-between" w="full">
           <Text fontSize="xl" textTransform="lowercase">
             {campaign.name}
@@ -55,7 +55,7 @@ export const CampaignLoaded = ({ campaign }: { campaign: Campaign }) => {
           <ShareCampaign />
         </HStack>
 
-        <HStack mb={2} justify="space-between" w="full">
+        <HStack justify="space-between" w="full">
           <CurrencyDisplay
             campaignId={campaign.id}
             copper={campaign.copper}

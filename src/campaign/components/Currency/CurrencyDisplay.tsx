@@ -1,4 +1,4 @@
-import { HStack, IconButton, Tooltip } from "@chakra-ui/react";
+import { HStack, IconButton, Tooltip, Wrap, WrapItem } from "@chakra-ui/react";
 import React from "react";
 import { FaPiggyBank } from "react-icons/fa";
 import { useModal } from "shared";
@@ -26,13 +26,23 @@ export const CurrencyDisplay = ({
 
   return (
     <HStack>
-      <HStack>
-        <Currency denomination="platinum" value={platinum} />
-        <Currency denomination="gold" value={gold} />
-        <Currency denomination="electrum" value={electrum} />
-        <Currency denomination="silver" value={silver} />
-        <Currency denomination="copper" value={copper} />
-      </HStack>
+      <Wrap>
+        <WrapItem>
+          <Currency denomination="platinum" value={platinum} />
+        </WrapItem>
+        <WrapItem>
+          <Currency denomination="gold" value={gold} />
+        </WrapItem>
+        <WrapItem>
+          <Currency denomination="electrum" value={electrum} />
+        </WrapItem>
+        <WrapItem>
+          <Currency denomination="silver" value={silver} />
+        </WrapItem>
+        <WrapItem>
+          <Currency denomination="copper" value={copper} />
+        </WrapItem>
+      </Wrap>
 
       <Tooltip label="modify money">
         <IconButton
