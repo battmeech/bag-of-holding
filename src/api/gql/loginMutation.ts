@@ -6,6 +6,7 @@ export const LoginGQL = gql`
       __typename
       id
       username
+      imageUrl
     }
   }
 `;

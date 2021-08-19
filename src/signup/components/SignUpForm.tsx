@@ -41,6 +41,9 @@ export const SignUpForm: React.FC<SignUpFormProps> = ({
   useEffect(() => {
     setValue("avatarUrl", session?.user?.image || "");
   }, [setValue, session?.user?.image]);
+  useEffect(() => {
+    setValue("username", (session as any)?.username || "");
+  }, [setValue, session]);
 
   return (
     <chakra.form {...spaceProps} onSubmit={handleSubmit(onSubmit)}>
@@ -63,10 +66,7 @@ export const SignUpForm: React.FC<SignUpFormProps> = ({
             <VStack spacing="0" w="full" align="flex-start">
               <FormLabel>avatar url</FormLabel>
 
-              <Input
-                {...register("avatarUrl")}
-                defaultValue={session?.user?.image || ""}
-              />
+              <Input {...register("avatarUrl")} />
               <Tooltip
                 label="we don't support image hosting just yet. choose an image from the web and paste the url above!"
                 aria-label="image upload tooltip"
