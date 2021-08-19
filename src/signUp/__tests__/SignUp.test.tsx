@@ -1,5 +1,5 @@
 import { render, screen } from "shared";
-import { SignUp } from "signup/SignUp";
+import { SignUp } from "signUp";
 
 describe("SignUp", () => {
   it("should show the user's name in the heading when available", () => {
