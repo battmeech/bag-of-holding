@@ -28,6 +28,11 @@ export interface EditItemInput {
   tags?: string[] | null;
 }
 
+export interface EditUserInput {
+  username?: string | null;
+  imageUrl?: string | null;
+}
+
 export interface ModifyMoneyInput {
   modification: MoneyModification;
   electrum: number;
