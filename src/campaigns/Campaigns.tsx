@@ -12,6 +12,7 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 import { useModal } from "shared";
+import { PageHeading } from "shared/components/PageHeading";
 import { CampaignList } from "./components/CampaignList";
 import { CampaignModal } from "./components/CampaignModal";
 import { ListCampaigns, ListCampaignsGQL } from "./gql";
@@ -21,8 +22,8 @@ export const Campaigns = () => {
   const { openModal } = useModal();
   return (
     <Box>
-      <Flex as="header" width="full" align="center">
-        <Text fontSize="xl">campaigns</Text>
+      <Flex mb="8" as="header" width="full" align="center">
+        <PageHeading>campaigns</PageHeading>
 
         <Box ml="auto">
           <Tooltip label="create campaign">

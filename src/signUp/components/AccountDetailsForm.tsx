@@ -16,17 +16,19 @@ import { useSession } from "next-auth/client";
 import React, { useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
-export type SignUpInputs = {
+export type AccountDetailsInputs = {
   avatarUrl: string;
   username: string;
 };
 
-type SignUpFormProps = {
-  onSubmit?: SubmitHandler<SignUpInputs>;
+type AccountDetailsFormProps = {
+  isSignUp?: boolean;
+  onSubmit?: SubmitHandler<AccountDetailsInputs>;
 } & SpaceProps;
 
-export const SignUpForm: React.FC<SignUpFormProps> = ({
+export const AccountDetailsForm: React.FC<AccountDetailsFormProps> = ({
   onSubmit = () => {},
+  isSignUp,
   ...spaceProps
 }) => {
   const [session] = useSession();
@@ -34,9 +36,9 @@ export const SignUpForm: React.FC<SignUpFormProps> = ({
     register,
     handleSubmit,
     setValue,
-    formState: { errors },
+    formState: { errors, isDirty },
     watch,
-  } = useForm<SignUpInputs>();
+  } = useForm<AccountDetailsInputs>();
 
   useEffect(() => {
     setValue("avatarUrl", session?.user?.image || "");
@@ -90,8 +92,12 @@ export const SignUpForm: React.FC<SignUpFormProps> = ({
           </Stack>
           <FormErrorMessage>{errors.avatarUrl?.message}</FormErrorMessage>
         </FormControl>
-        <Button colorScheme="teal" type="submit">
-          submit
+        <Button
+          disabled={!(isSignUp || isDirty)}
+          colorScheme="teal"
+          type="submit"
+        >
+          {isSignUp ? "submit" : "save changes"}
         </Button>
       </VStack>
     </chakra.form>

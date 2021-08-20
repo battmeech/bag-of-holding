@@ -1,4 +1,4 @@
-import { Button } from "@chakra-ui/react";
+import { Button, ButtonProps } from "@chakra-ui/react";
 import { ClientSafeProvider, signIn } from "next-auth/client";
 import { SiDiscord, SiGithub, SiGoogle, SiTwitch } from "react-icons/si";
 import React from "react";
@@ -10,13 +10,16 @@ const icons: Record<string, React.ReactElement> = {
   Discord: <SiDiscord />,
 };
 
+type ProviderButtonProps = {
+  provider: ClientSafeProvider;
+  callbackUrl: string;
+} & ButtonProps;
+
 export const ProviderButton = ({
   provider,
   callbackUrl,
-}: {
-  provider: ClientSafeProvider;
-  callbackUrl: string;
-}) => {
+  ...buttonProps
+}: ProviderButtonProps) => {
   return (
     <Button
       leftIcon={icons[provider.name]}
@@ -27,6 +30,7 @@ export const ProviderButton = ({
           callbackUrl,
         })
       }
+      {...buttonProps}
     >
       {provider.name}
     </Button>
