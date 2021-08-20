@@ -18,7 +18,8 @@ export const getSession = async (
         name: "Test User",
       },
       userId: "ac218e46-2a83-42ee-84bb-c35516edc485",
-      expires: "1000000000000000",
+      username: "user x",
+      isNewUser: false,
     };
   }
 
@@ -38,6 +39,9 @@ export const useSession = () => {
         image: "https://avatars.githubusercontent.com/u/38220395?v=4",
         name: "Test User",
       },
+      userId: "ac218e46-2a83-42ee-84bb-c35516edc485",
+      username: "user x",
+      isNewUser: false,
     };
 
     return { loading: false, session: dummySession };
