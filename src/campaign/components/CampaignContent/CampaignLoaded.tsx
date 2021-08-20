@@ -21,6 +21,7 @@ import { FetchCampaign_campaign_Campaign as Campaign } from "campaign/gql";
 import { useEffect, useState } from "react";
 import { MdClear } from "react-icons/md";
 import { useModal } from "shared";
+import { PageHeading } from "shared/components/PageHeading";
 import { ShareCampaign } from "../ShareCampaign";
 import { Sorting } from "./Sorting";
 import { useSortItems } from "./useSortItems";
@@ -48,9 +49,7 @@ export const CampaignLoaded = ({ campaign }: { campaign: Campaign }) => {
     <Box>
       <VStack mb={1}>
         <HStack justify="space-between" w="full">
-          <Text fontSize="xl" textTransform="lowercase">
-            {campaign.name}
-          </Text>
+          <PageHeading>{campaign.name}</PageHeading>
 
           <ShareCampaign />
         </HStack>

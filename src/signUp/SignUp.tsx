@@ -4,7 +4,11 @@ import { useSession } from "next-auth/client";
 import { useRouter } from "next/router";
 import React from "react";
 import { SubmitHandler } from "react-hook-form";
-import { SignUpForm, SignUpInputs } from "./components/SignUpForm";
+import { PageHeading } from "shared/components/PageHeading";
+import {
+  AccountDetailsForm,
+  AccountDetailsInputs,
+} from "./components/AccountDetailsForm";
 import { editUserMutation } from "./gql/editUserMutation";
 import { EditUser, EditUserVariables } from "./__generated__/EditUser";
 
@@ -21,7 +25,7 @@ export const SignUp: React.FC = () => {
   const [session] = useSession();
   const router = useRouter();
 
-  const onSubmit: SubmitHandler<SignUpInputs> = async (data) => {
+  const onSubmit: SubmitHandler<AccountDetailsInputs> = async (data) => {
     const res = await request<EditUser, EditUserVariables>(
       "/api/graphql",
       editUserMutation,
@@ -40,14 +44,14 @@ export const SignUp: React.FC = () => {
   };
 
   return (
-    <Container>
-      <Heading textTransform="lowercase">
-        welcome, {session?.user?.name || "adventurer"}
-      </Heading>
+    <>
+      <PageHeading>welcome, {session?.user?.name || "adventurer"}</PageHeading>
       <Heading mt="2" size="sm">
         we just need a few more things to get you set up...
       </Heading>
-      <SignUpForm mt="8" onSubmit={onSubmit} />
-    </Container>
+      <Container>
+        <AccountDetailsForm mt="8" onSubmit={onSubmit} isSignUp />
+      </Container>
+    </>
   );
 };
