@@ -2,7 +2,7 @@ import {
   Button,
   Input,
   InputGroup,
-  InputRightElement,
+  InputRightAddon,
   useBreakpoint,
   useClipboard,
 } from "@chakra-ui/react";
@@ -35,19 +35,10 @@ export const ShareCampaign = () => {
     default:
       return (
         <InputGroup w="md">
-          <Input defaultValue={url} />
-          <InputRightElement w="fit-content">
-            <Button
-              colorScheme="teal"
-              w="full"
-              h="1.75rem"
-              size="sm"
-              onClick={onClick}
-              mx={2}
-            >
-              {hasCopied ? "copied" : "share"}
-            </Button>
-          </InputRightElement>
+          <Input isReadOnly defaultValue={url} />
+          <InputRightAddon cursor="pointer" onClick={onClick} w="fit-content">
+            {hasCopied ? "copied" : "share"}
+          </InputRightAddon>
         </InputGroup>
       );
   }
