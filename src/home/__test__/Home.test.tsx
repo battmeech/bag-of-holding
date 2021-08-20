@@ -1,5 +1,9 @@
 import { Home } from "home";
+import { useSession } from "next-auth/client";
 import { render } from "shared";
+
+jest.mock("next-auth/client");
+(useSession as jest.Mock).mockReturnValueOnce([null, false]);
 
 describe("Home", () => {
   it("renders", () => {
