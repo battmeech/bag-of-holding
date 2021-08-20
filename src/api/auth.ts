@@ -55,6 +55,7 @@ export const auth = NextAuth({
       return session;
     },
     redirect: async (url, baseUrl) => {
+      console.log(baseUrl);
       const callbackUrl = url.startsWith(baseUrl) ? url : baseUrl;
       return callbackUrl.match(/\/api\/redirect/i)
         ? callbackUrl

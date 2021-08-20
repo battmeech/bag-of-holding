@@ -3,7 +3,7 @@
   "plugins": ["jest"],
   "rules": {
     "no-unused-vars": "error",
-    "no-console": "error",
+    "no-console": "off",
     "jest/expect-expect": [
       "error",
       {
