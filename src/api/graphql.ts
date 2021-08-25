@@ -1,3 +1,4 @@
+/* istanbul ignore file */
 import { createProxyMiddleware } from "http-proxy-middleware";
 import { NextApiHandler } from "next";
 import { getSession } from "shared/session";
