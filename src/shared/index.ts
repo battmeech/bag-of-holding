@@ -1,5 +1,5 @@
 export * from "./components";
 export * from "./gqlClient";
-export * from "./redirect";
+export * from "./ssr";
 export * from "./session";
 export * from "./testUtils";
