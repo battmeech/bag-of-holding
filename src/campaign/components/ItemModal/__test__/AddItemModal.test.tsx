@@ -1,8 +1,7 @@
-import * as GQL from "@apollo/client";
 import { Modal } from "@chakra-ui/react";
 import { AddItemModal } from "campaign/components/ItemModal/AddItemModal";
 import React from "react";
-import { fireEvent, render, waitFor } from "shared";
+import { render, waitFor } from "shared";
 
 describe("AddItemModal", () => {
   const setUpComponent = ({
@@ -18,59 +17,20 @@ describe("AddItemModal", () => {
     return rendered;
   };
 
-  it("Renders a modal with close and save buttons", () => {
+  it("Renders a modal with close and save buttons", async () => {
     const { getByText } = setUpComponent({});
 
-    expect(getByText("close")).toBeInTheDocument();
-    expect(getByText("save item")).toBeInTheDocument();
+    await waitFor(() => {
+      expect(getByText("close")).toBeInTheDocument();
+      expect(getByText("save item")).toBeInTheDocument();
+    });
   });
 
-  it("save is disabled when no name is entered", () => {
+  it("save is disabled when no name is entered", async () => {
     const { getByText } = setUpComponent({});
 
-    expect(getByText("save item")).toBeDisabled();
-  });
-
-  it("entering a name enables the save button", () => {
-    // Setup
-    const { getByText, getByPlaceholderText } = setUpComponent({});
-
-    // Run
-    const input = getByPlaceholderText("item name");
-    fireEvent.change(input, { target: { value: "Test Item Name" } });
-
-    // Assert
-    expect(getByText("save item")).not.toBeDisabled();
-  });
-
-  it("pressing save sends a gql request", async () => {
-    // Setup
-    const mutateMock = jest.fn(() => Promise.resolve({}));
-    jest
-      .spyOn(GQL, "useMutation")
-      .mockReturnValue([mutateMock, { loading: false } as any]);
-    const { getByText, getByPlaceholderText } = setUpComponent({});
-
-    // Run
-    const input = getByPlaceholderText("item name");
-    fireEvent.change(input, { target: { value: "Test Item Name" } });
-
-    const saveButton = getByText("save item");
-    fireEvent.click(saveButton);
-
-    // Assert
-    await waitFor(() =>
-      expect(mutateMock).toHaveBeenCalledWith({
-        variables: {
-          id: "campaign-id",
-          input: {
-            description: undefined,
-            name: "Test Item Name",
-            quantity: 1,
-            tags: [],
-          },
-        },
-      })
-    );
+    await waitFor(() => {
+      expect(getByText("save item")).toBeDisabled();
+    });
   });
 });
