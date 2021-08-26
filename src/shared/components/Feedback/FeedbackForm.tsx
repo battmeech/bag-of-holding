@@ -8,6 +8,10 @@ import {
   FormErrorMessage,
   FormLabel,
   Input,
+  ModalBody,
+  ModalCloseButton,
+  ModalFooter,
+  ModalHeader,
   Textarea,
   VStack,
 } from "@chakra-ui/react";
@@ -19,7 +23,7 @@ type IssueFormInputs = {
 
 export type IssueType = "bug" | "feature";
 
-type FeedbackFormProps = {
+export type FeedbackFormProps = {
   issueType: IssueType;
   onSuccess?: () => void;
 };
@@ -45,34 +49,42 @@ export const FeedbackForm: FC<FeedbackFormProps> = ({
 
   return (
     <chakra.form onSubmit={handleSubmit(onSubmit)}>
-      <VStack spacing="6">
-        <FormControl isInvalid={!!errors.title}>
-          <FormLabel>title</FormLabel>
-          <Input
-            placeholder={`${issueType} title`}
-            {...register("title", {
-              required: "please provide a title",
-            })}
-          />
-          <FormErrorMessage>{errors.title?.message}</FormErrorMessage>
-        </FormControl>
+      <ModalHeader>{issueType} details</ModalHeader>
+      <ModalCloseButton />
 
-        <FormControl isInvalid={!!errors.content}>
-          <FormLabel>content</FormLabel>
-          <Textarea
-            placeholder={`provide as much detail as possible about the ${issueType}`}
-            resize="none"
-            {...register("content", {
-              required: `please provide detail about the ${issueType}`,
-            })}
-          />
-          <FormErrorMessage>{errors.content?.message}</FormErrorMessage>
-        </FormControl>
+      <ModalBody>
+        <VStack spacing="6">
+          <FormControl isInvalid={!!errors.title}>
+            <FormLabel>title</FormLabel>
+            <Input
+              placeholder={`${issueType} title`}
+              {...register("title", {
+                required: "please provide a title",
+              })}
+            />
+            <FormErrorMessage>{errors.title?.message}</FormErrorMessage>
+          </FormControl>
 
+          <FormControl isInvalid={!!errors.content}>
+            <FormLabel>content</FormLabel>
+            <Textarea
+              h="30vh"
+              placeholder={`provide as much detail as possible about the ${issueType}`}
+              resize="none"
+              {...register("content", {
+                required: `please provide detail about the ${issueType}`,
+              })}
+            />
+            <FormErrorMessage>{errors.content?.message}</FormErrorMessage>
+          </FormControl>
+        </VStack>
+      </ModalBody>
+
+      <ModalFooter>
         <Button colorScheme="teal" type="submit">
           submit {issueType}
         </Button>
-      </VStack>
+      </ModalFooter>
     </chakra.form>
   );
 };

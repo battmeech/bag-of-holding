@@ -1,3 +1,4 @@
+import { Modal } from "@chakra-ui/react";
 import fetch from "cross-fetch";
 import { fireEvent, render, waitFor } from "shared";
 import { FeedbackForm, IssueType } from "../FeedbackForm";
@@ -14,7 +15,9 @@ describe("FeedbackForm", () => {
   }) => {
     const onSuccess = jest.fn();
     const rendered = render(
-      <FeedbackForm issueType={issueType} onSuccess={onSuccess} />
+      <Modal isOpen onClose={() => {}}>
+        <FeedbackForm issueType={issueType} onSuccess={onSuccess} />
+      </Modal>
     );
 
     const inputTitle = (title: string) => {
