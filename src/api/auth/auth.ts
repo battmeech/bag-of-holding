@@ -2,7 +2,7 @@ import { graphUrl } from "api/config";
 import { request } from "graphql-request";
 import NextAuth from "next-auth";
 import Providers from "next-auth/providers";
-import { Login, LoginGQL, LoginVariables } from "./gql";
+import { Login, LoginGQL, LoginVariables } from "../gql";
 
 const getAppProviders = () => {
   const providers = [

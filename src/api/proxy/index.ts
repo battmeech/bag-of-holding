@@ -1,0 +1,1 @@
+export { graphqlProxy } from "./graphql";

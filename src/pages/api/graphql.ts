@@ -1,4 +1,4 @@
-export { graphqlProxy as default } from "api/graphql";
+export { graphqlProxy as default } from "api";
 
 export const config = {
   api: {

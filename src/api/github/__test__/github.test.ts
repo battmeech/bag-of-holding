@@ -1,4 +1,4 @@
-import { createIssue } from "api/github";
+import { createIssue } from "../github";
 import { Octokit } from "octokit";
 
 jest.mock("octokit");

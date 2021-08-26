@@ -1,3 +1,3 @@
-export { auth } from "./auth";
-export { createIssue } from "./github";
-export { graphqlProxy } from "./graphql";
+export * from "./auth";
+export * from "./github";
+export * from "./proxy";
