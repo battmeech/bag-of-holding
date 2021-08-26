@@ -1,7 +1,9 @@
 import { createIssue } from "../github";
 import { Octokit } from "octokit";
+import { getSession } from "next-auth/client";
 
 jest.mock("octokit");
+jest.mock("next-auth/client");
 
 describe("github api", () => {
   const res = {
@@ -22,8 +24,24 @@ describe("github api", () => {
     return { create };
   };
 
+  const setupSessionMock = (
+    session: any = {
+      user: {
+        email: "test@test.com",
+        image: "https://avatars.githubusercontent.com/u/38220395?v=4",
+        name: "Test User",
+      },
+      userId: "ac218e46-2a83-42ee-84bb-c35516edc485",
+      username: "user x",
+      isNewUser: false,
+    }
+  ) => {
+    (getSession as jest.Mock).mockReturnValueOnce(session);
+  };
+
   it("creates an issue with the enhancement tag", async () => {
     const { create } = setupGithubMock();
+    setupSessionMock();
     const req = {
       method: "POST",
       body: {
@@ -45,6 +63,7 @@ describe("github api", () => {
 
   it("creates an defect with the bug tag", async () => {
     const { create } = setupGithubMock();
+    setupSessionMock();
     const req = {
       method: "POST",
       body: {
@@ -64,17 +83,19 @@ describe("github api", () => {
     });
   });
 
-  it("sends a 405 when an invalid method is provided", () => {
+  it("sends a 405 when an invalid method is provided", async () => {
+    setupSessionMock();
     const req = {
       method: "GET",
     } as any;
 
-    createIssue(req, res, "bug");
+    await createIssue(req, res, "bug");
 
     expect(res.status).toHaveBeenCalledWith(405);
   });
 
   it("sends a 500 when github fails", async () => {
+    setupSessionMock();
     const req = {
       method: "POST",
       body: {
@@ -95,5 +116,16 @@ describe("github api", () => {
     await createIssue(req, res, "bug");
 
     expect(res.status).toHaveBeenCalledWith(500);
+  });
+
+  it("sends a 401 when a user has no session", async () => {
+    setupSessionMock(null);
+    const req = {
+      method: "POST",
+    } as any;
+
+    await createIssue(req, res, "bug");
+
+    expect(res.status).toHaveBeenCalledWith(401);
   });
 });

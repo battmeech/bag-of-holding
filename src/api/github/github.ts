@@ -1,12 +1,18 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { Octokit } from "octokit";
+import { getSession } from "shared/session";
 
 export const createIssue = async (
   req: NextApiRequest,
   res: NextApiResponse,
   issueType: "enhancement" | "bug"
 ) => {
-  if (req.method !== "POST") {
+  const session = await getSession({ req });
+
+  if (!session.user) {
+    res.status(401);
+    res.json({ message: "You must be signed in to raise an issue" });
+  } else if (req.method !== "POST") {
     res.status(405);
     res.json({ message: `${req.method} not supported.` });
   } else {
