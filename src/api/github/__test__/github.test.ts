@@ -9,6 +9,7 @@ describe("github api", () => {
   const res = {
     status: jest.fn(),
     json: jest.fn(),
+    end: jest.fn(),
   } as any;
 
   const setupGithubMock = () => {

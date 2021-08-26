@@ -12,9 +12,11 @@ export const createIssue = async (
   if (!session.user) {
     res.status(401);
     res.json({ message: "You must be signed in to raise an issue" });
+    res.end();
   } else if (req.method !== "POST") {
     res.status(405);
     res.json({ message: `${req.method} not supported.` });
+    res.end();
   } else {
     const github = new Octokit({
       auth: process.env.GITHUB_API_KEY,
@@ -33,8 +35,11 @@ export const createIssue = async (
 
       res.status(200);
       res.json({ message: "success" });
+      res.end();
     } catch {
       res.status(500);
+      res.json({ message: "internal server error" });
+      res.end();
     }
   }
 };
