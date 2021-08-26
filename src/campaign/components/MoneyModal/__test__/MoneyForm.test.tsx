@@ -5,15 +5,15 @@ import { MoneyForm } from "../MoneyForm";
 
 describe("MoneyForm", () => {
   const setUpComponent = ({
-    errors = new Map<keyof FormProps["values"], boolean>(),
+    errors = {},
     values = { copper: 0, electrum: 0, gold: 0, platinum: 0, silver: 0 },
   }: {
-    errors?: Map<keyof FormProps["values"], boolean>;
+    errors?: FormProps["errors"];
     values?: FormProps["values"];
   }) => {
     const setValueMock = jest.fn();
     const rendered = render(
-      <MoneyForm setValues={setValueMock} errors={errors} values={values} />
+      <MoneyForm setValue={setValueMock} errors={errors} values={values} />
     );
     return { ...rendered, setValueMock };
   };
@@ -44,7 +44,7 @@ describe("MoneyForm", () => {
 
       fireEvent.click(addButton);
 
-      expect(setValueMock).toHaveBeenCalledWith({ key, value });
+      expect(setValueMock).toHaveBeenCalledWith(key, value);
     }
   );
 });
