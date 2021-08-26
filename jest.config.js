@@ -8,6 +8,7 @@ module.exports = {
     "!src/**/__test__/**",
     "!src/**/*.stories.*",
     "!src/shared/generators/*",
+    "!src/pages/**/*",
   ],
   testEnvironment: "jsdom",
   moduleNameMapper: {
