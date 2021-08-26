@@ -5,42 +5,17 @@ import {
   ModifyMoneyVariables,
 } from "campaign/gql";
 import { useEffect, useState } from "react";
+import {
+  DeepMap,
+  FieldError,
+  SubmitHandler,
+  useForm,
+  UseFormGetValues,
+  UseFormSetValue,
+} from "react-hook-form";
 import { MoneyModification } from "../../../../__generated__/globalTypes";
 
-type Values = {
-  platinum: number;
-  gold: number;
-  electrum: number;
-  silver: number;
-  copper: number;
-};
-
 type Modification = "add" | "deduct";
-
-export type FormProps = {
-  errors: Map<keyof Values, boolean>;
-  setValues: (value: { key: keyof Values; value: number | string }) => void;
-  values: Values;
-};
-
-const validate = (
-  errors: Map<keyof Values, boolean>,
-  key: keyof Values,
-  value: number | string
-) => {
-  if (typeof value === "string") {
-    if (value === "") {
-      errors.set(key, true);
-    } else {
-      errors.delete(key);
-    }
-  } else {
-    if (value < 0) errors.set(key, true);
-    else errors.delete(key);
-  }
-
-  return errors;
-};
 
 const initialValue = {
   platinum: 0,
@@ -50,6 +25,33 @@ const initialValue = {
   copper: 0,
 };
 
+type MoneyFormInputs = {
+  platinum: number;
+  gold: number;
+  electrum: number;
+  silver: number;
+  copper: number;
+};
+
+export type FormProps = {
+  errors: DeepMap<MoneyFormInputs, FieldError>;
+  setValue: UseFormSetValue<MoneyFormInputs>;
+  values: MoneyFormInputs;
+};
+
+const useSaveEnabled = (getValues: UseFormGetValues<MoneyFormInputs>) => {
+  const { copper, platinum, electrum, gold, silver } = getValues();
+  const [isSaveEnabled, setIsSaveEnabled] = useState(false);
+
+  useEffect(() => {
+    if (!copper && !platinum && !electrum && !gold && !silver)
+      setIsSaveEnabled(false);
+    else setIsSaveEnabled(true);
+  }, [copper, platinum, electrum, gold, silver]);
+
+  return isSaveEnabled;
+};
+
 export const useMoneyForm = ({
   campaignId,
   onSuccessCallback,
@@ -57,77 +59,55 @@ export const useMoneyForm = ({
   campaignId: string;
   onSuccessCallback: () => void;
 }) => {
-  const [money, setMoney] = useState<Values>(initialValue);
-  const [errors, setErrors] = useState(new Map<keyof Values, boolean>());
-  const [isSaveEnabled, setIsSaveEnabled] = useState(false);
+  const {
+    handleSubmit: submit,
+    formState: { errors },
+    watch,
+    setValue,
+    getValues,
+  } = useForm<MoneyFormInputs>({
+    defaultValues: initialValue,
+  });
 
-  const setValues = ({
-    key,
-    value,
-  }: {
-    key: keyof Values;
-    value: number | string;
-  }) => {
-    const newValue: Record<string, any> = {};
-    const numValue = Number(value);
-
-    if (value === "") newValue[key] = "";
-    else if (!isNaN(numValue) && value >= 0) newValue[key] = numValue;
-    else if (isNaN(numValue)) return;
-    setMoney((currentState) => ({
-      ...currentState,
-      ...newValue,
-    }));
-    setErrors(validate(errors, key, value));
-  };
+  const isSaveEnabled = useSaveEnabled(getValues);
 
   const [mutate, { loading }] = useMutation<ModifyMoney, ModifyMoneyVariables>(
     ModifyMoneyGQL
   );
 
-  const resetForm = () => {
-    setMoney(initialValue);
-  };
-
-  useEffect(() => {
-    if (errors.size > 0) setIsSaveEnabled(false);
-    else if (
-      money.copper === 0 &&
-      money.silver === 0 &&
-      money.electrum === 0 &&
-      money.gold === 0 &&
-      money.platinum === 0
-    )
-      setIsSaveEnabled(false);
-    else setIsSaveEnabled(true);
-  }, [errors, money]);
-
-  const modifyMoney = async (modification: Modification) => {
+  const modifyMoney = (modification: Modification) => {
     const map: Record<Modification, MoneyModification> = {
       add: MoneyModification.ADD,
       deduct: MoneyModification.DEDUCT,
     };
-    await mutate({
-      variables: {
-        id: campaignId,
-        input: { ...money, modification: map[modification] },
-      },
-    });
-    onSuccessCallback();
-    resetForm();
+
+    const onSubmit: SubmitHandler<MoneyFormInputs> = async (data) => {
+      await mutate({
+        variables: {
+          id: campaignId,
+          input: { ...data, modification: map[modification] },
+        },
+      });
+      onSuccessCallback();
+    };
+
+    return onSubmit;
   };
 
   const formProps: FormProps = {
-    setValues,
-    values: money,
     errors,
+    setValue,
+    values: watch(),
+  };
+
+  const handleSubmit = (modification: Modification) => {
+    return submit(modifyMoney(modification));
   };
 
   return {
+    saveLoading: loading,
     formProps,
-    resetForm,
-    modifyMoney,
-    loading,
     isSaveEnabled,
+    handleSubmit,
   };
 };

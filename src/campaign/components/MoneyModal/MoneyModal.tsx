@@ -12,7 +12,7 @@ import { useMoneyForm } from "./useMoneyForm";
 export function MoneyModal({ campaignId }: { campaignId: string }) {
   const { closeModal } = useModal();
 
-  const { modifyMoney, formProps, isSaveEnabled } = useMoneyForm({
+  const { handleSubmit, formProps, isSaveEnabled } = useMoneyForm({
     campaignId,
     onSuccessCallback: closeModal,
   });
@@ -27,17 +27,17 @@ export function MoneyModal({ campaignId }: { campaignId: string }) {
 
       <ModalFooter>
         <Button
-          disabled={!isSaveEnabled}
           variant="ghost"
+          disabled={!isSaveEnabled}
           mr={3}
-          onClick={() => modifyMoney("deduct")}
+          onClick={handleSubmit("deduct")}
         >
           deduct
         </Button>
         <Button
-          disabled={!isSaveEnabled}
           colorScheme="teal"
-          onClick={() => modifyMoney("add")}
+          disabled={!isSaveEnabled}
+          onClick={handleSubmit("add")}
         >
           add
         </Button>

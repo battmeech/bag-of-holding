@@ -56,6 +56,7 @@ export const CurrencyInput = ({
         <Coin denomination={denomination} />
       </InputLeftAddon>
       <Input
+        type="number"
         isInvalid={error}
         placeholder={denomination}
         value={value}
