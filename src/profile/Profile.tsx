@@ -20,6 +20,7 @@ export const Profile: React.FC<WithSession> = () => {
     isClosable: true,
     position: "bottom",
   });
+
   const onSubmit: SubmitHandler<AccountDetailsInputs> = async (data) => {
     const res = await request<EditUser, EditUserVariables>(
       "/api/graphql",
@@ -42,7 +43,7 @@ export const Profile: React.FC<WithSession> = () => {
   };
   return (
     <>
-      <PageHeading>my account</PageHeading>
+      <PageHeading>my profile</PageHeading>
       <Container>
         <AccountDetailsForm onSubmit={onSubmit} mt="8" />
       </Container>
