@@ -25,6 +25,10 @@ describe("github api", () => {
     return { create };
   };
 
+  beforeEach(() => {
+    jest.resetAllMocks();
+  });
+
   const setupSessionMock = (
     session: any = {
       user: {
@@ -45,10 +49,10 @@ describe("github api", () => {
     setupSessionMock();
     const req = {
       method: "POST",
-      body: {
+      body: JSON.stringify({
         title: "serious feature",
         content: "feature idea",
-      },
+      }),
     } as any;
 
     await createIssue(req, res, "enhancement");
@@ -67,10 +71,10 @@ describe("github api", () => {
     setupSessionMock();
     const req = {
       method: "POST",
-      body: {
+      body: JSON.stringify({
         title: "serious bug",
         content: "defect",
-      },
+      }),
     } as any;
 
     await createIssue(req, res, "bug");
@@ -99,10 +103,10 @@ describe("github api", () => {
     setupSessionMock();
     const req = {
       method: "POST",
-      body: {
+      body: JSON.stringify({
         title: "serious feature",
         content: "feature idea",
-      },
+      }),
     } as any;
 
     const failedCreate = jest.fn().mockRejectedValue(500);

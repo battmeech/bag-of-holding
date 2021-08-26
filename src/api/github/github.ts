@@ -22,14 +22,16 @@ export const createIssue = async (
       auth: process.env.GITHUB_API_KEY,
     });
 
+    const { title, content } = JSON.parse(req.body);
+
     try {
       await github.rest.issues.create({
         owner: "battmeech",
         repo: "bag-of-holding-web",
-        title: `${issueType === "bug" ? "Defect" : "Feature request"}: ${
-          req.body.title
-        }`,
-        body: req.body.content,
+        title: `${
+          issueType === "bug" ? "Defect" : "Feature request"
+        }: ${title}`,
+        body: content,
         labels: [issueType],
       });
 
