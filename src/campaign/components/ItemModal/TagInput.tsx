@@ -9,7 +9,7 @@ import {
 import { KeyboardEventHandler, useState } from "react";
 
 export type TagInputProps = {
-  onTagsChanged?: (tags: string[]) => void;
+  onTagsChanged: (tags: string[]) => void;
   tags?: string[];
 } & TagProps;
 
@@ -19,14 +19,18 @@ export const TagInput: React.FC<TagInputProps> = ({
   ...tagProps
 }) => {
   const [value, setValue] = useState("");
+
   const removeTag = (tag: string) => {
-    onTagsChanged?.(tags.filter((storedTag) => storedTag !== tag));
+    const newTags = [...tags].filter((storedTag) => storedTag !== tag);
+    onTagsChanged(newTags);
   };
+
   const addTag = (tag: string) => {
     const tagSet = new Set(tags);
     tagSet.add(tag);
-    onTagsChanged?.([...tagSet]);
+    onTagsChanged([...tagSet]);
   };
+
   const handleKeyDown: KeyboardEventHandler = ({ key, target }) => {
     const trimmedValue = (target as HTMLInputElement).value.trim();
     if (trimmedValue && (key === " " || key === "Enter")) {
@@ -34,6 +38,7 @@ export const TagInput: React.FC<TagInputProps> = ({
       setValue("");
     }
   };
+
   return (
     <>
       <Input
