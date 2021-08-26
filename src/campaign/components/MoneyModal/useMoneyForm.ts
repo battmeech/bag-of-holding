@@ -19,7 +19,6 @@ type Modification = "add" | "deduct";
 
 export type FormProps = {
   errors: Map<keyof Values, boolean>;
-  // eslint-disable-next-line no-unused-vars
   setValues: (value: { key: keyof Values; value: number | string }) => void;
   values: Values;
 };

@@ -9,7 +9,6 @@ import {
 import { KeyboardEventHandler, useState } from "react";
 
 export type TagInputProps = {
-  // eslint-disable-next-line no-unused-vars
   onTagsChanged?: (tags: string[]) => void;
   tags?: string[];
 } & TagProps;

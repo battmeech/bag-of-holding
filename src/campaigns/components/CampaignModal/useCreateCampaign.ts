@@ -7,7 +7,6 @@ import {
 import { useEffect, useState } from "react";
 
 type Input = {
-  // eslint-disable-next-line no-unused-vars
   onSuccessCallback: (campaignId: string) => void;
 };
 

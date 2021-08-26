@@ -8,7 +8,7 @@ import { createContext, FC, ReactNode, useContext, useState } from "react";
 
 /* istanbul ignore next */
 const ModalContext = createContext({
-  // eslint-disable-next-line no-unused-vars
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   openModal: (content: ReactNode, size = "xs") => {},
   closeModal: () => {},
 });

@@ -19,7 +19,6 @@ type Item = {
 
 export type FormProps = {
   errors: Map<keyof Item, boolean>;
-  // eslint-disable-next-line no-unused-vars
   setValues: (value: {
     key: keyof Item;
     value: string | number | string[];

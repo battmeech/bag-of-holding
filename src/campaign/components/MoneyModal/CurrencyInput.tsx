@@ -13,7 +13,6 @@ type CurrencyInputProps = {
   denomination: CurrencyDenomination;
   value: number;
   error: boolean;
-  // eslint-disable-next-line no-unused-vars
   onChange: (value: number | string) => void;
 };
 

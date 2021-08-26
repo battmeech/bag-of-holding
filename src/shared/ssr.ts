@@ -8,9 +8,7 @@ import { getSession, SessionWithID } from "./session";
 
 export const requireLogin = (
   gssp?: (
-    // eslint-disable-next-line no-unused-vars
     context: GetServerSidePropsContext,
-    // eslint-disable-next-line no-unused-vars
     session: SessionWithID
   ) => GetServerSidePropsResult<any> | Promise<GetServerSidePropsResult<any>>
 ) => {
