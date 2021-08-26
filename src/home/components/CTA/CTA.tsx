@@ -22,7 +22,7 @@ export const CTA: React.FC = () => {
   const ctaText = () => {
     if (!session) return "sign in";
     if (session.isNewUser) return "get started";
-    return "see campaigns";
+    return "view campaigns";
   };
 
   return (

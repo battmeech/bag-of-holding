@@ -11,16 +11,18 @@ describe("CTA", () => {
     render(<CTA />);
     expect(screen.getByRole("button", { name: /get started/i })).toBeVisible();
   });
+
   it("should render a 'sign in' button", () => {
     (useSession as jest.Mock).mockReturnValueOnce([null, false]);
     render(<CTA />);
     expect(screen.getByRole("button", { name: /sign in/i })).toBeVisible();
   });
-  it("should render a 'see campaigns' button", () => {
+
+  it("should render a 'view campaigns' button", () => {
     (useSession as jest.Mock).mockReturnValueOnce([{ userId: 23 }, false]);
     render(<CTA />);
     expect(
-      screen.getByRole("button", { name: /see campaigns/i })
+      screen.getByRole("button", { name: /view campaigns/i })
     ).toBeVisible();
   });
 });
