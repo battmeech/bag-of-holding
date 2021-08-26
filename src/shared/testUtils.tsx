@@ -4,7 +4,7 @@ import { ChakraProvider } from "@chakra-ui/react";
 import { render, RenderOptions } from "@testing-library/react";
 import React, { FC, ReactElement } from "react";
 import customTheme from "styles/customTheme";
-import { ModalProvider } from "./ModalProvider";
+import { ModalProvider } from "./components/ModalProvider/ModalProvider";
 
 type TestContextProviderProps = {
   mocks?: MockedResponse<Record<string, any>>[];

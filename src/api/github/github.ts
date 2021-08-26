@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { Octokit } from "octokit";
-import { getSession } from "shared/session";
+import { getSession } from "shared";
 
 export const createIssue = async (
   req: NextApiRequest,

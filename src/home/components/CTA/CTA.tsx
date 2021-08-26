@@ -12,7 +12,7 @@ import {
 import Image from "next/image";
 import NextLink from "next/link";
 import React from "react";
-import { useSession } from "shared/session";
+import { useSession } from "shared";
 import darkCampaignPage from "../../../../public/dark-campaign-page.png";
 import lightCampaignPage from "../../../../public/light-campaign-page.png";
 

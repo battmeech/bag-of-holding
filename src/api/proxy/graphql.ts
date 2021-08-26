@@ -1,7 +1,7 @@
 /* istanbul ignore file */
 import { createProxyMiddleware } from "http-proxy-middleware";
 import { NextApiHandler } from "next";
-import { getSession } from "shared/session";
+import { getSession } from "shared";
 import { graphUrl } from "../config";
 
 export const graphqlProxy: NextApiHandler = async (req, res) => {

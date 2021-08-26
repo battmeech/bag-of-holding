@@ -9,7 +9,7 @@ import {
 import { signOut } from "next-auth/client";
 import NextLink from "next/link";
 import React from "react";
-import { useSession } from "shared/session";
+import { useSession } from "shared";
 
 export const UserAvatar = () => {
   const { session } = useSession();

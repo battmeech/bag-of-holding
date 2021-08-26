@@ -2,7 +2,7 @@ import { graphUrl } from "api/config";
 import { request } from "graphql-request";
 import { GetServerSideProps } from "next";
 import absolute from "next-absolute-url";
-import { getSession } from "shared/session";
+import { getSession } from "shared";
 import { JoinCampaign, JoinCampaignGQL, JoinCampaignVariables } from "./gql";
 
 export const joinCampaign: GetServerSideProps = async (ctx) => {

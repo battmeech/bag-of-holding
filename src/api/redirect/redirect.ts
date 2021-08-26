@@ -1,5 +1,5 @@
 import { NextApiHandler } from "next";
-import { getSession } from "shared/session";
+import { getSession } from "shared";
 
 export const redirectToProfile: NextApiHandler = async (req, res) => {
   const session = await getSession({ req });

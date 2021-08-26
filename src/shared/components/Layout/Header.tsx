@@ -3,8 +3,7 @@ import { Button, HStack, IconButton, Link } from "@chakra-ui/react";
 import { signIn } from "next-auth/client";
 import NextLink from "next/link";
 import { SiDiscord } from "react-icons/si";
-import { AccessibleLink } from "shared";
-import { useSession } from "shared/session";
+import { AccessibleLink, useSession } from "shared";
 import { ThemeToggle } from "./ThemeToggle";
 import { UserAvatar } from "./UserAvatar";
 
