@@ -18,6 +18,7 @@ export const UserAvatar = () => {
     <Menu placement="bottom-end">
       <MenuButton>
         <Avatar
+          aria-label="user avatar"
           size="sm"
           src={session?.user?.image || undefined}
           name={session?.user?.name || undefined}
