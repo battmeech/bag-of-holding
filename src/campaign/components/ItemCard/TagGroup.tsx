@@ -39,7 +39,7 @@ export const TagGroup: React.FC<TagGroupProps> = ({
       {displayedTags.map((tag) => (
         <Tag
           cursor="pointer"
-          onClick={() => onTagClick(tag)}
+          onClick={() => onTagClick(tag.toLowerCase())}
           key={tag}
           variant={variant}
           colorScheme={colorScheme}
