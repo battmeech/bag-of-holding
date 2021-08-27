@@ -1,7 +1,7 @@
 import userEvent from "@testing-library/user-event";
 import { FetchCampaign_campaign_Campaign as Campaign } from "campaign/gql";
 import React from "react";
-import { fireEvent, render, waitFor } from "shared";
+import { fireEvent, render } from "shared";
 import { createCampaign } from "shared/testData";
 import { CampaignLoaded } from "../CampaignLoaded";
 
@@ -34,29 +34,6 @@ describe("CampaignLoaded", () => {
     fireEvent.click(piggyBank);
 
     expect(getByText("modify money")).toBeInTheDocument();
-  });
-
-  it("renders the add item modal when clicking the plus button", async () => {
-    const { getByLabelText, getByText } = setUpComponent({});
-
-    const plusButton = getByLabelText("add item");
-    fireEvent.click(plusButton);
-
-    await waitFor(() => {
-      expect(getByText("new item")).toBeInTheDocument();
-    });
-  });
-
-  it("renders the add item modal when clicking the add item button", async () => {
-    const campaign = { ...createCampaign(), items: [] };
-    const { getByText } = setUpComponent({ campaign });
-
-    const addItem = getByText("add an item");
-    fireEvent.click(addItem);
-
-    await waitFor(() => {
-      expect(getByText("new item")).toBeInTheDocument();
-    });
   });
 
   it("renders a search input when items exist on the campaign", () => {
