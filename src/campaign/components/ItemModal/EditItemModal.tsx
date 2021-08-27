@@ -1,5 +1,6 @@
 import {
   Button,
+  chakra,
   ModalBody,
   ModalCloseButton,
   ModalFooter,
@@ -18,7 +19,7 @@ export function EditItemModal({ item }: { item: ExistingItem }) {
     existingItem: item,
   });
   return (
-    <>
+    <chakra.form onSubmit={saveItem}>
       <ModalHeader>edit item</ModalHeader>
       <ModalCloseButton />
       <ModalBody>
@@ -29,10 +30,10 @@ export function EditItemModal({ item }: { item: ExistingItem }) {
         <Button variant="ghost" mr={3} onClick={closeModal}>
           close
         </Button>
-        <Button colorScheme="teal" onClick={saveItem} disabled={!isSaveEnabled}>
+        <Button colorScheme="teal" type="submit" disabled={!isSaveEnabled}>
           save item
         </Button>
       </ModalFooter>
-    </>
+    </chakra.form>
   );
 }
