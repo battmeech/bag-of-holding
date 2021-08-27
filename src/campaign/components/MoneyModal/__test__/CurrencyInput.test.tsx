@@ -112,6 +112,6 @@ describe("CurrentInput", () => {
 
     fireEvent.change(input, { target: { value: "2" } });
 
-    expect(onChangeMock).toHaveBeenCalledWith("2");
+    expect(onChangeMock).toHaveBeenCalledWith(2);
   });
 });

@@ -44,9 +44,17 @@ const useSaveEnabled = (getValues: UseFormGetValues<MoneyFormInputs>) => {
   const [isSaveEnabled, setIsSaveEnabled] = useState(false);
 
   useEffect(() => {
-    if (!copper && !platinum && !electrum && !gold && !silver)
+    if (!copper && !platinum && !electrum && !gold && !silver) {
       setIsSaveEnabled(false);
-    else setIsSaveEnabled(true);
+    } else if (
+      isNaN(copper) ||
+      isNaN(platinum) ||
+      isNaN(electrum) ||
+      isNaN(gold) ||
+      isNaN(silver)
+    ) {
+      setIsSaveEnabled(false);
+    } else setIsSaveEnabled(true);
   }, [copper, platinum, electrum, gold, silver]);
 
   return isSaveEnabled;
