@@ -1,8 +1,8 @@
 import { ItemCard } from "campaign/components/ItemCard";
-import { createItem } from "shared/testData";
 import { FetchCampaign_campaign_Campaign_items as Item } from "campaign/gql";
 import React from "react";
 import { fireEvent, render } from "shared";
+import { createItem } from "shared/testData";
 
 describe("ItemCard", () => {
   const tagClickMock = jest.fn();
@@ -33,21 +33,6 @@ describe("ItemCard", () => {
 
     expect(getByText("edit item")).toBeInTheDocument();
     expect(getByText("delete item")).toBeInTheDocument();
-  });
-
-  it("clicking edit item brings up the edit modal", () => {
-    const { getByLabelText, getByText } = setUpComponent({});
-
-    const optionsMenu = getByLabelText("item options");
-
-    fireEvent.click(optionsMenu);
-
-    const editItemButton = getByText("edit item");
-
-    fireEvent.click(editItemButton);
-
-    expect(getByText("item name")).toBeInTheDocument();
-    expect(getByText("item description")).toBeInTheDocument();
   });
 
   it("clicking delete item brings up the delete confirmation modal", () => {
