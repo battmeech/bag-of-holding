@@ -1,7 +1,6 @@
 import { Modal } from "@chakra-ui/react";
 import { EditItemModal } from "campaign/components/ItemModal/EditItemModal";
 import { EditItem_editItem_Item as Item } from "campaign/gql";
-import React from "react";
 import { fireEvent, render, waitFor } from "shared";
 import { createItem } from "shared/testData";
 
@@ -15,11 +14,13 @@ describe("EditItemModal", () => {
     return rendered;
   };
 
-  it("renders a modal with close and save buttons", () => {
+  it("renders a modal with close and save buttons", async () => {
     const { getByText } = setupComponent({});
 
-    expect(getByText("close")).toBeInTheDocument();
-    expect(getByText("save item")).toBeInTheDocument();
+    await waitFor(() => {
+      expect(getByText("close")).toBeInTheDocument();
+      expect(getByText("save item")).toBeInTheDocument();
+    });
   });
 
   it("save is enabled on modal load is entered", async () => {
