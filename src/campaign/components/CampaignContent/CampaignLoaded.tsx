@@ -119,7 +119,7 @@ export const CampaignLoaded = ({ campaign }: { campaign: Campaign }) => {
               .sort(sortItems)
               .map((item) => (
                 <ItemCard
-                  onTagClick={(tag) => setFilterText(tag.toLowerCase())}
+                  onTagClick={setFilterText}
                   key={item.id}
                   item={item}
                 />
