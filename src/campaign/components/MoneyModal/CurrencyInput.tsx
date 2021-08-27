@@ -13,7 +13,7 @@ type CurrencyInputProps = {
   denomination: CurrencyDenomination;
   value: number;
   error: boolean;
-  onChange: (value: number | string) => void;
+  onChange: (value: number) => void;
 };
 
 export const CurrencyInput = ({
@@ -60,7 +60,7 @@ export const CurrencyInput = ({
         isInvalid={error}
         placeholder={denomination}
         value={value}
-        onChange={(event) => onChange(event.target.value)}
+        onChange={(event) => onChange(parseInt(event.target.value))}
       />
       <InputRightAddon>
         <Box>
@@ -71,11 +71,12 @@ export const CurrencyInput = ({
             size="sm"
             icon={<AddIcon />}
             mr={1}
+            disabled={isNaN(value)}
           />
 
           <IconButton
             variant="ghost"
-            disabled={value === 0}
+            disabled={value === 0 || isNaN(value)}
             onClick={deduct}
             aria-label={`deduct-${denomination}`}
             size="sm"
