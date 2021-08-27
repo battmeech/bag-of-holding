@@ -38,7 +38,9 @@ const useItem = () => {
     watch,
     getValues,
     handleSubmit,
-  } = useForm<ItemFormInputs>();
+  } = useForm<ItemFormInputs>({
+    defaultValues: { description: "", name: "", quantity: 1, tags: [] },
+  });
 
   const [isSaveEnabled, setIsSaveEnabled] = useState(false);
 
@@ -70,7 +72,7 @@ export const useCreateItem = ({
   campaignId: string;
   onSuccessCallback: () => void;
 }) => {
-  const { isSaveEnabled, reset, formProps, handleSubmit } = useItem();
+  const { isSaveEnabled, formProps, handleSubmit } = useItem();
   const [mutate, { loading }] = useMutation<AddItem, AddItemVariables>(
     AddItemGQL
   );
@@ -92,7 +94,6 @@ export const useCreateItem = ({
 
   return {
     saveLoading: loading,
-    resetForm: () => reset(),
     isSaveEnabled,
     formProps,
     saveItem: handleSubmit(onSubmit),

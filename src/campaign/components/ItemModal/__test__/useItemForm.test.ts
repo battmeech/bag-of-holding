@@ -30,7 +30,12 @@ describe("useItemForm", () => {
       const { result } = setupHook({});
 
       await waitFor(() => {
-        expect(result.current.formProps.values).toStrictEqual({});
+        expect(result.current.formProps.values).toStrictEqual({
+          description: "",
+          name: "",
+          quantity: 1,
+          tags: [],
+        });
       });
     });
 
@@ -78,24 +83,6 @@ describe("useItemForm", () => {
       });
     });
 
-    it("calling reset form resets the values to blank", async () => {
-      const { result } = setupHook({});
-
-      act(() => {
-        result.current.formProps.setValue("name", "new name");
-
-        result.current.formProps.setValue("description", "new");
-      });
-
-      act(() => {
-        result.current.resetForm();
-      });
-
-      await waitFor(() => {
-        expect(result.current.formProps.values).toStrictEqual({});
-      });
-    });
-
     it("returns saveLoading as true when the GQL query is in progress", async () => {
       const { result } = setupHook({ loading: true });
 
@@ -128,7 +115,7 @@ describe("useItemForm", () => {
           variables: {
             id: "campaignId",
             input: {
-              description: undefined,
+              description: "",
               name: "Name",
               quantity: 1,
               tags: undefined,
