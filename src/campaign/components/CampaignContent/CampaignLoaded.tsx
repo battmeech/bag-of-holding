@@ -18,32 +18,20 @@ import { CurrencyDisplay } from "campaign/components/Currency";
 import { ItemCard } from "campaign/components/ItemCard";
 import { AddItemModal } from "campaign/components/ItemModal";
 import { FetchCampaign_campaign_Campaign as Campaign } from "campaign/gql";
-import { useEffect, useState } from "react";
 import { MdClear } from "react-icons/md";
 import { useModal } from "shared";
 import { PageHeading } from "shared/components/PageHeading";
 import { ShareCampaign } from "../ShareCampaign";
 import { Sorting } from "./Sorting";
+import { useFilterItems } from "./useFilterItems";
 import { useSortItems } from "./useSortItems";
 
 export const CampaignLoaded = ({ campaign }: { campaign: Campaign }) => {
   const { openModal } = useModal();
-  const [filterText, setFilterText] = useState("");
-  const [filteredItems, setFilteredItems] = useState(campaign.items ?? []);
-
   const { sortItems, sortingOrder, toggleSortingOrder } = useSortItems();
-
-  useEffect(() => {
-    const newFilteredItems = campaign.items?.filter(
-      (item) =>
-        item.name.toLowerCase().includes(filterText.toLowerCase()) ||
-        item.description?.toLowerCase().includes(filterText.toLowerCase()) ||
-        item.tags.filter((tag) =>
-          tag.toLowerCase().includes(filterText.toLowerCase())
-        ).length > 0
-    );
-    setFilteredItems(newFilteredItems ?? []);
-  }, [filterText, campaign.items]);
+  const { filterText, filteredItems, setFilterText } = useFilterItems(
+    campaign.items
+  );
 
   return (
     <Box>
