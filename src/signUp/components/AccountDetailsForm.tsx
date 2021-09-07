@@ -1,3 +1,4 @@
+import { useMutation } from "@apollo/client";
 import {
   Avatar,
   Button,
@@ -10,11 +11,13 @@ import {
   Stack,
   Text,
   Tooltip,
+  useToast,
   VStack,
 } from "@chakra-ui/react";
-import { useSession } from "next-auth/client";
 import React, { useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { useSession } from "shared";
+import { EditUser, EditUserGQL, EditUserVariables } from "signUp/gql";
 
 export type AccountDetailsInputs = {
   avatarUrl: string;
@@ -23,15 +26,15 @@ export type AccountDetailsInputs = {
 
 type AccountDetailsFormProps = {
   isSignUp?: boolean;
-  onSubmit?: SubmitHandler<AccountDetailsInputs>;
+  onSuccessCallback: (userId: string) => void;
 } & SpaceProps;
 
 export const AccountDetailsForm: React.FC<AccountDetailsFormProps> = ({
-  onSubmit = () => {},
   isSignUp,
+  onSuccessCallback,
   ...spaceProps
 }) => {
-  const [session] = useSession();
+  const { session } = useSession();
   const {
     register,
     handleSubmit,
@@ -40,12 +43,40 @@ export const AccountDetailsForm: React.FC<AccountDetailsFormProps> = ({
     watch,
   } = useForm<AccountDetailsInputs>();
 
+  const toast = useToast({
+    status: "error",
+    description:
+      "there was a problem updating your profile. please try again later.",
+    variant: "solid",
+    isClosable: true,
+    position: "bottom",
+  });
+
   useEffect(() => {
     setValue("avatarUrl", session?.user?.image || "");
   }, [setValue, session?.user?.image]);
+
   useEffect(() => {
     setValue("username", (session as any)?.username || "");
   }, [setValue, session]);
+
+  const [mutate] = useMutation<EditUser, EditUserVariables>(EditUserGQL);
+
+  const onSubmit: SubmitHandler<AccountDetailsInputs> = async (data) => {
+    const { data: response } = await mutate({
+      variables: {
+        input: {
+          imageUrl: data.avatarUrl,
+          username: data.username,
+        },
+      },
+    });
+    if (response?.editUser.__typename === "User") {
+      onSuccessCallback(response.editUser.id);
+    } else {
+      return toast();
+    }
+  };
 
   return (
     <chakra.form {...spaceProps} onSubmit={handleSubmit(onSubmit)}>

@@ -1,6 +1,6 @@
-import { gql } from "graphql-request";
+import gql from "graphql-tag";
 
-export const editUserMutation = gql`
+export const EditUserGQL = gql`
   mutation EditUser($input: EditUserInput!) {
     editUser(input: $input) {
       __typename
