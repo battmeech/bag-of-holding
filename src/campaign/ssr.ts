@@ -1,16 +1,16 @@
 import { graphUrl } from "api/config";
 import {
-  FetchCampaign,
-  FetchCampaignGQL,
-  FetchCampaignVariables,
+  CheckCampaignExists,
+  CheckCampaignExistsGQL,
+  CheckCampaignExistsVariables,
 } from "campaign/gql";
 import request from "graphql-request";
 import { requireLogin } from "shared";
 
 export const getServerSideProps = requireLogin(async (ctx, { userId }) => {
-  const data = await request<FetchCampaign, FetchCampaignVariables>(
+  const data = await request<CheckCampaignExists, CheckCampaignExistsVariables>(
     graphUrl,
-    FetchCampaignGQL,
+    CheckCampaignExistsGQL,
     { id: ctx.query.campaignId as string },
     {
       "bag-user-id": userId,
