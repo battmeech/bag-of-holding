@@ -13,6 +13,7 @@ export const Campaign = () => {
       variables: {
         id: campaignId as string,
       },
+      pollInterval: 5000,
     }
   );
 

@@ -18,7 +18,9 @@ import { CampaignModal } from "./components/CampaignModal";
 import { ListCampaigns, ListCampaignsGQL } from "./gql";
 
 export const Campaigns = () => {
-  const { data, loading } = useQuery<ListCampaigns>(ListCampaignsGQL);
+  const { data, loading } = useQuery<ListCampaigns>(ListCampaignsGQL, {
+    pollInterval: 5000,
+  });
   const { openModal } = useModal();
   return (
     <Box>

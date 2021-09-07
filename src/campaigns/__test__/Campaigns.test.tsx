@@ -15,7 +15,9 @@ describe("Campaigns", () => {
 
     render(<Campaigns />);
 
-    expect(gqlSpy).toHaveBeenCalledWith(ListCampaignsGQL);
+    expect(gqlSpy).toHaveBeenCalledWith(ListCampaignsGQL, {
+      pollInterval: expect.any(Number),
+    });
   });
 
   it("displays campaigns that are returned", () => {
@@ -53,15 +55,13 @@ describe("Campaigns", () => {
     ).toBeInTheDocument();
   });
   it("does not show a 'create campaign' button when campaigns are provided", () => {
-    jest
-      .spyOn(require("@apollo/client"), "useQuery")
-      .mockReturnValue({
-        data: {
-          campaigns: [
-            { name: "My campaign", id: "12", itemCount: 0, userCount: 0 },
-          ],
-        },
-      });
+    jest.spyOn(require("@apollo/client"), "useQuery").mockReturnValue({
+      data: {
+        campaigns: [
+          { name: "My campaign", id: "12", itemCount: 0, userCount: 0 },
+        ],
+      },
+    });
 
     const { queryByRole } = render(<Campaigns />);
 

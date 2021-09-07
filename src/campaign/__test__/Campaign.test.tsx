@@ -21,6 +21,7 @@ describe("Campaign", () => {
 
     expect(useQuery).toHaveBeenCalledWith(FetchCampaignGQL, {
       variables: { id: "campaign-id" },
+      pollInterval: expect.any(Number),
     });
   });
 });
