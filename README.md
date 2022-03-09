@@ -4,7 +4,7 @@ This is a web app to be used alongside a D&D campaign to store all the items you
 
 ## Getting Started
 
-The site is deployed via Vercel and be found [here](https://purrito-bag-of-holding.vercel.app/)
+The site is deployed via Vercel and be found [here](https://www.bagofholding.xyz/)
 
 ## Running your own Bag of Holding
 
