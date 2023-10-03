@@ -8,19 +8,38 @@
   },
   "scripts": {
     "postinstall": "husky install",
-    "test": "yarn test:type && yarn test:coverage",
+    "test": "yarn test:type && yarn lint && yarn test:coverage",
     "test:type": "tsc --noEmit",
     "test:unit": "jest",
     "test:coverage": "jest --coverage",
-    "lint": "eslint ./src --ext ts,tsx",
-    "prettify": "prettier --write src",
-    "storybook": "start-storybook -p 6006",
-    "build:storybook": "build-storybook"
+    "lint": "eslint . --ext ts,tsx",
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.7.2",
     "@commitlint/config-conventional": "^17.7.0",
-    "husky": "^8.0.3"
+    "@types/jest": "^29.5.5",
+    "@types/node": "^20.8.2",
+    "@types/react": "^18.2.24",
+    "@types/react-dom": "^18.2.8",
+    "@typescript-eslint/eslint-plugin": "^6.7.4",
+    "@typescript-eslint/parser": "^6.7.4",
+    "eslint": "^8.50.0",
+    "eslint-config-next": "^13.5.4",
+    "eslint-plugin-jest": "^27.4.2",
+    "eslint-plugin-prettier": "^5.0.0",
+    "husky": "^8.0.3",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
+    "prettier": "^3.0.3",
+    "typescript": "^5.2.2"
+  },
+  "dependencies": {
+    "next": "^13.5.4",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "volta": {
     "node": "18.18.0",
