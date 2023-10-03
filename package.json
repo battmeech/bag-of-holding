@@ -7,7 +7,7 @@
     "type": "git"
   },
   "scripts": {
-    "prepare": "husky install",
+    "postinstall": "husky install",
     "test": "yarn test:type && yarn test:coverage",
     "test:type": "tsc --noEmit",
     "test:unit": "jest",
