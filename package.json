@@ -6,6 +6,11 @@
     "url": "https://github.com/battmeech/bag-of-holding-web",
     "type": "git"
   },
+  "volta": {
+    "node": "18.18.0",
+    "yarn": "3.6.3"
+  },
+  "packageManager": "yarn@3.6.3",
   "scripts": {
     "postinstall": "husky install",
     "test": "yarn test:type && yarn lint && yarn test:coverage",
@@ -40,9 +45,5 @@
     "next": "^13.5.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
-  },
-  "volta": {
-    "node": "18.18.0",
-    "yarn": "3.6.3"
   }
 }
