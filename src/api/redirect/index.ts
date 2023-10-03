@@ -1,1 +1,0 @@
-export { redirectToProfile } from "./redirect";

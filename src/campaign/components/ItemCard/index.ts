@@ -1,1 +1,0 @@
-export { ItemCard } from "./ItemCard";
