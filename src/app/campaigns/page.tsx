@@ -1,2 +1,2 @@
 "use client";
-export { Campaigns as default } from "@ui-components/Campaigns/Campaigns";
+export { Campaigns as default } from "@ui-views/Campaigns";

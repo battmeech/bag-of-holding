@@ -20,6 +20,7 @@
     ],
     "paths": {
       "@ui-components/*": ["./src/ui-components/*"],
+      "@ui-views/*": ["./src/ui-views/*"],
       "@ui-styling/*": ["./src/ui-styling/*"],
       "@app/*": ["./src/app/*"],
       "@trpc-client/*": ["./src/trpc-client/*"],

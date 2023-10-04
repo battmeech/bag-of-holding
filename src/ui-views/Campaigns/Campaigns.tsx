@@ -12,7 +12,7 @@ import {
 } from "@chakra-ui/react";
 import { PageHeading } from "@ui-components/PageHeading";
 import React from "react";
-import { CampaignList } from "@ui-components/Campaigns/CampaignList";
+import { CampaignList } from "@ui-views/Campaigns/CampaignList";
 import { trpc } from "@trpc-client/client";
 
 export const Campaigns = () => {

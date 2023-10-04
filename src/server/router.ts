@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { router, publicProcedure } from "@server/trpc";
-import { campaign } from "@server/routes/campaign";
+import { campaign } from "@server/routers/campaign";
 export const appRouter = router({
   hello: publicProcedure
     .input(
