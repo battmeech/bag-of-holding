@@ -1,7 +1,8 @@
 import { z } from "zod";
-import { router, procedure } from "@server/trpc";
+import { router, publicProcedure } from "@server/trpc";
+import { campaign } from "@server/routes/campaign";
 export const appRouter = router({
-  hello: procedure
+  hello: publicProcedure
     .input(
       z.object({
         text: z.string(),
@@ -12,6 +13,7 @@ export const appRouter = router({
         greeting: `hello ${opts.input.text}`,
       };
     }),
+  campaign,
 });
 
 export type AppRouter = typeof appRouter;
