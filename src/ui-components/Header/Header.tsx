@@ -1,7 +1,7 @@
 "use client";
 import { Heading } from "@chakra-ui/layout";
 import { HStack } from "@chakra-ui/react";
-import { ThemeToggle } from "@ui-components/ThemeToggle";
+import { ThemeToggle } from "@ui-components/Header/ThemeToggle";
 import { Link } from "@chakra-ui/next-js";
 
 export const Header = () => (
