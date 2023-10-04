@@ -4,12 +4,13 @@ import { ChakraProvider } from "@chakra-ui/react";
 import { customTheme } from "@ui-styling/theme";
 import { SessionProvider } from "next-auth/react";
 import { Session } from "next-auth";
+import { ReactNode } from "react";
 
 export const Providers = ({
   children,
   session,
 }: {
-  children: React.ReactNode;
+  children: ReactNode;
   session: Session | null;
 }) => (
   <SessionProvider session={session}>

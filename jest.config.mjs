@@ -15,6 +15,7 @@ const config = {
     "!src/app/**",
     "!src/auth/**",
     "!src/ui-styling/**",
+    "!src/trpc-client/**",
     "!src/server/prisma.ts",
   ],
   testEnvironment: 'jest-environment-jsdom',
