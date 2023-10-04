@@ -14,11 +14,8 @@ import lightLogo from "@public/light-logo.png";
 import { Heading } from "@chakra-ui/layout";
 import darkCampaignPage from "@public/dark-campaign-page.png";
 import lightCampaignPage from "@public/light-campaign-page.png";
-import { trpc } from "@trpc-client/client";
 
 export default function Home() {
-  const {} = trpc.hello.useQuery({ text: "hello" });
-
   return (
     <>
       <Stack w="full" align="center" direction={{ base: "column", sm: "row" }}>
