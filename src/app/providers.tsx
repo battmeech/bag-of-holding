@@ -1,7 +1,7 @@
 "use client";
 import { CacheProvider } from "@chakra-ui/next-js";
 import { ChakraProvider } from "@chakra-ui/react";
-import { customTheme } from "@/theme";
+import { customTheme } from "@ui-styling/theme";
 import { SessionProvider } from "next-auth/react";
 import { Session } from "next-auth";
 
