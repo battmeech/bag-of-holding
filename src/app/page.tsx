@@ -9,13 +9,13 @@ import {
 } from "@chakra-ui/react";
 import Image from "next/image";
 import React from "react";
-import darkLogo from "../../public/dark-logo.png";
-import lightLogo from "../../public/light-logo.png";
+import darkLogo from "@public/dark-logo.png";
+import lightLogo from "@public/light-logo.png";
 import { Heading } from "@chakra-ui/layout";
-import darkCampaignPage from "../../public/dark-campaign-page.png";
-import lightCampaignPage from "../../public/light-campaign-page.png";
+import darkCampaignPage from "@public/dark-campaign-page.png";
+import lightCampaignPage from "@public/light-campaign-page.png";
 
-const Home = () => {
+export default function Home() {
   return (
     <>
       <Stack w="full" align="center" direction={{ base: "column", sm: "row" }}>
@@ -69,6 +69,4 @@ const Home = () => {
       </Stack>
     </>
   );
-};
-
-export default Home;
+}

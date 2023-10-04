@@ -1,10 +1,10 @@
-import { Providers } from "@/app/providers";
+import { Providers } from "@app/providers";
 import "@fontsource/lexend/latin.css";
-import { Header } from "@/app/Header";
 import { ReactNode } from "react";
 import { Box } from "@chakra-ui/layout";
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { Header } from "@ui-components/Header";
+import { authOptions } from "@app-auth/next-auth";
 
 export const metadata = {
   title: "Next.js",

@@ -4,11 +4,12 @@ import { Box, Heading, Text } from "@chakra-ui/layout";
 import { useColorModeValue } from "@chakra-ui/react";
 import Image from "next/image";
 import Link from "next/link";
-import darkDice from "../../public/dark-dice.png";
-import lightDice from "../../public/light-dice.png";
-import { MotionBox } from "@/shared/MotionBox";
+import darkDice from "@public/dark-dice.png";
+import lightDice from "@public/light-dice.png";
+import { MotionBox } from "@ui-components/MotionBox";
+import { FC } from "react";
 
-const Page404: React.FC = () => (
+const Page404: FC = () => (
   <>
     <MotionBox
       animate={{ y: 20 }}
