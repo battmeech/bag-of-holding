@@ -6,6 +6,7 @@ export const campaign = router({
   list: privateProcedure.query(async ({ ctx }) => {
     return prisma.campaign.findMany({
       where: { users: { some: { id: ctx.userId } } },
+      include: { users: true, items: true },
     });
   }),
   create: privateProcedure
