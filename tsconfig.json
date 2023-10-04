@@ -22,6 +22,7 @@
       "@ui-components/*": ["./src/ui-components/*"],
       "@ui-styling/*": ["./src/ui-styling/*"],
       "@app/*": ["./src/app/*"],
+      "@trpc-client/*": ["./src/trpc-client/*"],
       "@app-auth/*": ["./src/auth/*"],
       "@server/*": ["./src/server/*"],
       "@public/*": ["./public/*"]
