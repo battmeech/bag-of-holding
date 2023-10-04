@@ -12,14 +12,14 @@
   },
   "packageManager": "yarn@3.6.3",
   "scripts": {
-    "postinstall": "husky install",
+    "postinstall": "husky install && prisma generate",
     "test": "yarn test:type && yarn lint && yarn test:coverage",
     "test:type": "tsc --noEmit",
     "test:unit": "jest",
     "test:coverage": "jest --coverage",
     "lint": "eslint . --ext ts,tsx",
     "dev": "next dev",
-    "build": "next build",
+    "build": "prisma generate && next build",
     "start": "next start"
   },
   "devDependencies": {
