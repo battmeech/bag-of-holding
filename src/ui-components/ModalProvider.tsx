@@ -37,7 +37,13 @@ export const ModalProvider: FC<{ children: ReactNode }> = ({ children }) => {
   return (
     <ModalContext.Provider value={value}>
       {children}
-      <Modal isOpen={isOpen} onClose={closeModal} isCentered size={size}>
+      <Modal
+        preserveScrollBarGap
+        isOpen={isOpen}
+        onClose={closeModal}
+        isCentered
+        size={size}
+      >
         <ModalOverlay data-testid="modal-overlay" />
         <ModalContent>{content}</ModalContent>
       </Modal>
