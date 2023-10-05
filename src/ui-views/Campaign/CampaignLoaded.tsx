@@ -1,5 +1,7 @@
 import { AddIcon, SearchIcon } from "@chakra-ui/icons";
 import {
+  Avatar,
+  AvatarGroup,
   Box,
   Button,
   Center,
@@ -38,7 +40,23 @@ export const CampaignLoaded = ({ campaign }: { campaign: Campaign }) => {
       <VStack mb={1}>
         <HStack justify="space-between" w="full">
           <PageHeading>{campaign.name}</PageHeading>
+        </HStack>
 
+        <HStack w="full" justify="space-between">
+          <HStack>
+            <Text>players</Text>
+            <AvatarGroup size="sm" max={4}>
+              {campaign.users.map((user) => (
+                <Avatar
+                  key={user.id}
+                  aria-label="user avatar"
+                  size="sm"
+                  src={user.image || undefined}
+                  name={user.name || undefined}
+                />
+              ))}
+            </AvatarGroup>
+          </HStack>
           <ShareCampaign />
         </HStack>
 
@@ -51,7 +69,6 @@ export const CampaignLoaded = ({ campaign }: { campaign: Campaign }) => {
             electrum={campaign.electrum}
             platinum={campaign.platinum}
           />
-
           <Tooltip label="add item">
             <IconButton
               aria-label="add item"
