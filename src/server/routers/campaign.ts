@@ -11,9 +11,9 @@ export const campaign = router({
   }),
   getById: privateProcedure
     .input(z.object({ id: z.string() }))
-    .query(async ({ input }) => {
+    .query(async ({ input, ctx }) => {
       return prisma.campaign.findUnique({
-        where: { id: input.id },
+        where: { id: input.id, users: { some: { id: ctx.userId } } },
         include: { users: true, items: true },
       });
     }),
