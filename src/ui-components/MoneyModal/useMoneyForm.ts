@@ -6,6 +6,7 @@ import {
   UseFormGetValues,
   UseFormSetValue,
 } from "react-hook-form";
+import { trpc } from "@trpc-client/client";
 
 type Modification = "add" | "deduct";
 
@@ -54,6 +55,7 @@ const useSaveEnabled = (getValues: UseFormGetValues<MoneyFormInputs>) => {
 
 export const useMoneyForm = ({
   onSuccessCallback,
+  campaignId,
 }: {
   campaignId: string;
   onSuccessCallback: () => void;
@@ -70,10 +72,16 @@ export const useMoneyForm = ({
 
   const isSaveEnabled = useSaveEnabled(getValues);
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const modifyMoney = (_: Modification) => {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const onSubmit: SubmitHandler<MoneyFormInputs> = async (__) => {
+  const trpcContext = trpc.useContext();
+  const mutation = trpc.campaign.alterMoney.useMutation({
+    onSuccess: () => {
+      trpcContext.campaign.getById.invalidate({ id: campaignId });
+    },
+  });
+
+  const modifyMoney = (modification: Modification) => {
+    const onSubmit: SubmitHandler<MoneyFormInputs> = async (data) => {
+      mutation.mutate({ campaignId, modification, alterations: data });
       onSuccessCallback();
     };
 

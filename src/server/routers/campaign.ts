@@ -25,4 +25,44 @@ export const campaign = router({
       });
       return id;
     }),
+  alterMoney: privateProcedure
+    .input(
+      z.object({
+        campaignId: z.string(),
+        modification: z.enum(["add", "deduct"]),
+        alterations: z.object({
+          copper: z.number(),
+          platinum: z.number(),
+          electrum: z.number(),
+          gold: z.number(),
+          silver: z.number(),
+        }),
+      })
+    )
+    .mutation(async ({ input }) => {
+      let data = {};
+
+      if (input.modification === "add") {
+        data = {
+          platinum: { increment: input.alterations.platinum },
+          gold: { increment: input.alterations.gold },
+          electrum: { increment: input.alterations.electrum },
+          silver: { increment: input.alterations.silver },
+          copper: { increment: input.alterations.copper },
+        };
+      } else {
+        data = {
+          platinum: { decrement: input.alterations.platinum },
+          gold: { decrement: input.alterations.gold },
+          electrum: { decrement: input.alterations.electrum },
+          silver: { decrement: input.alterations.silver },
+          copper: { decrement: input.alterations.copper },
+        };
+      }
+
+      return prisma.campaign.update({
+        where: { id: input.campaignId },
+        data,
+      });
+    }),
 });

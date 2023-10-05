@@ -14,9 +14,12 @@ import { PageHeading } from "@ui-components/PageHeading";
 import React from "react";
 import { CampaignList } from "@ui-views/Campaigns/CampaignList";
 import { trpc } from "@trpc-client/client";
+import { useModal } from "@ui-components/ModalProvider";
+import { CampaignModal } from "@ui-views/Campaigns/CampaignModal/CampaignModal";
 
 export const Campaigns = () => {
   const { data, isLoading } = trpc.campaign.list.useQuery();
+  const { openModal } = useModal();
 
   return (
     <Box>
@@ -30,7 +33,7 @@ export const Campaigns = () => {
               variant="ghost"
               size="lg"
               icon={<AddIcon />}
-              onClick={() => alert("under construction")}
+              onClick={() => openModal(<CampaignModal />)}
             />
           </Tooltip>
         </Box>
@@ -41,7 +44,7 @@ export const Campaigns = () => {
             <Text>nothing to see here!</Text>
             <Button
               colorScheme="teal"
-              onClick={() => alert("under construction")}
+              onClick={() => openModal(<CampaignModal />)}
             >
               create a campaign
             </Button>
