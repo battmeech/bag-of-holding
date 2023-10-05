@@ -25,6 +25,15 @@ export const campaign = router({
       });
       return id;
     }),
+  join: privateProcedure
+    .input(z.object({ campaignId: z.string() }))
+    .mutation(async ({ input, ctx }) => {
+      const campaign = await prisma.campaign.update({
+        where: { id: input.campaignId },
+        data: { users: { connect: { id: ctx.userId } } },
+      });
+      return campaign;
+    }),
   alterMoney: privateProcedure
     .input(
       z.object({

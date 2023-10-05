@@ -9,7 +9,9 @@ import {
 import React, { useState } from "react";
 
 export const ShareCampaign = () => {
-  const [url] = useState(window.location.href.replace("/campaigns/", "/join/"));
+  const [url] = useState(
+    window.location.href.replace("/campaigns/", "/campaigns/join/")
+  );
 
   const { hasCopied, onCopy } = useClipboard(url);
   const breakpoint = useBreakpoint();
