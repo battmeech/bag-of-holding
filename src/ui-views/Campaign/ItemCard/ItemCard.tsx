@@ -60,7 +60,12 @@ export const ItemCard = ({ item, onTagClick = () => {} }: ItemCardProps) => {
               <MenuItem
                 icon={<DeleteIcon />}
                 onClick={() =>
-                  openModal(<DeleteConfirmationModal itemId={item.id} />)
+                  openModal(
+                    <DeleteConfirmationModal
+                      itemId={item.id}
+                      campaignId={item.campaignId}
+                    />
+                  )
                 }
               >
                 delete item
@@ -96,12 +101,7 @@ export const ItemCard = ({ item, onTagClick = () => {} }: ItemCardProps) => {
                   <RiPencilFill data-testid="no-notes-icon" />
                 )
               }
-              onClick={() =>
-                openModal(
-                  <ItemNotes currentNotes={item.notes} itemId={item.id} />,
-                  "xl"
-                )
-              }
+              onClick={() => openModal(<ItemNotes item={item} />, "xl")}
             />
           </Tooltip>
 

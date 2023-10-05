@@ -72,7 +72,13 @@ export const useCreateItem = ({
   });
 
   const onSubmit: SubmitHandler<ItemFormInputs> = async (data) => {
-    mutation.mutate({ campaignId, itemName: data.name });
+    mutation.mutate({
+      campaignId,
+      itemName: data.name,
+      quantity: data.quantity,
+      tags: data.tags,
+      description: data.description,
+    });
     onSuccessCallback();
   };
 
@@ -85,7 +91,7 @@ export const useCreateItem = ({
 };
 
 export const useEditItem = ({
-  existingItem: { name, description, tags, quantity, id },
+  existingItem: { name, description, tags, quantity, id, campaignId },
   onSuccessCallback,
 }: {
   existingItem: Item;
@@ -95,6 +101,13 @@ export const useEditItem = ({
 
   const { setValue } = formProps;
 
+  const trpcContext = trpc.useContext();
+  const mutation = trpc.item.update.useMutation({
+    onSuccess: () => {
+      trpcContext.campaign.getById.invalidate({ id: campaignId });
+    },
+  });
+
   useEffect(() => {
     setValue("name", name);
     setValue("description", description || undefined);
@@ -103,7 +116,13 @@ export const useEditItem = ({
   }, []);
 
   const onSubmit: SubmitHandler<ItemFormInputs> = async (input) => {
-    alert(`TODO: update item ${input.name} ${id}`);
+    mutation.mutate({
+      itemId: id,
+      itemName: input.name,
+      description: input.description,
+      quantity: input.quantity,
+      tags: input.tags,
+    });
     onSuccessCallback();
   };
 

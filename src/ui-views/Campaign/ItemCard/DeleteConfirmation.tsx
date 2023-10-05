@@ -6,12 +6,26 @@ import {
   ModalHeader,
 } from "@chakra-ui/react";
 import { useModal } from "@ui-components/ModalProvider";
+import { trpc } from "@trpc-client/client";
 
-export function DeleteConfirmationModal({ itemId }: { itemId: string }) {
+export function DeleteConfirmationModal({
+  itemId,
+  campaignId,
+}: {
+  itemId: string;
+  campaignId: string;
+}) {
   const { closeModal } = useModal();
 
+  const trpcContext = trpc.useContext();
+  const mutation = trpc.item.delete.useMutation({
+    onSuccess: async () => {
+      await trpcContext.campaign.getById.invalidate({ id: campaignId });
+    },
+  });
+
   const onClick = async () => {
-    alert(`TODO: delete item ${itemId}`);
+    mutation.mutate({ itemId, campaignId: campaignId });
     closeModal();
   };
 

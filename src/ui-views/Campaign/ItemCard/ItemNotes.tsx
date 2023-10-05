@@ -9,19 +9,13 @@ import {
 } from "@chakra-ui/react";
 import { useModal } from "@ui-components/ModalProvider";
 import { useEditNotes } from "@ui-views/Campaign/ItemCard/useEditNotes";
+import { Item } from "@ui-views/Campaign/types";
 
-export const ItemNotes = ({
-  currentNotes,
-  itemId,
-}: {
-  currentNotes: string | null;
-  itemId: string;
-}) => {
+export const ItemNotes = ({ item }: { item: Item }) => {
   const { closeModal } = useModal();
 
   const { notes, setNotes, saveItem, saveActive } = useEditNotes({
-    itemId,
-    currentNotes,
+    item,
   });
 
   return (
@@ -45,7 +39,11 @@ export const ItemNotes = ({
             close
           </Button>
 
-          <Button disabled={!saveActive} colorScheme="teal" onClick={saveItem}>
+          <Button
+            isDisabled={!saveActive}
+            colorScheme="teal"
+            onClick={saveItem}
+          >
             save changes
           </Button>
         </HStack>

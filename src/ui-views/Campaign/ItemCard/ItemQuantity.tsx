@@ -24,6 +24,7 @@ export const ItemQuantityEditor = ({
   const { quantity, saveItem, setQuantity } = useEditQuantity({
     itemId: item.id,
     currentQuantity: item.quantity,
+    campaignId: item.campaignId,
   });
 
   useEffect(() => {
