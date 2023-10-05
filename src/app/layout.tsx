@@ -5,7 +5,6 @@ import { Box } from "@chakra-ui/layout";
 import { getServerSession } from "next-auth";
 import { Header } from "@ui-components/Header";
 import { authOptions } from "@app-auth/next-auth";
-import { ClientProvider } from "@app/trpc-provider";
 
 export const metadata = {
   title: "bag of holding",
@@ -19,14 +18,12 @@ async function RootLayout({ children }: { children: ReactNode }) {
     <html lang="en">
       <Box m="0 auto" maxWidth={1200} transition="0.5s ease-out" as="body">
         <Providers session={session}>
-          <ClientProvider>
-            <Box m={8}>
-              <Header />
-              <Box as="main" my={22}>
-                {children}
-              </Box>
+          <Box m={8}>
+            <Header />
+            <Box as="main" my={22}>
+              {children}
             </Box>
-          </ClientProvider>
+          </Box>
         </Providers>
       </Box>
     </html>

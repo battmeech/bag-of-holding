@@ -3844,6 +3844,7 @@ __metadata:
     prisma: ^5.3.1
     react: ^18.2.0
     react-dom: ^18.2.0
+    react-hook-form: ^7.47.0
     react-icons: ^4.11.0
     superjson: ^1.13.3
     typescript: ^5.2.2
@@ -8471,6 +8472,15 @@ __metadata:
     "@types/react":
       optional: true
   checksum: 93473a6f0a249487e0f1609ccfe94312ce86265d7bca01f6825c061e15fcc13c78d6adb0555f8d9e7fa1cba3e23958f3ca4d4148c7bea828843c909feb5e10f1
+  languageName: node
+  linkType: hard
+
+"react-hook-form@npm:^7.47.0":
+  version: 7.47.0
+  resolution: "react-hook-form@npm:7.47.0"
+  peerDependencies:
+    react: ^16.8.0 || ^17 || ^18
+  checksum: dec192fec9c54e436f9e47008635dd7849b6b119ed477a9b0cd491367a0b2ced3427cd937febfb245e1cb7578c863917181d903eff4519c2787bf713ec7d3426
   languageName: node
   linkType: hard
 

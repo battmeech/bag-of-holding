@@ -1,5 +1,6 @@
 import {
   Box,
+  Button,
   chakra,
   Divider,
   Heading,
@@ -11,6 +12,7 @@ import {
 import React from "react";
 import { GiElfHelmet, GiPlainDagger } from "react-icons/gi";
 import { Outputs } from "@trpc-client/client";
+import { Link } from "@chakra-ui/next-js";
 
 export const CampaignCard = ({
   campaign,
@@ -46,6 +48,14 @@ export const CampaignCard = ({
           </Text>
         </HStack>
       </Stack>
+
+      <Box w="full">
+        <Link href={`/campaigns/${campaign.id}`}>
+          <Button w="full" variant="link" colorScheme="teal">
+            view
+          </Button>
+        </Link>
+      </Box>
     </VStack>
   );
 };

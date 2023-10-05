@@ -5,6 +5,8 @@ import { customTheme } from "@ui-styling/theme";
 import { SessionProvider } from "next-auth/react";
 import { Session } from "next-auth";
 import { ReactNode } from "react";
+import { ModalProvider } from "@ui-components/ModalProvider";
+import { ClientProvider } from "@app/trpc-provider";
 
 export const Providers = ({
   children,
@@ -14,8 +16,12 @@ export const Providers = ({
   session: Session | null;
 }) => (
   <SessionProvider session={session}>
-    <CacheProvider>
-      <ChakraProvider theme={customTheme}>{children}</ChakraProvider>
-    </CacheProvider>
+    <ClientProvider>
+      <CacheProvider>
+        <ChakraProvider theme={customTheme}>
+          <ModalProvider>{children}</ModalProvider>
+        </ChakraProvider>
+      </CacheProvider>
+    </ClientProvider>
   </SessionProvider>
 );

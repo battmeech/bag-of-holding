@@ -9,6 +9,14 @@ export const campaign = router({
       include: { users: true, items: true },
     });
   }),
+  getById: privateProcedure
+    .input(z.object({ id: z.string() }))
+    .query(async ({ input }) => {
+      return prisma.campaign.findUnique({
+        where: { id: input.id },
+        include: { users: true, items: true },
+      });
+    }),
   create: privateProcedure
     .input(z.object({ name: z.string() }))
     .mutation(async ({ input, ctx }) => {
