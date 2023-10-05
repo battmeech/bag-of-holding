@@ -3,11 +3,9 @@ import {
   Link,
   Menu,
   MenuButton,
-  MenuGroup,
   MenuItem,
   MenuList,
 } from "@chakra-ui/react";
-
 import NextLink from "next/link";
 import { signOut, useSession } from "next-auth/react";
 
@@ -29,15 +27,9 @@ export const UserAvatar = () => {
           <MenuItem>view campaigns</MenuItem>
         </Link>
 
-        <MenuGroup title="profile">
-          <Link as={NextLink} href="/profile">
-            <MenuItem>my profile</MenuItem>
-          </Link>
-
-          <MenuItem onClick={() => signOut({ callbackUrl: "/" })}>
-            sign out
-          </MenuItem>
-        </MenuGroup>
+        <MenuItem onClick={() => signOut({ callbackUrl: "/" })}>
+          sign out
+        </MenuItem>
       </MenuList>
     </Menu>
   );
