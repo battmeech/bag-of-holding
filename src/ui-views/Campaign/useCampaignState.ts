@@ -31,8 +31,8 @@ export function useCampaignPageState({
   useEffect(() => {
     if (isLoading) setState({ state: "loading" });
     if (error) setState({ state: "error", message: "error" });
-    if (!data) setState({ state: "not found" });
     if (data) setState({ state: "loaded", campaign: data });
+    if (!isLoading && !data && !error) setState({ state: "not found" });
   }, [isLoading, data, error]);
 
   return state;

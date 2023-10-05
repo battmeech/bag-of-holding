@@ -5,14 +5,13 @@ import { CampaignContent } from "@ui-views/Campaign/CampaignContent";
 export const Campaign = () => {
   const params = useParams();
 
-  const { data, isInitialLoading, error, isLoading } =
-    trpc.campaign.getById.useQuery({
-      id: params.campaignId as string,
-    });
+  const { data, status, error } = trpc.campaign.getById.useQuery({
+    id: params.campaignId as string,
+  });
 
   return (
     <CampaignContent
-      isLoading={isInitialLoading || isLoading}
+      isLoading={status === "loading"}
       data={data}
       error={!!error}
     />
