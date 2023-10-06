@@ -44,19 +44,55 @@ export const campaign = router({
   create: privateProcedure
     .input(z.object({ name: z.string() }))
     .mutation(async ({ input, ctx }) => {
-      const { id } = await prisma.campaign.create({
+      const { id: campaignId } = await prisma.campaign.create({
         data: { name: input.name, users: { connect: { id: ctx.userId } } },
       });
-      return id;
+
+      await prisma.campaignLog.create({
+        data: {
+          changeType: "CAMPAIGN_CREATE",
+          user: { connect: { id: ctx.userId } },
+          changeDescription: input.name,
+          campaign: { connect: { id: campaignId } },
+        },
+      });
+
+      return campaignId;
     }),
   join: privateProcedure
     .input(z.object({ campaignId: z.string() }))
     .mutation(async ({ input, ctx }) => {
-      const campaign = await prisma.campaign.update({
+      const campaign = await prisma.campaign.findUnique({
+        where: { id: input.campaignId },
+        include: { users: true },
+      });
+
+      if (!campaign) {
+        throw new TRPCError({
+          message: "Campaign not found",
+          code: "NOT_FOUND",
+        });
+      }
+
+      if (campaign.users.some((user) => user.id === ctx.userId)) {
+        return campaign;
+      }
+
+      const updatedCampaign = await prisma.campaign.update({
         where: { id: input.campaignId },
         data: { users: { connect: { id: ctx.userId } } },
       });
-      return campaign;
+
+      await prisma.campaignLog.create({
+        data: {
+          changeType: "JOIN_CAMPAIGN",
+          user: { connect: { id: ctx.userId } },
+          changeDescription: campaign.name,
+          campaign: { connect: { id: input.campaignId } },
+        },
+      });
+
+      return updatedCampaign;
     }),
   alterMoney: privateProcedure
     .input(
@@ -72,8 +108,8 @@ export const campaign = router({
         }),
       })
     )
-    .mutation(async ({ input }) => {
-      let data = {};
+    .mutation(async ({ input, ctx }) => {
+      let data: any;
 
       if (input.modification === "add") {
         data = {
@@ -93,9 +129,30 @@ export const campaign = router({
         };
       }
 
-      return prisma.campaign.update({
+      const campaign = prisma.campaign.update({
         where: { id: input.campaignId },
         data,
       });
+
+      const changeDescription = Object.keys(data)
+        .reduce((acc, key) => {
+          const value = data[key].increment || data[key].decrement;
+          if (!value) return acc;
+
+          return `${acc}${value} ${key} `;
+        }, "")
+        .trim();
+
+      await prisma.campaignLog.create({
+        data: {
+          changeType:
+            input.modification === "add" ? "ADD_CURRENCY" : "DEDUCT_CURRENCY",
+          user: { connect: { id: ctx.userId } },
+          changeDescription,
+          campaign: { connect: { id: input.campaignId } },
+        },
+      });
+
+      return campaign;
     }),
 });

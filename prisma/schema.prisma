@@ -9,6 +9,8 @@ datasource db {
 }
 
 enum ChangeType {
+  CAMPAIGN_CREATE
+  JOIN_CAMPAIGN
   ADD_ITEM
   REMOVE_ITEM
   ALTER_ITEM
