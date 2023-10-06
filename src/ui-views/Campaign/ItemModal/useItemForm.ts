@@ -113,6 +113,7 @@ export const useEditItem = ({
     setValue("description", description || undefined);
     setValue("quantity", quantity);
     setValue("tags", tags);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const onSubmit: SubmitHandler<ItemFormInputs> = async (input) => {

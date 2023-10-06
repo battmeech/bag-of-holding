@@ -36,14 +36,14 @@ export const CampaignCard = ({
         <HStack align="center">
           <GiElfHelmet />
           <Text>
-            {campaign.users.length}{" "}
+            {campaign.numberOfUsers}{" "}
             <chakra.span color="gray.500">players</chakra.span>
           </Text>
         </HStack>
         <HStack align="center">
           <GiPlainDagger />
           <Text>
-            {campaign.items.length}{" "}
+            {campaign.numberOfItems}{" "}
             <chakra.span color="gray.500">items</chakra.span>
           </Text>
         </HStack>

@@ -1,21 +1,45 @@
 import { privateProcedure, router } from "@server/trpc";
 import { prisma } from "@server/prisma";
 import { z } from "zod";
+import { TRPCError } from "@trpc/server";
 
 export const campaign = router({
   list: privateProcedure.query(async ({ ctx }) => {
-    return prisma.campaign.findMany({
+    const campaigns = await prisma.campaign.findMany({
       where: { users: { some: { id: ctx.userId } } },
       include: { users: true, items: true },
     });
+
+    return campaigns.map((campaign) => ({
+      id: campaign.id,
+      name: campaign.name,
+      numberOfUsers: campaign.users.length,
+      numberOfItems: campaign.items.length,
+    }));
   }),
   getById: privateProcedure
     .input(z.object({ id: z.string() }))
     .query(async ({ input, ctx }) => {
-      return prisma.campaign.findUnique({
+      const campaign = await prisma.campaign.findUnique({
         where: { id: input.id, users: { some: { id: ctx.userId } } },
         include: { users: true, items: true },
       });
+
+      if (!campaign) {
+        throw new TRPCError({
+          message: "Campaign not found",
+          code: "NOT_FOUND",
+        });
+      }
+
+      return {
+        ...campaign,
+        users: campaign.users.map((user) => ({
+          id: user.id,
+          image: user.image,
+          name: user.name,
+        })),
+      };
     }),
   create: privateProcedure
     .input(z.object({ name: z.string() }))
