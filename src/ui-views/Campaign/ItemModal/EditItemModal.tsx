@@ -30,7 +30,7 @@ export function EditItemModal({ item }: { item: Item }) {
         <Button variant="ghost" mr={3} onClick={closeModal}>
           close
         </Button>
-        <Button colorScheme="teal" type="submit" disabled={!isSaveEnabled}>
+        <Button colorScheme="teal" type="submit" isDisabled={!isSaveEnabled}>
           save item
         </Button>
       </ModalFooter>

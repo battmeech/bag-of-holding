@@ -24,7 +24,9 @@ export const ItemForm = ({ errors, values, setValue }: FormProps) => {
           placeholder="item name"
           my="auto"
           value={values.name}
-          onChange={(event) => setValue("name", event.target.value)}
+          onChange={(event) =>
+            setValue("name", event.target.value, { shouldDirty: true })
+          }
         />
       </FormControl>
 
@@ -35,7 +37,9 @@ export const ItemForm = ({ errors, values, setValue }: FormProps) => {
           placeholder="item description"
           my="auto"
           value={values.description}
-          onChange={(event) => setValue("description", event.target.value)}
+          onChange={(event) =>
+            setValue("description", event.target.value, { shouldDirty: true })
+          }
         />
       </FormControl>
 
@@ -45,7 +49,9 @@ export const ItemForm = ({ errors, values, setValue }: FormProps) => {
           value={values.quantity}
           defaultValue={1}
           min={0}
-          onChange={(value) => setValue("quantity", parseInt(value))}
+          onChange={(value) =>
+            setValue("quantity", parseInt(value), { shouldDirty: true })
+          }
         >
           <NumberInputField />
           <NumberInputStepper>
@@ -60,7 +66,7 @@ export const ItemForm = ({ errors, values, setValue }: FormProps) => {
           colorScheme="teal"
           tags={values.tags}
           onTagsChanged={(tags) => {
-            setValue("tags", tags);
+            setValue("tags", tags, { shouldDirty: true });
           }}
         />
       </FormControl>

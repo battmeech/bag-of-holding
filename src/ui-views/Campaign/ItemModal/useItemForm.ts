@@ -21,16 +21,21 @@ type ItemFormInputs = {
   tags?: string[];
 };
 
-const useItem = () => {
+const useItem = (defaultValues?: Partial<ItemFormInputs>) => {
   const {
     reset,
-    formState: { errors, isValid },
+    formState: { errors, isValid, isDirty },
     setValue,
     watch,
     getValues,
     handleSubmit,
   } = useForm<ItemFormInputs>({
-    defaultValues: { description: "", name: "", quantity: 1, tags: [] },
+    defaultValues: defaultValues || {
+      description: "",
+      name: "",
+      quantity: 1,
+      tags: [],
+    },
   });
 
   const [isSaveEnabled, setIsSaveEnabled] = useState(false);
@@ -38,9 +43,9 @@ const useItem = () => {
   const name = getValues("name");
 
   useEffect(() => {
-    if (isValid && name) setIsSaveEnabled(true);
+    if (isValid && name && isDirty) setIsSaveEnabled(true);
     else setIsSaveEnabled(false);
-  }, [name, isValid]);
+  }, [name, isValid, isDirty]);
 
   const formProps: FormProps = {
     errors,
@@ -91,15 +96,18 @@ export const useCreateItem = ({
 };
 
 export const useEditItem = ({
-  existingItem: { name, description, tags, quantity, id, campaignId },
+  existingItem: { id, campaignId, name, description, tags, quantity },
   onSuccessCallback,
 }: {
   existingItem: Item;
   onSuccessCallback: () => void;
 }) => {
-  const { isSaveEnabled, formProps, handleSubmit } = useItem();
-
-  const { setValue } = formProps;
+  const { isSaveEnabled, formProps, handleSubmit } = useItem({
+    name,
+    description: description || undefined,
+    tags,
+    quantity,
+  });
 
   const trpcContext = trpc.useContext();
   const mutation = trpc.item.update.useMutation({
@@ -107,14 +115,6 @@ export const useEditItem = ({
       trpcContext.campaign.getById.invalidate({ id: campaignId });
     },
   });
-
-  useEffect(() => {
-    setValue("name", name);
-    setValue("description", description || undefined);
-    setValue("quantity", quantity);
-    setValue("tags", tags);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   const onSubmit: SubmitHandler<ItemFormInputs> = async (input) => {
     mutation.mutate({
@@ -128,7 +128,7 @@ export const useEditItem = ({
   };
 
   return {
-    saveLoading: false,
+    saveLoading: mutation.isLoading,
     isSaveEnabled,
     formProps,
     saveItem: handleSubmit(onSubmit),
