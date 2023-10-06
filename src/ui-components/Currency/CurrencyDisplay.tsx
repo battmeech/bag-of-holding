@@ -43,16 +43,6 @@ export const CurrencyDisplay = ({
           <Currency denomination="copper" value={copper} />
         </WrapItem>
       </Wrap>
-
-      <Tooltip label="modify money">
-        <IconButton
-          aria-label="edit money"
-          variant="ghost"
-          size="lg"
-          icon={<FaPiggyBank />}
-          onClick={() => openModal(<MoneyModal campaignId={campaignId} />)}
-        />
-      </Tooltip>
     </HStack>
   );
 };

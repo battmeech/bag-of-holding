@@ -1,4 +1,4 @@
-import { AddIcon, SearchIcon } from "@chakra-ui/icons";
+import { SearchIcon } from "@chakra-ui/icons";
 import {
   Avatar,
   AvatarGroup,
@@ -6,14 +6,12 @@ import {
   Button,
   Center,
   HStack,
-  IconButton,
   Input,
   InputGroup,
   InputLeftElement,
   InputRightElement,
   SimpleGrid,
   Text,
-  Tooltip,
   VStack,
 } from "@chakra-ui/react";
 import { MdClear } from "react-icons/md";
@@ -27,8 +25,8 @@ import { useFilterItems } from "@ui-views/Campaign/useFilter";
 import { Sorting } from "@ui-views/Campaign/Sorting";
 import { AddItemModal } from "@ui-views/Campaign/ItemModal/AddItemModal";
 import { ItemCard } from "@ui-views/Campaign/ItemCard/ItemCard";
-import { FaJournalWhills } from "react-icons/fa";
-import { CampaignLogModal } from "@ui-views/Campaign/CampaignLogModal";
+import React from "react";
+import { CampaignButtonGroup } from "@ui-views/Campaign/CampaignButtonGroup";
 
 export const CampaignLoaded = ({ campaign }: { campaign: Campaign }) => {
   const { openModal } = useModal();
@@ -45,33 +43,18 @@ export const CampaignLoaded = ({ campaign }: { campaign: Campaign }) => {
         </HStack>
 
         <HStack w="full" justify="space-between">
-          <HStack>
-            <Tooltip label="open campaign logs">
-              <IconButton
-                aria-label="open campaign logs"
-                variant="ghost"
-                icon={<FaJournalWhills />}
-                onClick={() =>
-                  openModal(
-                    <CampaignLogModal campaignId={campaign.id} />,
-                    "full"
-                  )
-                }
+          <AvatarGroup size="sm" max={4}>
+            {campaign.users.map((user) => (
+              <Avatar
+                key={user.id}
+                aria-label="user avatar"
+                size="sm"
+                src={user.image || undefined}
+                name={user.name || undefined}
               />
-            </Tooltip>
-            <Text>players</Text>
-            <AvatarGroup size="sm" max={4}>
-              {campaign.users.map((user) => (
-                <Avatar
-                  key={user.id}
-                  aria-label="user avatar"
-                  size="sm"
-                  src={user.image || undefined}
-                  name={user.name || undefined}
-                />
-              ))}
-            </AvatarGroup>
-          </HStack>
+            ))}
+          </AvatarGroup>
+
           <ShareCampaign />
         </HStack>
 
@@ -84,17 +67,7 @@ export const CampaignLoaded = ({ campaign }: { campaign: Campaign }) => {
             electrum={campaign.electrum}
             platinum={campaign.platinum}
           />
-          <Tooltip label="add item">
-            <IconButton
-              aria-label="add item"
-              variant="ghost"
-              size="lg"
-              icon={<AddIcon />}
-              onClick={() =>
-                openModal(<AddItemModal campaignId={campaign.id} />)
-              }
-            />
-          </Tooltip>
+          <CampaignButtonGroup campaignId={campaign.id} />
         </HStack>
       </VStack>
 
