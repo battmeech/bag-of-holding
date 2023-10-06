@@ -27,6 +27,8 @@ import { useFilterItems } from "@ui-views/Campaign/useFilter";
 import { Sorting } from "@ui-views/Campaign/Sorting";
 import { AddItemModal } from "@ui-views/Campaign/ItemModal/AddItemModal";
 import { ItemCard } from "@ui-views/Campaign/ItemCard/ItemCard";
+import { FaJournalWhills } from "react-icons/fa";
+import { CampaignLogModal } from "@ui-views/Campaign/CampaignLogModal";
 
 export const CampaignLoaded = ({ campaign }: { campaign: Campaign }) => {
   const { openModal } = useModal();
@@ -44,6 +46,19 @@ export const CampaignLoaded = ({ campaign }: { campaign: Campaign }) => {
 
         <HStack w="full" justify="space-between">
           <HStack>
+            <Tooltip label="open campaign logs">
+              <IconButton
+                aria-label="open campaign logs"
+                variant="ghost"
+                icon={<FaJournalWhills />}
+                onClick={() =>
+                  openModal(
+                    <CampaignLogModal campaignId={campaign.id} />,
+                    "full"
+                  )
+                }
+              />
+            </Tooltip>
             <Text>players</Text>
             <AvatarGroup size="sm" max={4}>
               {campaign.users.map((user) => (
