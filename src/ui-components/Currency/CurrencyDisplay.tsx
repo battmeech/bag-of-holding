@@ -1,9 +1,6 @@
-import { HStack, IconButton, Tooltip, Wrap, WrapItem } from "@chakra-ui/react";
+import { HStack, Wrap, WrapItem } from "@chakra-ui/react";
 import React from "react";
-import { FaPiggyBank } from "react-icons/fa";
 import { Currency } from "./Currency";
-import { useModal } from "@ui-components/ModalProvider";
-import { MoneyModal } from "@ui-components/MoneyModal/MoneyModal";
 
 type CurrencyDisplayProps = {
   platinum: number;
@@ -11,7 +8,6 @@ type CurrencyDisplayProps = {
   electrum: number;
   silver: number;
   copper: number;
-  campaignId: string;
 };
 
 export const CurrencyDisplay = ({
@@ -20,10 +16,7 @@ export const CurrencyDisplay = ({
   electrum,
   silver,
   copper,
-  campaignId,
 }: CurrencyDisplayProps) => {
-  const { openModal } = useModal();
-
   return (
     <HStack>
       <Wrap>

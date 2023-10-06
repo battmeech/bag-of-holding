@@ -60,7 +60,6 @@ export const CampaignLoaded = ({ campaign }: { campaign: Campaign }) => {
 
         <HStack justify="space-between" w="full">
           <CurrencyDisplay
-            campaignId={campaign.id}
             copper={campaign.copper}
             silver={campaign.silver}
             gold={campaign.gold}
