@@ -8,6 +8,26 @@ datasource db {
   directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
 }
 
+enum ChangeType {
+  ADD_ITEM
+  REMOVE_ITEM
+  ALTER_ITEM
+  CHANGE_ITEM_QUANTITY
+  ADD_CURRENCY
+  DEDUCT_CURRENCY
+}
+
+model CampaignLog {
+  id                String @id @default(uuid())
+  campaign          Campaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  campaignId        String
+  user              User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId            String
+  createdAt         DateTime @default(now())
+  changeType        ChangeType
+  changeDescription String
+}
+
 model Campaign {
   id        String   @id @default(uuid())
   name      String
@@ -17,6 +37,7 @@ model Campaign {
   silver    Int      @default(0)
   copper    Int      @default(0)
   items     Item[]
+  logs      CampaignLog[]
   users     User[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -73,6 +94,7 @@ model User {
   campaigns     Campaign[]
   accounts      Account[]
   sessions      Session[]
+  logs          CampaignLog[]
 }
 
 model VerificationToken {
