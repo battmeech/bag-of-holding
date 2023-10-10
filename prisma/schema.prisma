@@ -17,18 +17,40 @@ enum ChangeType {
   CHANGE_ITEM_QUANTITY
   ADD_CURRENCY
   DEDUCT_CURRENCY
+  ADD_QUEST
+  ALTER_QUEST
+  REMOVE_QUEST
 }
 
 model CampaignLog {
-  id                String @id @default(uuid())
-  campaign          Campaign @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  id                String    @id @default(uuid())
+  campaign          Campaign  @relation(fields: [campaignId], references: [id], onDelete: Cascade)
   campaignId        String
-  user              User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user              User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId            String
-  createdAt         DateTime @default(now())
+  createdAt         DateTime  @default(now())
   changeType        ChangeType
   changeDescription String
 }
+
+enum QuestStatus {
+  ACTIVE
+  COMPLETE
+  FAILED
+}
+
+model Quest {
+  id          String       @id @default(uuid())
+  campaign    Campaign     @relation(fields: [campaignId], references: [id], onDelete: Cascade)
+  campaignId  String
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  name        String
+  notes       String?
+  source      String?
+  status      QuestStatus  @default(ACTIVE)
+}
+
 
 model Campaign {
   id        String   @id @default(uuid())
@@ -40,6 +62,7 @@ model Campaign {
   copper    Int      @default(0)
   items     Item[]
   logs      CampaignLog[]
+  quests    Quest[]
   users     User[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
