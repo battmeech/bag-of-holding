@@ -14,9 +14,15 @@ import { CampaignLogModal } from "@ui-views/Campaign/CampaignLogModal";
 import { MoneyModal } from "@ui-components/MoneyModal/MoneyModal";
 import { AddIcon } from "@chakra-ui/icons";
 import { AddItemModal } from "@ui-views/Campaign/ItemModal/AddItemModal";
-import React, { FC } from "react";
+import React, { FC, ReactNode } from "react";
 import { useModal } from "@ui-components/ModalProvider";
 import { GoKebabHorizontal } from "react-icons/go";
+import { BiSolidGridAlt } from "react-icons/bi";
+import {
+  useViewProvider,
+  View,
+} from "@ui-views/Campaign/ViewControls/ViewProvider";
+import { ViewChangeModal } from "@ui-views/Campaign/ViewControls/ViewChangeModal";
 
 type ButtonsProps = {
   campaignId: string;
@@ -29,6 +35,46 @@ export const CampaignButtonGroup: FC<ButtonsProps> = ({ campaignId }) => {
     { base: "kebab", sm: "separate buttons" },
     { fallback: "md", ssr: false }
   );
+
+  const { view, changeView } = useViewProvider();
+
+  const contextualAddButton: Record<View, ReactNode> = {
+    item: (
+      <Tooltip label="add item">
+        <IconButton
+          aria-label="add item"
+          variant="ghost"
+          size="lg"
+          icon={<AddIcon />}
+          onClick={() => openModal(<AddItemModal campaignId={campaignId} />)}
+        />
+      </Tooltip>
+    ),
+    quest: (
+      <Tooltip label="add quest">
+        <IconButton
+          aria-label="add quest"
+          variant="ghost"
+          size="lg"
+          icon={<AddIcon />}
+          onClick={() => alert("not implemented")}
+        />
+      </Tooltip>
+    ),
+  };
+
+  const contextualMenuItem: Record<View, ReactNode> = {
+    item: (
+      <MenuItem
+        onClick={() => openModal(<AddItemModal campaignId={campaignId} />)}
+      >
+        add item
+      </MenuItem>
+    ),
+    quest: (
+      <MenuItem onClick={() => alert("not implemented")}>add quest</MenuItem>
+    ),
+  };
 
   if (variant === "kebab")
     return (
@@ -49,10 +95,19 @@ export const CampaignButtonGroup: FC<ButtonsProps> = ({ campaignId }) => {
             adjust money
           </MenuItem>
 
+          {contextualMenuItem[view]}
+
           <MenuItem
-            onClick={() => openModal(<AddItemModal campaignId={campaignId} />)}
+            isDisabled={view === "item"}
+            onClick={() => changeView("item")}
           >
-            add item
+            view items
+          </MenuItem>
+          <MenuItem
+            isDisabled={view === "quest"}
+            onClick={() => changeView("quest")}
+          >
+            view quests
           </MenuItem>
         </MenuList>
       </Menu>
@@ -80,13 +135,20 @@ export const CampaignButtonGroup: FC<ButtonsProps> = ({ campaignId }) => {
           onClick={() => openModal(<MoneyModal campaignId={campaignId} />)}
         />
       </Tooltip>
-      <Tooltip label="add item">
+      {contextualAddButton[view]}
+
+      <Tooltip label="toggle view">
         <IconButton
-          aria-label="add item"
+          aria-label="toggle view"
           variant="ghost"
           size="lg"
-          icon={<AddIcon />}
-          onClick={() => openModal(<AddItemModal campaignId={campaignId} />)}
+          icon={<BiSolidGridAlt />}
+          onClick={() =>
+            openModal(
+              <ViewChangeModal view={view} changeView={changeView} />,
+              "sm"
+            )
+          }
         />
       </Tooltip>
     </HStack>

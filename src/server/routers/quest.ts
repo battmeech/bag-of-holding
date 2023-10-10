@@ -66,7 +66,7 @@ export const quest = router({
   update: privateProcedure
     .input(
       z.object({
-        itemId: z.string(),
+        questId: z.string(),
         questName: z.string().optional(),
         status: z.enum(["ACTIVE", "COMPLETE", "FAILED"]).optional(),
         notes: z.string().optional(),
@@ -82,7 +82,7 @@ export const quest = router({
           status: input.status,
         },
         where: {
-          id: input.itemId,
+          id: input.questId,
           campaign: { users: { some: { id: ctx.userId } } },
         },
       });
