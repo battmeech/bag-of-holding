@@ -22,7 +22,7 @@ export const campaign = router({
     .query(async ({ input, ctx }) => {
       const campaign = await prisma.campaign.findUnique({
         where: { id: input.id, users: { some: { id: ctx.userId } } },
-        include: { users: true, items: true },
+        include: { users: true, items: true, quests: true },
       });
 
       if (!campaign) {
