@@ -5,7 +5,7 @@ import { ShareCampaign } from "@ui-components/ShareCampaign";
 import { CurrencyDisplay } from "@ui-components/Currency/CurrencyDisplay";
 import React from "react";
 import { CampaignButtonGroup } from "@ui-views/Campaign/CampaignButtonGroup";
-import { ItemGrid } from "@ui-views/Campaign/ItemGrid";
+import { ItemGrid } from "@ui-views/Campaign/ItemGrid/ItemGrid";
 
 export const CampaignLoaded = ({ campaign }: { campaign: Campaign }) => {
   return (
