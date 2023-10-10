@@ -35,8 +35,5 @@ export const CampaignContent = ({
       return <Box>campaign not found</Box>;
     case "loaded":
       return <CampaignLoaded campaign={pageState.campaign} />;
-    /* istanbul ignore next */
-    default:
-      return null;
   }
 };
