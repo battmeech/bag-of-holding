@@ -1,5 +1,4 @@
 import { Box } from "@chakra-ui/react";
-import { MotionBox } from "@ui-components/MotionBox";
 import { useCampaignPageState } from "@ui-views/Campaign/useCampaignState";
 import { CampaignLoaded } from "@ui-views/Campaign/CampaignLoaded";
 import { Campaign } from "@ui-views/Campaign/types";
