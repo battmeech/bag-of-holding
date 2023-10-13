@@ -67,6 +67,10 @@ export const QuestCard: FC<QuestCardProps> = ({ quest }) => {
             </MenuList>
           </Menu>
         </HStack>
+
+        <Text w="full" fontSize="sm">
+          source: {quest.source || "not specified"}
+        </Text>
       </VStack>
     </VStack>
   );
