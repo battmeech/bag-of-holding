@@ -83,13 +83,12 @@ export const QuestCard: FC<QuestCardProps> = ({ quest }) => {
             </Tooltip>
           </HStack>
         </HStack>
-
         <Divider />
-
-        <Text w="full" fontSize="sm">
-          source: {quest.source || "not specified"}
-        </Text>
       </VStack>
+
+      <Text w="full" fontSize="sm">
+        source: {quest.source || "not specified"}
+      </Text>
     </VStack>
   );
 };
