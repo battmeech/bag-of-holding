@@ -2,6 +2,7 @@ import { CampaignLog } from "@ui-views/Campaign/types";
 import { FC } from "react";
 import {
   Table,
+  TableCaption,
   TableContainer,
   Tbody,
   Td,
@@ -19,9 +20,13 @@ export const LogTable: FC<LogTableProps> = ({ logs }) => {
   return (
     <TableContainer h="80vh" overflowY="scroll">
       <Table variant="simple" size="sm" borderColor="gray.300">
+        <TableCaption>showing top 20 logs</TableCaption>
+
         <Thead>
           <Tr>
-            <Th textTransform="lowercase">culprit</Th>
+            <Th textTransform="lowercase" w="5%">
+              culprit
+            </Th>
             <Th textTransform="lowercase">date</Th>
             <Th textTransform="lowercase">action</Th>
             <Th textTransform="lowercase">additional info</Th>

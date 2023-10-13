@@ -22,6 +22,8 @@ export const campaignLogs = router({
           campaignId: input.campaignId,
         },
         include: { campaign: true, user: true },
+        take: 20,
+        orderBy: { createdAt: "desc" },
       });
 
       return logs.map((log) => ({
