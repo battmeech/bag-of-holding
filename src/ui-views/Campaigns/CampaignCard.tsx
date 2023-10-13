@@ -13,6 +13,7 @@ import React from "react";
 import { GiElfHelmet, GiPlainDagger } from "react-icons/gi";
 import { Outputs } from "@trpc-client/client";
 import { Link } from "@chakra-ui/next-js";
+import { FaBookJournalWhills } from "react-icons/fa6";
 
 export const CampaignCard = ({
   campaign,
@@ -45,7 +46,7 @@ export const CampaignCard = ({
           </Text>
         </HStack>
         <HStack align="center">
-          <GiPlainDagger />
+          <FaBookJournalWhills />
           <Text>
             {campaign.numberOfQuests}{" "}
             <chakra.span color="gray.500">quests</chakra.span>
