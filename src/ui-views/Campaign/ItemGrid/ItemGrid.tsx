@@ -40,7 +40,7 @@ export const ItemGrid: FC<ItemGridProps> = ({ items, campaignId }) => {
             <Button
               colorScheme="teal"
               onClick={() =>
-                openModal(<AddItemModal campaignId={campaignId} />)
+                openModal(<AddItemModal campaignId={campaignId} />, "md")
               }
             >
               add an item
