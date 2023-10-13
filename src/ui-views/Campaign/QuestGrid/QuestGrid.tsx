@@ -1,8 +1,10 @@
 import { Quest } from "@ui-views/Campaign/types";
-import { FC } from "react";
-import { SimpleGrid } from "@chakra-ui/react";
+import React, { FC } from "react";
+import { Button, Center, SimpleGrid, Text, VStack } from "@chakra-ui/react";
 import { QuestCard } from "@ui-views/Campaign/QuestCard/QuestCard";
 import { Heading } from "@chakra-ui/layout";
+import { useModal } from "@ui-components/ModalProvider";
+import { AddQuestModal } from "@ui-views/Campaign/QuestModal/AddQuestModal";
 
 type QuestGridProps = {
   quests: Quest[];
@@ -17,11 +19,26 @@ const partitionQuests = (quests: Quest[]) => {
   return { active, failed, complete, fullList: quests };
 };
 
-export const QuestGrid: FC<QuestGridProps> = ({ quests }) => {
+export const QuestGrid: FC<QuestGridProps> = ({ quests, campaignId }) => {
   const { complete, active, failed } = partitionQuests(quests);
+  const { openModal } = useModal();
 
   if (quests.length === 0) {
-    return <div>no quests</div>;
+    return (
+      <Center w="full" h="50vh">
+        <VStack spacing="8">
+          <Text>nothing to see here!</Text>
+          <Button
+            colorScheme="teal"
+            onClick={() =>
+              openModal(<AddQuestModal campaignId={campaignId} />, "md")
+            }
+          >
+            add a quest
+          </Button>
+        </VStack>
+      </Center>
+    );
   }
   return (
     <>

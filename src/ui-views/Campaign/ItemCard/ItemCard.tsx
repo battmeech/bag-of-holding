@@ -53,7 +53,7 @@ export const ItemCard = ({ item, onTagClick = () => {} }: ItemCardProps) => {
             <MenuList>
               <MenuItem
                 icon={<EditIcon />}
-                onClick={() => openModal(<EditItemModal item={item} />)}
+                onClick={() => openModal(<EditItemModal item={item} />, "md")}
               >
                 edit item
               </MenuItem>

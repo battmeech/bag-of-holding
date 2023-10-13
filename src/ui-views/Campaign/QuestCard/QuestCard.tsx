@@ -14,6 +14,7 @@ import { GoKebabHorizontal } from "react-icons/go";
 import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
 import { useModal } from "@ui-components/ModalProvider";
 import { EditQuestModal } from "@ui-views/Campaign/QuestModal/EditQuestModal";
+import { DeleteConfirmationModal } from "@ui-views/Campaign/QuestCard/DeleteConfirmation";
 
 type QuestCardProps = {
   quest: Quest;
@@ -52,7 +53,14 @@ export const QuestCard: FC<QuestCardProps> = ({ quest }) => {
               </MenuItem>
               <MenuItem
                 icon={<DeleteIcon />}
-                onClick={() => alert('TODO": delete confirmation modal')}
+                onClick={() =>
+                  openModal(
+                    <DeleteConfirmationModal
+                      questId={quest.id}
+                      campaignId={quest.campaignId}
+                    />
+                  )
+                }
               >
                 delete quest
               </MenuItem>
