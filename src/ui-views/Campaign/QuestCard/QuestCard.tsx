@@ -78,7 +78,7 @@ export const QuestCard: FC<QuestCardProps> = ({ quest }) => {
                 aria-label="view notes"
                 size="xs"
                 icon={<FaExpandAlt />}
-                onClick={() => openModal(<QuestNotes quest={quest} />, "2xl")}
+                onClick={() => openModal(<QuestNotes quest={quest} />, "5xl")}
               />
             </Tooltip>
           </HStack>

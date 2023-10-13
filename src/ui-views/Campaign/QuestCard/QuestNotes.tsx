@@ -31,7 +31,7 @@ export const QuestNotes = ({ quest }: { quest: Quest }) => {
       <ModalCloseButton />
       <ModalBody overflow="scroll">
         {mode === "view" ? (
-          <Box h="60vh" minH="50vh" maxH="70vh" px={2}>
+          <Box h="70vh" minH="50vh" maxH="80vh" px={2}>
             <Markdown text={formProps.values.notes || ""} />
           </Box>
         ) : (
@@ -41,9 +41,9 @@ export const QuestNotes = ({ quest }: { quest: Quest }) => {
               formProps.setValue("notes", e.target.value, { shouldDirty: true })
             }
             value={formProps.values.notes}
-            h="60vh"
+            h="70vh"
             minH="50vh"
-            maxH="70vh"
+            maxH="80vh"
           />
         )}
       </ModalBody>
