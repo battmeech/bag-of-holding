@@ -1,7 +1,6 @@
 import { Quest } from "@ui-views/Campaign/types";
 import React, { FC } from "react";
 import {
-  Box,
   Divider,
   HStack,
   IconButton,
@@ -41,6 +40,22 @@ export const QuestCard: FC<QuestCardProps> = ({ quest }) => {
         <HStack w="full" justify="space-between">
           <Text fontSize="md">{quest.name}</Text>
           <HStack>
+            <Tooltip label="view notes">
+              <IconButton
+                variant="ghost"
+                aria-label="view notes"
+                size="xs"
+                icon={
+                  quest.notes?.trim() ? (
+                    <CgNotes data-testid="notes-icon" />
+                  ) : (
+                    <RiPencilFill data-testid="no-notes-icon" />
+                  )
+                }
+                onClick={() => openModal(<QuestNotes quest={quest} />, "5xl")}
+              />
+            </Tooltip>
+
             <Menu placement="bottom-end">
               <MenuButton
                 as={IconButton}
@@ -80,24 +95,6 @@ export const QuestCard: FC<QuestCardProps> = ({ quest }) => {
           source: {quest.source || "not specified"}
         </Text>
       </VStack>
-
-      <Box w="full">
-        <Tooltip label="view notes">
-          <IconButton
-            variant="ghost"
-            aria-label="view notes"
-            size="xs"
-            icon={
-              quest.notes?.trim() ? (
-                <CgNotes data-testid="notes-icon" />
-              ) : (
-                <RiPencilFill data-testid="no-notes-icon" />
-              )
-            }
-            onClick={() => openModal(<QuestNotes quest={quest} />, "5xl")}
-          />
-        </Tooltip>
-      </Box>
     </VStack>
   );
 };

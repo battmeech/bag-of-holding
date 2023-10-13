@@ -1,5 +1,6 @@
 import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
 import {
+  Divider,
   Flex,
   HStack,
   IconButton,
@@ -42,37 +43,57 @@ export const ItemCard = ({ item, onTagClick = () => {} }: ItemCardProps) => {
       <VStack w="full">
         <HStack w="full" justify="space-between">
           <Text fontSize="md">{item.name}</Text>
-          <Menu placement="bottom-end">
-            <MenuButton
-              as={IconButton}
-              aria-label="item options"
-              icon={<GoKebabHorizontal />}
-              variant="ghost"
-              size="xs"
-            />
-            <MenuList>
-              <MenuItem
-                icon={<EditIcon />}
-                onClick={() => openModal(<EditItemModal item={item} />, "md")}
-              >
-                edit item
-              </MenuItem>
-              <MenuItem
-                icon={<DeleteIcon />}
-                onClick={() =>
-                  openModal(
-                    <DeleteConfirmationModal
-                      itemId={item.id}
-                      campaignId={item.campaignId}
-                    />
+
+          <HStack>
+            <Tooltip label="view notes">
+              <IconButton
+                variant="ghost"
+                aria-label="view notes"
+                size="xs"
+                icon={
+                  item.notes?.trim() ? (
+                    <CgNotes data-testid="notes-icon" />
+                  ) : (
+                    <RiPencilFill data-testid="no-notes-icon" />
                   )
                 }
-              >
-                delete item
-              </MenuItem>
-            </MenuList>
-          </Menu>
+                onClick={() => openModal(<ItemNotes item={item} />, "xl")}
+              />
+            </Tooltip>
+
+            <Menu placement="bottom-end">
+              <MenuButton
+                as={IconButton}
+                aria-label="item options"
+                icon={<GoKebabHorizontal />}
+                variant="ghost"
+                size="xs"
+              />
+              <MenuList>
+                <MenuItem
+                  icon={<EditIcon />}
+                  onClick={() => openModal(<EditItemModal item={item} />, "md")}
+                >
+                  edit item
+                </MenuItem>
+                <MenuItem
+                  icon={<DeleteIcon />}
+                  onClick={() =>
+                    openModal(
+                      <DeleteConfirmationModal
+                        itemId={item.id}
+                        campaignId={item.campaignId}
+                      />
+                    )
+                  }
+                >
+                  delete item
+                </MenuItem>
+              </MenuList>
+            </Menu>
+          </HStack>
         </HStack>
+        <Divider />
         <Flex w="full" justify="flex-start">
           <Text fontSize="sm">{item.description}</Text>
         </Flex>
@@ -89,22 +110,6 @@ export const ItemCard = ({ item, onTagClick = () => {} }: ItemCardProps) => {
         />
 
         <HStack justify="space-between" w="full">
-          <Tooltip label="view notes">
-            <IconButton
-              variant="ghost"
-              aria-label="view notes"
-              size="xs"
-              icon={
-                item.notes?.trim() ? (
-                  <CgNotes data-testid="notes-icon" />
-                ) : (
-                  <RiPencilFill data-testid="no-notes-icon" />
-                )
-              }
-              onClick={() => openModal(<ItemNotes item={item} />, "xl")}
-            />
-          </Tooltip>
-
           <ItemQuantityEditor item={item} />
         </HStack>
       </VStack>
