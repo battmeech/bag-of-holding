@@ -10,7 +10,7 @@ import {
   useBreakpointValue,
 } from "@chakra-ui/react";
 import { FaJournalWhills, FaPiggyBank } from "react-icons/fa";
-import { CampaignLogModal } from "@ui-views/Campaign/CampaignLogModal";
+import { CampaignLogModal } from "@ui-views/Campaign/CampaignLogs/CampaignLogModal";
 import { MoneyModal } from "@ui-components/MoneyModal/MoneyModal";
 import React, { FC } from "react";
 import { useModal } from "@ui-components/ModalProvider";
