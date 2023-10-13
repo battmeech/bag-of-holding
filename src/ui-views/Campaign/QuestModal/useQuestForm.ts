@@ -18,6 +18,7 @@ type QuestFormProps = {
   name: string;
   source?: string;
   status: QuestStatus;
+  notes?: string;
 };
 
 const useQuest = (defaultValues?: Partial<QuestFormProps>) => {
@@ -91,7 +92,7 @@ export const useCreateQuest = ({
 };
 
 export const useEditQuest = ({
-  existingQuest: { id, campaignId, name, source, status },
+  existingQuest: { id, campaignId, name, source, status, notes },
   onSuccessCallback,
 }: {
   existingQuest: Quest;
@@ -101,6 +102,7 @@ export const useEditQuest = ({
     name,
     source: source || undefined,
     status,
+    notes: notes || undefined,
   });
 
   const trpcContext = trpc.useContext();
@@ -116,6 +118,7 @@ export const useEditQuest = ({
       status: input.status,
       source: input.source,
       questName: input.name,
+      notes: input.notes,
     });
     onSuccessCallback();
   };
