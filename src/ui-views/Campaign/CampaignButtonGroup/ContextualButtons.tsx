@@ -8,6 +8,7 @@ import { AddIcon } from "@chakra-ui/icons";
 import { AddItemModal } from "@ui-views/Campaign/ItemModal/AddItemModal";
 import { AddQuestModal } from "@ui-views/Campaign/QuestModal/AddQuestModal";
 import { useModal } from "@ui-components/ModalProvider";
+import { HiSwitchHorizontal } from "react-icons/hi";
 
 type ContextualButtonProps = {
   campaignId: string;
@@ -75,4 +76,35 @@ export const ContextualMenuButton: FC<ContextualButtonProps> = ({
   };
 
   return contextualMenuItem[view];
+};
+
+export const ContextualViewButton: FC = () => {
+  const { view, changeView } = useViewProvider();
+
+  const contextualViewButtons: Record<View, ReactNode> = {
+    item: (
+      <Tooltip label="view quests">
+        <IconButton
+          aria-label="toggle view"
+          variant="ghost"
+          size="lg"
+          icon={<HiSwitchHorizontal />}
+          onClick={() => changeView("quest")}
+        />
+      </Tooltip>
+    ),
+    quest: (
+      <Tooltip label="view items">
+        <IconButton
+          aria-label="toggle view"
+          variant="ghost"
+          size="lg"
+          icon={<HiSwitchHorizontal />}
+          onClick={() => changeView("item")}
+        />
+      </Tooltip>
+    ),
+  };
+
+  return contextualViewButtons[view];
 };

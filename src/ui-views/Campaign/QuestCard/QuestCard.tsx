@@ -1,6 +1,7 @@
 import { Quest } from "@ui-views/Campaign/types";
 import React, { FC } from "react";
 import {
+  Divider,
   HStack,
   IconButton,
   Menu,
@@ -67,6 +68,8 @@ export const QuestCard: FC<QuestCardProps> = ({ quest }) => {
             </MenuList>
           </Menu>
         </HStack>
+
+        <Divider />
 
         <Text w="full" fontSize="sm">
           source: {quest.source || "not specified"}

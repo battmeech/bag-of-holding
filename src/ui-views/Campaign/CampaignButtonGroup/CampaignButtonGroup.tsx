@@ -15,12 +15,11 @@ import { MoneyModal } from "@ui-components/MoneyModal/MoneyModal";
 import React, { FC } from "react";
 import { useModal } from "@ui-components/ModalProvider";
 import { GoKebabHorizontal } from "react-icons/go";
-import { BiSolidGridAlt } from "react-icons/bi";
 import { useViewProvider } from "@ui-views/Campaign/ViewControls/ViewProvider";
-import { ViewChangeModal } from "@ui-views/Campaign/ViewControls/ViewChangeModal";
 import {
   ContextualAddButton,
   ContextualMenuButton,
+  ContextualViewButton,
 } from "@ui-views/Campaign/CampaignButtonGroup/ContextualButtons";
 
 type ButtonsProps = {
@@ -99,20 +98,7 @@ export const CampaignButtonGroup: FC<ButtonsProps> = ({ campaignId }) => {
 
       <ContextualAddButton campaignId={campaignId} />
 
-      <Tooltip label="toggle view">
-        <IconButton
-          aria-label="toggle view"
-          variant="ghost"
-          size="lg"
-          icon={<BiSolidGridAlt />}
-          onClick={() =>
-            openModal(
-              <ViewChangeModal view={view} changeView={changeView} />,
-              "sm"
-            )
-          }
-        />
-      </Tooltip>
+      <ContextualViewButton />
     </HStack>
   );
 };
