@@ -1,6 +1,7 @@
 import { Quest } from "@ui-views/Campaign/types";
 import React, { FC } from "react";
 import {
+  Box,
   Divider,
   HStack,
   IconButton,
@@ -17,8 +18,9 @@ import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
 import { useModal } from "@ui-components/ModalProvider";
 import { EditQuestModal } from "@ui-views/Campaign/QuestModal/EditQuestModal";
 import { DeleteConfirmationModal } from "@ui-views/Campaign/QuestCard/DeleteConfirmation";
-import { FaExpandAlt } from "react-icons/fa";
 import { QuestNotes } from "@ui-views/Campaign/QuestCard/QuestNotes";
+import { CgNotes } from "react-icons/cg";
+import { RiPencilFill } from "react-icons/ri";
 
 type QuestCardProps = {
   quest: Quest;
@@ -71,24 +73,31 @@ export const QuestCard: FC<QuestCardProps> = ({ quest }) => {
                 </MenuItem>
               </MenuList>
             </Menu>
-
-            <Tooltip label="view notes">
-              <IconButton
-                variant="ghost"
-                aria-label="view notes"
-                size="xs"
-                icon={<FaExpandAlt />}
-                onClick={() => openModal(<QuestNotes quest={quest} />, "5xl")}
-              />
-            </Tooltip>
           </HStack>
         </HStack>
         <Divider />
+        <Text w="full" fontSize="sm">
+          source: {quest.source || "not specified"}
+        </Text>
       </VStack>
 
-      <Text w="full" fontSize="sm">
-        source: {quest.source || "not specified"}
-      </Text>
+      <Box w="full">
+        <Tooltip label="view notes">
+          <IconButton
+            variant="ghost"
+            aria-label="view notes"
+            size="xs"
+            icon={
+              quest.notes?.trim() ? (
+                <CgNotes data-testid="notes-icon" />
+              ) : (
+                <RiPencilFill data-testid="no-notes-icon" />
+              )
+            }
+            onClick={() => openModal(<QuestNotes quest={quest} />, "5xl")}
+          />
+        </Tooltip>
+      </Box>
     </VStack>
   );
 };
