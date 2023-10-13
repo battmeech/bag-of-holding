@@ -11,10 +11,20 @@ type QuestGridProps = {
   campaignId: string;
 };
 
+const sortByDate = (a: Quest, b: Quest) => {
+  return new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime();
+};
+
 const partitionQuests = (quests: Quest[]) => {
-  const active = quests.filter((quest) => quest.status === "ACTIVE");
-  const failed = quests.filter((quest) => quest.status === "FAILED");
-  const complete = quests.filter((quest) => quest.status === "COMPLETE");
+  const active = quests
+    .filter((quest) => quest.status === "ACTIVE")
+    .sort(sortByDate);
+  const failed = quests
+    .filter((quest) => quest.status === "FAILED")
+    .sort(sortByDate);
+  const complete = quests
+    .filter((quest) => quest.status === "COMPLETE")
+    .sort(sortByDate);
 
   return { active, failed, complete, fullList: quests };
 };
