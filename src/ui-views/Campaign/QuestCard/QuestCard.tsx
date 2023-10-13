@@ -13,12 +13,15 @@ import {
 import { GoKebabHorizontal } from "react-icons/go";
 import { DeleteIcon, EditIcon } from "@chakra-ui/icons";
 import { useModal } from "@ui-components/ModalProvider";
+import { EditQuestModal } from "@ui-views/Campaign/QuestModal/EditQuestModal";
 
 type QuestCardProps = {
   quest: Quest;
 };
 
 export const QuestCard: FC<QuestCardProps> = ({ quest }) => {
+  const { openModal } = useModal();
+
   return (
     <VStack
       justify="space-between"
@@ -41,7 +44,9 @@ export const QuestCard: FC<QuestCardProps> = ({ quest }) => {
             <MenuList>
               <MenuItem
                 icon={<EditIcon />}
-                onClick={() => alert("TODO: quest modal")}
+                onClick={() =>
+                  openModal(<EditQuestModal quest={quest} />, "md")
+                }
               >
                 edit quest
               </MenuItem>
