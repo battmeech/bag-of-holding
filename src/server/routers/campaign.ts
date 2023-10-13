@@ -7,7 +7,7 @@ export const campaign = router({
   list: privateProcedure.query(async ({ ctx }) => {
     const campaigns = await prisma.campaign.findMany({
       where: { users: { some: { id: ctx.userId } } },
-      include: { users: true, items: true },
+      include: { users: true, items: true, quests: true },
     });
 
     return campaigns.map((campaign) => ({
@@ -15,6 +15,7 @@ export const campaign = router({
       name: campaign.name,
       numberOfUsers: campaign.users.length,
       numberOfItems: campaign.items.length,
+      numberOfQuests: campaign.quests.length,
     }));
   }),
   getById: privateProcedure

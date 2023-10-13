@@ -5,7 +5,7 @@ import {
   Divider,
   Heading,
   HStack,
-  Stack,
+  SimpleGrid,
   Text,
   VStack,
 } from "@chakra-ui/react";
@@ -29,10 +29,7 @@ export const CampaignCard = ({
 
       <Divider />
 
-      <Stack
-        spacing={{ base: "2", sm: "8" }}
-        direction={{ base: "column", sm: "row" }}
-      >
+      <SimpleGrid spacing={2} columns={{ base: 1, sm: 2 }}>
         <HStack align="center">
           <GiElfHelmet />
           <Text>
@@ -47,7 +44,14 @@ export const CampaignCard = ({
             <chakra.span color="gray.500">items</chakra.span>
           </Text>
         </HStack>
-      </Stack>
+        <HStack align="center">
+          <GiPlainDagger />
+          <Text>
+            {campaign.numberOfQuests}{" "}
+            <chakra.span color="gray.500">quests</chakra.span>
+          </Text>
+        </HStack>
+      </SimpleGrid>
 
       <Box w="full">
         <Link href={`/campaigns/${campaign.id}`}>
