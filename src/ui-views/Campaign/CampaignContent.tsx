@@ -3,6 +3,7 @@ import { MotionBox } from "@ui-components/MotionBox";
 import { useCampaignPageState } from "@ui-views/Campaign/useCampaignState";
 import { CampaignLoaded } from "@ui-views/Campaign/CampaignLoaded";
 import { Campaign } from "@ui-views/Campaign/types";
+import { CampaignLoading } from "@ui-views/Campaign/CampaignLoading";
 
 type CampaignContentProps = {
   isLoading: boolean;
@@ -19,16 +20,7 @@ export const CampaignContent = ({
 
   switch (pageState.state) {
     case "loading":
-      return (
-        <MotionBox
-          animate={{ y: 20 }}
-          transition={{ repeat: Infinity, duration: 2, repeatType: "reverse" }}
-          width={["100%", "70%", "60%", "60%"]}
-          margin="0 auto"
-        >
-          loading
-        </MotionBox>
-      );
+      return <CampaignLoading />;
     case "error":
       return <Box>something went wrong</Box>;
     case "not found":
