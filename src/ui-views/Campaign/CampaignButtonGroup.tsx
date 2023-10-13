@@ -23,6 +23,7 @@ import {
   View,
 } from "@ui-views/Campaign/ViewControls/ViewProvider";
 import { ViewChangeModal } from "@ui-views/Campaign/ViewControls/ViewChangeModal";
+import { AddQuestModal } from "@ui-views/Campaign/QuestModal/AddQuestModal";
 
 type ButtonsProps = {
   campaignId: string;
@@ -46,7 +47,9 @@ export const CampaignButtonGroup: FC<ButtonsProps> = ({ campaignId }) => {
           variant="ghost"
           size="lg"
           icon={<AddIcon />}
-          onClick={() => openModal(<AddItemModal campaignId={campaignId} />)}
+          onClick={() =>
+            openModal(<AddItemModal campaignId={campaignId} />, "md")
+          }
         />
       </Tooltip>
     ),
@@ -57,7 +60,9 @@ export const CampaignButtonGroup: FC<ButtonsProps> = ({ campaignId }) => {
           variant="ghost"
           size="lg"
           icon={<AddIcon />}
-          onClick={() => alert("not implemented")}
+          onClick={() =>
+            openModal(<AddQuestModal campaignId={campaignId} />, "md")
+          }
         />
       </Tooltip>
     ),
@@ -72,7 +77,11 @@ export const CampaignButtonGroup: FC<ButtonsProps> = ({ campaignId }) => {
       </MenuItem>
     ),
     quest: (
-      <MenuItem onClick={() => alert("not implemented")}>add quest</MenuItem>
+      <MenuItem
+        onClick={() => openModal(<AddQuestModal campaignId={campaignId} />)}
+      >
+        add quest
+      </MenuItem>
     ),
   };
 
