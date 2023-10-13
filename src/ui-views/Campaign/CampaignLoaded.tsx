@@ -4,7 +4,7 @@ import { PageHeading } from "@ui-components/PageHeading";
 import { ShareCampaign } from "@ui-components/ShareCampaign";
 import { CurrencyDisplay } from "@ui-components/Currency/CurrencyDisplay";
 import React, { ReactNode } from "react";
-import { CampaignButtonGroup } from "@ui-views/Campaign/CampaignButtonGroup";
+import { CampaignButtonGroup } from "@ui-views/Campaign/CampaignButtonGroup/CampaignButtonGroup";
 import { ItemGrid } from "@ui-views/Campaign/ItemGrid/ItemGrid";
 import { QuestGrid } from "@ui-views/Campaign/QuestGrid/QuestGrid";
 import {

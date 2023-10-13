@@ -12,18 +12,16 @@ import {
 import { FaJournalWhills, FaPiggyBank } from "react-icons/fa";
 import { CampaignLogModal } from "@ui-views/Campaign/CampaignLogModal";
 import { MoneyModal } from "@ui-components/MoneyModal/MoneyModal";
-import { AddIcon } from "@chakra-ui/icons";
-import { AddItemModal } from "@ui-views/Campaign/ItemModal/AddItemModal";
-import React, { FC, ReactNode } from "react";
+import React, { FC } from "react";
 import { useModal } from "@ui-components/ModalProvider";
 import { GoKebabHorizontal } from "react-icons/go";
 import { BiSolidGridAlt } from "react-icons/bi";
-import {
-  useViewProvider,
-  View,
-} from "@ui-views/Campaign/ViewControls/ViewProvider";
+import { useViewProvider } from "@ui-views/Campaign/ViewControls/ViewProvider";
 import { ViewChangeModal } from "@ui-views/Campaign/ViewControls/ViewChangeModal";
-import { AddQuestModal } from "@ui-views/Campaign/QuestModal/AddQuestModal";
+import {
+  ContextualAddButton,
+  ContextualMenuButton,
+} from "@ui-views/Campaign/CampaignButtonGroup/ContextualButtons";
 
 type ButtonsProps = {
   campaignId: string;
@@ -38,52 +36,6 @@ export const CampaignButtonGroup: FC<ButtonsProps> = ({ campaignId }) => {
   );
 
   const { view, changeView } = useViewProvider();
-
-  const contextualAddButton: Record<View, ReactNode> = {
-    item: (
-      <Tooltip label="add item">
-        <IconButton
-          aria-label="add item"
-          variant="ghost"
-          size="lg"
-          icon={<AddIcon />}
-          onClick={() =>
-            openModal(<AddItemModal campaignId={campaignId} />, "md")
-          }
-        />
-      </Tooltip>
-    ),
-    quest: (
-      <Tooltip label="add quest">
-        <IconButton
-          aria-label="add quest"
-          variant="ghost"
-          size="lg"
-          icon={<AddIcon />}
-          onClick={() =>
-            openModal(<AddQuestModal campaignId={campaignId} />, "md")
-          }
-        />
-      </Tooltip>
-    ),
-  };
-
-  const contextualMenuItem: Record<View, ReactNode> = {
-    item: (
-      <MenuItem
-        onClick={() => openModal(<AddItemModal campaignId={campaignId} />)}
-      >
-        add item
-      </MenuItem>
-    ),
-    quest: (
-      <MenuItem
-        onClick={() => openModal(<AddQuestModal campaignId={campaignId} />)}
-      >
-        add quest
-      </MenuItem>
-    ),
-  };
 
   if (variant === "kebab")
     return (
@@ -104,7 +56,7 @@ export const CampaignButtonGroup: FC<ButtonsProps> = ({ campaignId }) => {
             adjust money
           </MenuItem>
 
-          {contextualMenuItem[view]}
+          <ContextualMenuButton campaignId={campaignId} />
 
           <MenuItem
             isDisabled={view === "item"}
@@ -144,7 +96,8 @@ export const CampaignButtonGroup: FC<ButtonsProps> = ({ campaignId }) => {
           onClick={() => openModal(<MoneyModal campaignId={campaignId} />)}
         />
       </Tooltip>
-      {contextualAddButton[view]}
+
+      <ContextualAddButton campaignId={campaignId} />
 
       <Tooltip label="toggle view">
         <IconButton
