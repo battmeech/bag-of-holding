@@ -6,9 +6,12 @@ import { ViewProvider } from "@ui-views/Campaign/ViewControls/ViewProvider";
 export const Campaign = () => {
   const params = useParams();
 
-  const { data, status, error } = trpc.campaign.getById.useQuery({
-    id: params.campaignId as string,
-  });
+  const { data, status, error } = trpc.campaign.getById.useQuery(
+    {
+      id: params.campaignId as string,
+    },
+    { staleTime: 5000 }
+  );
 
   return (
     <ViewProvider>
